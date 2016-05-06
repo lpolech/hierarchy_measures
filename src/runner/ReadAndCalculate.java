@@ -7,7 +7,7 @@ public class ReadAndCalculate {
 
 	public static void main(String[] args) {
 		GeneratedCSVReader reader = new GeneratedCSVReader();
-		Hierarchy H = reader.load("balancedTree5000.csv", true);
+		Hierarchy H = reader.load("Edge_tool_n03265032.sbow.csv", true, true, false);
 		H.getRoot().printSubtree();
 		
 //		int setNum = 7;
