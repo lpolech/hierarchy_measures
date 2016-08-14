@@ -2,14 +2,18 @@ package runner;
 
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.reader.GeneratedCSVReader;
+import distance_measures.Euclidean;
+import internal_measures.FlatCalinskiHarabasz;
+import internal_measures.FlatDaviesBouldin;
 
 public class ReadAndCalculate {
 
 	public static void main(String[] args) {
-		GeneratedCSVReader reader = new GeneratedCSVReader();
-		Hierarchy H = reader.load("Edge_tool_n03265032.sbow.csv", true, true, false);
+        GeneratedCSVReader reader = new GeneratedCSVReader();
+		Hierarchy H = reader.load("very-simple.csv", false, true, false);
 		H.getRoot().printSubtree();
-		
+        FlatCalinskiHarabasz db = new FlatCalinskiHarabasz();
+        System.out.println(db.getMeasure(H, new Euclidean()));
 //		int setNum = 7;
 //		int numberOfIterations = 30;
 //		System.out.println("file;standard;partialOrder;adapted;standard TP;partial TP;standard TN;partial TN;standard FP;partial FP;standard FN;partial FN");
@@ -40,7 +44,7 @@ public class ReadAndCalculate {
 //			Hierarchy H = reader.load(fullPath, true);
 //			//((BasicNode) H.getRoot()).printSubtree();
 //				
-//			System.out.println(fullPath + ";" + standardFmeasure.getMeasure(H) + ";" + partialOrderFscore.getMeasure(H) + ";" + adaptedFmeasure.getMeasure(H)
+//			System.out.println(fullPath + ";" + standardFmeasure.getDistance(H) + ";" + partialOrderFscore.getDistance(H) + ";" + adaptedFmeasure.getDistance(H)
 //				+ ";" + standardFmeasure.TP + ";" + partialOrderFscore.TP + ";" + standardFmeasure.TN + ";" + partialOrderFscore.TN
 //				+ ";" + standardFmeasure.FP + ";" + partialOrderFscore.FP + ";" + standardFmeasure.FN + ";" + partialOrderFscore.FN);
 //		}
@@ -72,7 +76,7 @@ public class ReadAndCalculate {
 ////		AdaptedFmeasure adaptedFmeasure = new AdaptedFmeasure(true, imitateFlatClustering);
 ////		Hierarchy H = reader.load("sample1withClasses.csv", true);
 ////		((BasicNode) H.getRoot()).printSubtree();
-////		System.out.println(adaptedFmeasure.getMeasure(H));
+////		System.out.println(adaptedFmeasure.getDistance(H));
 //		
 //		
 //		System.out.println("file;standard;partialOrder;adapted;standard TP;partial TP;standard TN;partial TN;standard FP;partial FP;standard FN;partial FN");
@@ -92,7 +96,7 @@ public class ReadAndCalculate {
 //			Hierarchy H = reader.load(fullPath, true);
 //			//((BasicNode) H.getRoot()).printSubtree();
 //			
-//			System.out.println(fullPath + ";" + standardFmeasure.getMeasure(H) + ";" + partialOrderFscore.getMeasure(H) + ";" + adaptedFmeasure.getMeasure(H)
+//			System.out.println(fullPath + ";" + standardFmeasure.getDistance(H) + ";" + partialOrderFscore.getDistance(H) + ";" + adaptedFmeasure.getDistance(H)
 //				+ ";" + standardFmeasure.TP + ";" + partialOrderFscore.TP + ";" + standardFmeasure.TN + ";" + partialOrderFscore.TN
 //				+ ";" + standardFmeasure.FP + ";" + partialOrderFscore.FP + ";" + standardFmeasure.FN + ";" + partialOrderFscore.FN);
 //		}
@@ -117,34 +121,34 @@ public class ReadAndCalculate {
 //				Hierarchy H = reader.load(fullPath, true);
 //				//((BasicNode) H.getRoot()).printSubtree();
 //				
-//				System.out.println(fullPath + ";" + standardFmeasure.getMeasure(H) + ";" + partialOrderFscore.getMeasure(H) + ";" + adaptedFmeasure.getMeasure(H)
+//				System.out.println(fullPath + ";" + standardFmeasure.getDistance(H) + ";" + partialOrderFscore.getDistance(H) + ";" + adaptedFmeasure.getDistance(H)
 //				+ ";" + standardFmeasure.TP + ";" + partialOrderFscore.TP + ";" + standardFmeasure.TN + ";" + partialOrderFscore.TN
 //				+ ";" + standardFmeasure.FP + ";" + partialOrderFscore.FP + ";" + standardFmeasure.FN + ";" + partialOrderFscore.FN);
 //			}
 //		}
 //		
-//		System.out.println("adapted F-measure: " + adaptedFmeasure.getMeasure(H));
-//		System.out.println("partial order F-measure: " + partialOrderFscore.getMeasure(H));
+//		System.out.println("adapted F-measure: " + adaptedFmeasure.getDistance(H));
+//		System.out.println("partial order F-measure: " + partialOrderFscore.getDistance(H));
 //		System.out.println("H0");
 //		Hierarchy H0 = reader.load("denseShallowTree.r.csv", true);
-//		System.out.println("adapted F-measure: " + adaptedFmeasure.getMeasure(H0));
-//		System.out.println("partial order F-measure: " + partialOrderFscore.getMeasure(H0));
+//		System.out.println("adapted F-measure: " + adaptedFmeasure.getDistance(H0));
+//		System.out.println("partial order F-measure: " + partialOrderFscore.getDistance(H0));
 //		System.out.println("H1");
 //		Hierarchy H1 = reader.load("lowerPartsDenseShallowTree.r.csv", true);
-//		System.out.println("adapted F-measure: " + adaptedFmeasure.getMeasure(H1));
-//		System.out.println("partial order F-measure: " + partialOrderFscore.getMeasure(H1));
+//		System.out.println("adapted F-measure: " + adaptedFmeasure.getDistance(H1));
+//		System.out.println("partial order F-measure: " + partialOrderFscore.getDistance(H1));
 //		System.out.println("H2");
 //		Hierarchy H2 = reader.load("lowerPartsDenseShallowTrees.r.csv", true);
-//		System.out.println("adapted F-measure: " + adaptedFmeasure.getMeasure(H2));
-//		System.out.println("partial order F-measure: " + partialOrderFscore.getMeasure(H2));
+//		System.out.println("adapted F-measure: " + adaptedFmeasure.getDistance(H2));
+//		System.out.println("partial order F-measure: " + partialOrderFscore.getDistance(H2));
 //		System.out.println("H3");
 //		Hierarchy H3 = reader.load("sparseDeepTree.r.csv", true);
-//		System.out.println("adapted F-measure: " + adaptedFmeasure.getMeasure(H3));
-//		System.out.println("partial order F-measure: " + partialOrderFscore.getMeasure(H3));
+//		System.out.println("adapted F-measure: " + adaptedFmeasure.getDistance(H3));
+//		System.out.println("partial order F-measure: " + partialOrderFscore.getDistance(H3));
 //		System.out.println("H4");
 //		Hierarchy H4 = reader.load("upperPartsDenseDeepTree.r.csv", true);
-//		System.out.println("adapted F-measure: " + adaptedFmeasure.getMeasure(H4));
-//		System.out.println("partial order F-measure: " + partialOrderFscore.getMeasure(H4));
+//		System.out.println("adapted F-measure: " + adaptedFmeasure.getDistance(H4));
+//		System.out.println("partial order F-measure: " + partialOrderFscore.getDistance(H4));
 	}
 
 }
