@@ -1,20 +1,21 @@
 package external_measures;
 
-import interfaces.Measure;
+import interfaces.DistanceMeasure;
+import interfaces.QualityMeasure;
 
 import java.util.LinkedList;
 
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
 
-public class StandardFmeasure implements Measure {
+public class StandardFmeasure implements QualityMeasure {
 	public int TP = 0;
 	public int FP = 0;
 	public int TN = 0;
 	public int FN = 0;
 	
 	@Override
-	public double getMeasure(Hierarchy h) {
+	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
 		TP = 0;
 		FP = 0;
 		TN = 0;
@@ -63,14 +64,14 @@ public class StandardFmeasure implements Measure {
 		return numerator/denominator;
 	}
 
-	@Override
-	public double desiredValue() {
-		return 1;
-	}
-
-	@Override
-	public double notDesiredValue() {
-		return 0;
-	}
+//	@Override
+//	public double desiredValue() {
+//		return 1;
+//	}
+//
+//	@Override
+//	public double notDesiredValue() {
+//		return 0;
+//	}
 
 }

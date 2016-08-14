@@ -1,20 +1,22 @@
 package external_measures;
 
-import interfaces.Measure;
+import common.Utils;
+import interfaces.DistanceMeasure;
+import interfaces.QualityMeasure;
 
 import java.util.LinkedList;
 
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
 
-public class PartialOrderFmeasure implements Measure {
+public class PartialOrderFmeasure implements QualityMeasure {
 	public int TP = 0;
 	public int FP = 0;
 	public int TN = 0;
 	public int FN = 0;
-	
+
 	@Override
-	public double getMeasure(Hierarchy h) {
+	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
 		TP = 0;
 		FP = 0;
 		TN = 0;
@@ -33,11 +35,9 @@ public class PartialOrderFmeasure implements Measure {
 					String secondTrueClass = allInstancesArr[j].getTrueClass();
 					String secondAssignClass = allInstancesArr[j].getNodeId();
 					
-					if((firstTrueClass+basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR)
-							.startsWith(secondTrueClass+basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR))
+					if(Utils.isTheSameOrSubclass(firstTrueClass, secondTrueClass))
 					{
-						if((firstAssignClass+basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR)
-								.startsWith(secondAssignClass+basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR))
+						if(Utils.isTheSameOrSubclass(firstAssignClass, secondAssignClass))
 						{
 							TP++;
 						}
@@ -48,8 +48,7 @@ public class PartialOrderFmeasure implements Measure {
 					}
 					else
 					{
-						if((firstAssignClass+basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR)
-								.startsWith(secondAssignClass+basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR))
+						if(Utils.isTheSameOrSubclass(firstAssignClass, secondAssignClass))
 						{
 							FP++;
 						}
@@ -66,14 +65,14 @@ public class PartialOrderFmeasure implements Measure {
 		return numerator/denominator;
 	}
 
-	@Override
-	public double desiredValue() {
-		return 1;
-	}
-
-	@Override
-	public double notDesiredValue() {
-		return 0;
-	}
+//	@Override
+//	public double desiredValue() {
+//		return 1;
+//	}
+//
+//	@Override
+//	public double notDesiredValue() {
+//		return 0;
+//	}
 
 }

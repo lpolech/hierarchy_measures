@@ -1,6 +1,7 @@
 package external_measures;
 
-import interfaces.Measure;
+import interfaces.DistanceMeasure;
+import interfaces.QualityMeasure;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -9,7 +10,7 @@ import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
 
-public class AdaptedFmeasure implements Measure {
+public class AdaptedFmeasure implements QualityMeasure {
 
 	/*
 	 * Consider each instances from child groups as belonging also to parent group
@@ -19,9 +20,9 @@ public class AdaptedFmeasure implements Measure {
 	public AdaptedFmeasure(boolean instancesInheritance) {
 		this.withInstancesInheritance = instancesInheritance;
 	}
-	
+
 	@Override
-	public double getMeasure(Hierarchy h) {
+	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
 		int numberOfGroups = h.getNumberOfGroups();
 		int numberOfClasses = h.getNumberOfClasses();
 		HashMap<String, Integer> eachGroupIndex = new HashMap<String, Integer>(numberOfGroups, 1.0f);//we have the max size of map
@@ -141,14 +142,14 @@ public class AdaptedFmeasure implements Measure {
 		return FMeasure;
 	}
 
-	@Override
-	public double desiredValue() {
-		return 1;
-	}
-
-	@Override
-	public double notDesiredValue() {
-		return 0;
-	}
+//	@Override
+//	public double desiredValue() {
+//		return 1;
+//	}
+//
+//	@Override
+//	public double notDesiredValue() {
+//		return 0;
+//	}
 
 }

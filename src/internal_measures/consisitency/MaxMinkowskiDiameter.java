@@ -1,26 +1,27 @@
 package internal_measures.consisitency;
 
-import interfaces.Measure;
+import interfaces.DistanceMeasure;
+import interfaces.QualityMeasure;
 import basic_hierarchy.interfaces.Hierarchy;
 
-public class MaxMinkowskiDiameter implements Measure {
+public class MaxMinkowskiDiameter implements QualityMeasure {
 
 	@Override
-	public double getMeasure(Hierarchy h) {
+	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
-	public double desiredValue() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public double notDesiredValue() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	@Override
+//	public double desiredValue() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//
+//	@Override
+//	public double notDesiredValue() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
 }
