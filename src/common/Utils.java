@@ -4,6 +4,7 @@ import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Utils {
 
@@ -26,7 +27,52 @@ public class Utils {
     }
 
     public static boolean isTheSameOrSubclass(String baseClass, String queryClass) {
-        return (baseClass + basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR)
-                .startsWith(queryClass +basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR);
+        return (queryClass + basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR)
+                .startsWith(baseClass + basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR);
+    }
+    
+    public static boolean isSubclass(String baseClass, String queryClass) {
+    	return (queryClass + basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR)
+                .startsWith(baseClass + basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR)
+                && queryClass.length() > baseClass.length();
+    }
+    
+    public static Double[] nodeSubtreeVariance(Node n)
+    {
+    	LinkedList<Instance> instances = n.getSubtreeInstances();
+    	assert !instances.isEmpty();
+    	
+    	int dim = instances.getFirst().getData().length;
+    	Double[] variance = new Double[dim];
+    	double[] mean = new double[dim];
+    	
+    	for(Instance i: instances)
+    	{
+    		for(int d = 0; d < dim; d++)
+    		{
+    			mean[d] += i.getData()[d];
+    		}
+    	}
+    	
+    	for(int d = 0; d < dim; d++)
+		{
+			mean[d] /= instances.size();
+		}
+    	
+    	for(Instance i: instances)
+    	{
+    		for(int d = 0; d < dim; d++)
+    		{
+    			variance[d] += Math.pow(i.getData()[d] - mean[d], 2);
+    		}
+    	}
+    	
+    	for(int d = 0; d < dim; d++)
+		{
+    		variance[d] /= instances.size();
+		}
+    	
+    	return variance;
     }
 }
+

@@ -1,22 +1,19 @@
-package external_measures;
-
-import common.Utils;
-import interfaces.DistanceMeasure;
-import interfaces.QualityMeasure;
+package external_measures.statistical_hypothesis;
 
 import java.util.LinkedList;
 
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
+import interfaces.Hypotheses;
 
-public class PartialOrderFmeasure implements QualityMeasure {
-	public int TP = 0;
-	public int FP = 0;
-	public int TN = 0;
-	public int FN = 0;
+public class FlatHypotheses implements Hypotheses {
+	private int TP = Integer.MIN_VALUE;
+	private int FP = Integer.MIN_VALUE;
+	private int TN = Integer.MIN_VALUE;
+	private int FN = Integer.MIN_VALUE;
 
-	@Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+	public void calculate(Hierarchy h)
+	{
 		TP = 0;
 		FP = 0;
 		TN = 0;
@@ -35,9 +32,9 @@ public class PartialOrderFmeasure implements QualityMeasure {
 					String secondTrueClass = allInstancesArr[j].getTrueClass();
 					String secondAssignClass = allInstancesArr[j].getNodeId();
 					
-					if(Utils.isTheSameOrSubclass(firstTrueClass, secondTrueClass))
+					if(firstTrueClass.equals(secondTrueClass))
 					{
-						if(Utils.isTheSameOrSubclass(firstAssignClass, secondAssignClass))
+						if(firstAssignClass.equals(secondAssignClass))
 						{
 							TP++;
 						}
@@ -48,7 +45,7 @@ public class PartialOrderFmeasure implements QualityMeasure {
 					}
 					else
 					{
-						if(Utils.isTheSameOrSubclass(firstAssignClass, secondAssignClass))
+						if(firstAssignClass.equals(secondAssignClass))
 						{
 							FP++;
 						}
@@ -60,19 +57,21 @@ public class PartialOrderFmeasure implements QualityMeasure {
 				}
 			}
 		}
-		double numerator = 2*TP;
-		double denominator = 2*TP + FP + FN;
-		return numerator/denominator;
 	}
 
-//	@Override
-//	public double desiredValue() {
-//		return 1;
-//	}
-//
-//	@Override
-//	public double notDesiredValue() {
-//		return 0;
-//	}
+	public int getTP() {
+		return TP;
+	}
 
+	public int getFP() {
+		return FP;
+	}
+
+	public int getTN() {
+		return TN;
+	}
+
+	public int getFN() {
+		return FN;
+	}
 }

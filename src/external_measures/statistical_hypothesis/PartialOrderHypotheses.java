@@ -1,21 +1,20 @@
-package external_measures;
-
-import interfaces.DistanceMeasure;
-import interfaces.QualityMeasure;
+package external_measures.statistical_hypothesis;
 
 import java.util.LinkedList;
 
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
+import common.Utils;
+import interfaces.Hypotheses;
 
-public class StandardFmeasure implements QualityMeasure {
-	public int TP = 0;
-	public int FP = 0;
-	public int TN = 0;
-	public int FN = 0;
-	
-	@Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+public class PartialOrderHypotheses implements Hypotheses {//TODO: mozna z tej klasy i FlatHypotheses zrobic jedna klase przyjmujaca lambde czy tam funkcje, ktora bedzie odpalana w tych ifach
+	private int TP = Integer.MIN_VALUE;
+	private int FP = Integer.MIN_VALUE;
+	private int TN = Integer.MIN_VALUE;
+	private int FN = Integer.MIN_VALUE;
+
+	public void calculate(Hierarchy h) 
+	{
 		TP = 0;
 		FP = 0;
 		TN = 0;
@@ -34,9 +33,9 @@ public class StandardFmeasure implements QualityMeasure {
 					String secondTrueClass = allInstancesArr[j].getTrueClass();
 					String secondAssignClass = allInstancesArr[j].getNodeId();
 					
-					if(firstTrueClass.equals(secondTrueClass))
+					if(Utils.isTheSameOrSubclass(firstTrueClass, secondTrueClass))
 					{
-						if(firstAssignClass.equals(secondAssignClass))
+						if(Utils.isTheSameOrSubclass(firstAssignClass, secondAssignClass))
 						{
 							TP++;
 						}
@@ -47,7 +46,7 @@ public class StandardFmeasure implements QualityMeasure {
 					}
 					else
 					{
-						if(firstAssignClass.equals(secondAssignClass))
+						if(Utils.isTheSameOrSubclass(firstAssignClass, secondAssignClass))
 						{
 							FP++;
 						}
@@ -59,19 +58,21 @@ public class StandardFmeasure implements QualityMeasure {
 				}
 			}
 		}
-		double numerator = 2.0d*TP;
-		double denominator = 2*TP + FP + FN;
-		return numerator/denominator;
 	}
 
-//	@Override
-//	public double desiredValue() {
-//		return 1;
-//	}
-//
-//	@Override
-//	public double notDesiredValue() {
-//		return 0;
-//	}
+	public int getTP() {
+		return TP;
+	}
 
+	public int getFP() {
+		return FP;
+	}
+
+	public int getTN() {
+		return TN;
+	}
+
+	public int getFN() {
+		return FN;
+	}
 }

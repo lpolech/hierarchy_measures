@@ -1,4 +1,4 @@
-package external_measures.information_based_measures;
+package external_measures.information_based;
 
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Node;
