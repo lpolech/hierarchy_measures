@@ -21,4 +21,14 @@ public class JaccardIndex implements QualityMeasure {
 		return this.hypothesesCalculator.getTP()/(double)(this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getFP() + this.hypothesesCalculator.getFN());
 	}
 
+	@Override
+	public double getDesiredValue() {
+		return 1;
+	}
+
+	@Override
+	public double getNotDesiredValue() {
+		return 0;
+	}
+
 }

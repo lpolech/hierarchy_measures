@@ -47,4 +47,14 @@ public class FlatDaviesBouldin implements QualityMeasure {
         }
         return maxAvgClustersDispersion/(double)nodes.length;
     }
+
+    @Override
+    public double getDesiredValue() {
+        return 0;
+    }
+
+    @Override
+    public double getNotDesiredValue() {
+        return Double.MAX_VALUE;
+    }
 }

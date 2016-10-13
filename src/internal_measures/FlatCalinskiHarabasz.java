@@ -46,16 +46,26 @@ public class FlatCalinskiHarabasz implements QualityMeasure { //inspired by
         for(int n = 0; n < nodes.length; n++)
         {
             betweenGroupsVariance += nodes[n].getNodeInstances().size()
-                    * this.dist.getDistance(allObjectsMeanInstance, nodes[n].getNodeRepresentation());
+                    * Math.pow(this.dist.getDistance(allObjectsMeanInstance, nodes[n].getNodeRepresentation()), 2);
 
             Instance groupCenter = nodes[n].getNodeRepresentation();
             for(Instance i: nodes[n].getNodeInstances())
             {
-                withinGroupsVariance += this.dist.getDistance(i, groupCenter);
+                withinGroupsVariance += Math.pow(this.dist.getDistance(i, groupCenter), 2);
             }
         }
 
         return (betweenGroupsVariance * (allObjects.size() - nodes.length)) / (withinGroupsVariance * (nodes.length - 1));
+    }
+
+    @Override
+    public double getDesiredValue() {
+        return Double.MAX_VALUE;
+    }
+
+    @Override
+    public double getNotDesiredValue() {
+        return 0;
     }
 
 }

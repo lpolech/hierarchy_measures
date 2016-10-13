@@ -10,17 +10,15 @@ public class AvgMinkowskiAverageLinkage implements QualityMeasure {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-//
-//	@Override
-//	public double desiredValue() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
-//	@Override
-//	public double notDesiredValue() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
+
+	@Override
+	public double getDesiredValue() {
+		return 0;
+	}
+
+	@Override
+	public double getNotDesiredValue() {
+		return 0;
+	}
 
 }

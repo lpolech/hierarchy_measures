@@ -24,4 +24,14 @@ public class Fmeasure implements QualityMeasure {
 		double denominator = numerator + this.beta*this.beta*this.hypothesesCalculator.getFN() + this.hypothesesCalculator.getFP();
 		return numerator/denominator;
 	}
+
+	@Override
+	public double getDesiredValue() {
+		return 1.0;
+	}
+
+	@Override
+	public double getNotDesiredValue() {
+		return 0;
+	}
 }

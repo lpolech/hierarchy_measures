@@ -38,6 +38,16 @@ public class HierarchicalClassPurity implements QualityMeasure {
 		return sumOfClassPurity/(double)h.getNumberOfInstances();
 	}
 
+	@Override
+	public double getDesiredValue() {
+		return 1.0;
+	}
+
+	@Override
+	public double getNotDesiredValue() {
+		return 0;
+	}
+
 	private void bottomUpCalculation(Node currentNode/*node*/, String[] allClasses, HashMap<String, Integer> indexedClasses, HashMap<Node, Integer[]> indexedPartials)
 	{
 		for(Node child: currentNode.getChildren())

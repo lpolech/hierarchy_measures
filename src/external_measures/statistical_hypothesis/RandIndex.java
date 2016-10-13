@@ -1,7 +1,6 @@
 package external_measures.statistical_hypothesis;
 
 import basic_hierarchy.interfaces.Hierarchy;
-import interfaces.DistanceMeasure;
 import interfaces.Hypotheses;
 import interfaces.QualityMeasure;
 
@@ -20,6 +19,16 @@ public class RandIndex implements QualityMeasure {
 		this.hypothesesCalculator.calculate(h);
 		return (this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getTN())
 				/(double)(this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getTN() + this.hypothesesCalculator.getFP() + this.hypothesesCalculator.getFN());
+	}
+
+	@Override
+	public double getDesiredValue() {
+		return 1;
+	}
+
+	@Override
+	public double getNotDesiredValue() {
+		return 0;
 	}
 
 }

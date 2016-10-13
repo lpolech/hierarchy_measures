@@ -68,7 +68,8 @@ public class AdaptedFmeasure implements QualityMeasure {
 						String potentialParentClass = classes[j];						
 						if(potentialParentClass.length() < instanceClass.length())
 						{
-							if(instanceClass.startsWith(potentialParentClass+basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR))
+							if(instanceClass.startsWith(
+									potentialParentClass+basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR))
 							{
 								eachClassInGroupNumberOfInstances[eachClassIndex.get(potentialParentClass)][i]++;
 							}
@@ -142,14 +143,14 @@ public class AdaptedFmeasure implements QualityMeasure {
 		return FMeasure;
 	}
 
-//	@Override
-//	public double desiredValue() {
-//		return 1;
-//	}
-//
-//	@Override
-//	public double notDesiredValue() {
-//		return 0;
-//	}
+	@Override
+	public double getDesiredValue() {
+		return 1.0;
+	}
+
+	@Override
+	public double getNotDesiredValue() {
+		return 0.0;
+	}
 
 }

@@ -45,6 +45,16 @@ public class FlatNormalizedMutualInformation  extends FlatEntropy {
         return mutualInformation/((classEntropy + nodeEntropy)/2.0);
     }
 
+    @Override
+    public double getDesiredValue() {
+        return 0;
+    }
+
+    @Override
+    public double getNotDesiredValue() {
+        return 0;
+    }
+
     private double calculateEntropy(int[] count, int overallNumberOfInstances)
     {
         double entropy = 0.0;
