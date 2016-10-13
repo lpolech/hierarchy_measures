@@ -16,7 +16,7 @@ public class RandIndex implements QualityMeasure {
 	}
 	
 	@Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+	public double getMeasure(Hierarchy h) {
 		this.hypothesesCalculator.calculate(h);
 		return (this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getTN())
 				/(double)(this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getTN() + this.hypothesesCalculator.getFP() + this.hypothesesCalculator.getFN());

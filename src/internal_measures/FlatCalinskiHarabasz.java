@@ -11,8 +11,17 @@ import java.util.LinkedList;
 
 public class FlatCalinskiHarabasz implements QualityMeasure { //inspired by
     // https://www.mathworks.com/help/stats/clustering.evaluation.calinskiharabaszevaluation-class.html?requestedDomain=www.mathworks.com
+    private DistanceMeasure dist;
+
+    private FlatCalinskiHarabasz() {}
+
+    public FlatCalinskiHarabasz(DistanceMeasure dist)
+    {
+        this.dist = dist;
+    }
+
     @Override
-    public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+    public double getMeasure(Hierarchy h) {
         double betweenGroupsVariance = 0.0;
         double withinGroupsVariance = 0.0;
         double[] allObjectsMeanVect = new double[h.getRoot().getSubtreeInstances().getFirst().getData().length];
@@ -37,12 +46,12 @@ public class FlatCalinskiHarabasz implements QualityMeasure { //inspired by
         for(int n = 0; n < nodes.length; n++)
         {
             betweenGroupsVariance += nodes[n].getNodeInstances().size()
-                    * dist.getDistance(allObjectsMeanInstance, nodes[n].getNodeRepresentation());
+                    * this.dist.getDistance(allObjectsMeanInstance, nodes[n].getNodeRepresentation());
 
             Instance groupCenter = nodes[n].getNodeRepresentation();
             for(Instance i: nodes[n].getNodeInstances())
             {
-                withinGroupsVariance += dist.getDistance(i, groupCenter);
+                withinGroupsVariance += this.dist.getDistance(i, groupCenter);
             }
         }
 

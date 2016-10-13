@@ -18,7 +18,7 @@ public class FlatEntropy2 extends FlatEntropy {
     }
 
     @Override
-    public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+    public double getMeasure(Hierarchy h) {
         double measure = 0.0;
         for(String c: h.getClasses())
         {

@@ -20,7 +20,7 @@ public class InformationGain extends FlatEntropy {
     }
 
     @Override
-    public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+    public double getMeasure(Hierarchy h) {
         double cumulativeClassRatio = 0.0;
         for(String c: h.getClasses())
         {
@@ -28,6 +28,6 @@ public class InformationGain extends FlatEntropy {
             cumulativeClassRatio += (classRatio * Math.log(classRatio)/this.baseLogarithm);
         }
         cumulativeClassRatio *= (-1);
-        return cumulativeClassRatio - this.entropyMeasure.getMeasure(h, dist);
+        return cumulativeClassRatio - this.entropyMeasure.getMeasure(h);
     }
 }

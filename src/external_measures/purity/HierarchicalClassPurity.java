@@ -11,7 +11,7 @@ import common.Utils;
 public class HierarchicalClassPurity implements QualityMeasure {
 
 	@Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+	public double getMeasure(Hierarchy h) {
 		int sumOfClassPurity = 0;
 		
 		Node[] allNodes = h.getGroups();//allGroups

@@ -9,8 +9,17 @@ import basic_hierarchy.interfaces.Hierarchy;
 import java.util.LinkedList;
 
 public class FlatWithinBetweenIndex implements QualityMeasure {
+    private DistanceMeasure dist;
+
+    private FlatWithinBetweenIndex() {}
+
+    public FlatWithinBetweenIndex(DistanceMeasure dist)
+    {
+        this.dist = dist;
+    }
+
     @Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+	public double getMeasure(Hierarchy h) {
 		double maxWithinNodeDistance = (-1)*Double.MAX_VALUE;
         double minNodesCentersDistance = Double.MAX_VALUE;
 

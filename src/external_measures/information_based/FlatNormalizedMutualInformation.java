@@ -23,8 +23,8 @@ public class FlatNormalizedMutualInformation  extends FlatEntropy {
     }
 
     @Override
-    public double getMeasure(Hierarchy h, DistanceMeasure dist) {
-        double mutualInformation = MIIndex.getMeasure(h, dist);
+    public double getMeasure(Hierarchy h) {
+        double mutualInformation = MIIndex.getMeasure(h);
 
         String[] classes = h.getClasses();
         int[] classesCount = new int[h.getNumberOfClasses()];

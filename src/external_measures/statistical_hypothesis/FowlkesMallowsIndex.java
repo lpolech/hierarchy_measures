@@ -20,7 +20,7 @@ public class FowlkesMallowsIndex implements QualityMeasure {
 	}
 	
 	@Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+	public double getMeasure(Hierarchy h) {
 		this.hypothesesCalculator.calculate(h);
 		double numerator = this.hypothesesCalculator.getTP()*this.hypothesesCalculator.getTP();
 		double denominator = (this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getFP()) * (this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getFN());

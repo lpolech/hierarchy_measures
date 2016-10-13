@@ -16,7 +16,7 @@ public class JaccardIndex implements QualityMeasure {
 	}
 	
 	@Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+	public double getMeasure(Hierarchy h) {
 		this.hypothesesCalculator.calculate(h);
 		return this.hypothesesCalculator.getTP()/(double)(this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getFP() + this.hypothesesCalculator.getFN());
 	}

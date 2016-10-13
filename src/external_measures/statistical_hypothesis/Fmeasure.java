@@ -18,7 +18,7 @@ public class Fmeasure implements QualityMeasure {
 	}
 
 	@Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+	public double getMeasure(Hierarchy h) {
 		this.hypothesesCalculator.calculate(h);
 		double numerator = (1.0d + this.beta*this.beta) * this.hypothesesCalculator.getTP();
 		double denominator = numerator + this.beta*this.beta*this.hypothesesCalculator.getFN() + this.hypothesesCalculator.getFP();

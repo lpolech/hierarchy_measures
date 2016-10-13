@@ -9,8 +9,17 @@ import interfaces.QualityMeasure;
 import java.util.LinkedList;
 
 public class FlatDaviesBouldin implements QualityMeasure {
+    private DistanceMeasure dist;
+
+    private FlatDaviesBouldin() {}
+
+    public FlatDaviesBouldin(DistanceMeasure dist)
+    {
+        this.dist = dist;
+    }
+
     @Override
-    public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+    public double getMeasure(Hierarchy h) {
         double maxAvgClustersDispersion = (-1)*Double.MAX_VALUE;
 
         Node[] nodes = h.getGroups();

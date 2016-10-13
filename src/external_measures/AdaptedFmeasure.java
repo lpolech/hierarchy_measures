@@ -22,7 +22,7 @@ public class AdaptedFmeasure implements QualityMeasure {
 	}
 
 	@Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+	public double getMeasure(Hierarchy h) {
 		int numberOfGroups = h.getNumberOfGroups();
 		int numberOfClasses = h.getNumberOfClasses();
 		HashMap<String, Integer> eachGroupIndex = new HashMap<String, Integer>(numberOfGroups, 1.0f);//we have the max size of map
