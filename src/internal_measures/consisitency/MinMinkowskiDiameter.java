@@ -7,7 +7,7 @@ import basic_hierarchy.interfaces.Hierarchy;
 public class MinMinkowskiDiameter implements QualityMeasure {
 
 	@Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+	public double getMeasure(Hierarchy h) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

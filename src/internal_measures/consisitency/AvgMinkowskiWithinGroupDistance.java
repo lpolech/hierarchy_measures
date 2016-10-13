@@ -7,7 +7,7 @@ import interfaces.QualityMeasure;
 public class AvgMinkowskiWithinGroupDistance implements QualityMeasure {
 
 	@Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+	public double getMeasure(Hierarchy h) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -20,7 +20,7 @@ public class FlatMutualInformation extends FlatEntropy {
     }
 
     @Override
-    public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+    public double getMeasure(Hierarchy h) {
         int overallNumberOfObjects = h.getNumberOfInstances();
         double measure = 0.0;
         for(Node n: h.getGroups())

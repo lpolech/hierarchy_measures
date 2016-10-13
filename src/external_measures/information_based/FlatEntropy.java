@@ -13,5 +13,5 @@ public abstract class FlatEntropy implements QualityMeasure {
     }
 
     @Override
-    public abstract double getMeasure(Hierarchy h, DistanceMeasure dist);
+    public abstract double getMeasure(Hierarchy h);
 }

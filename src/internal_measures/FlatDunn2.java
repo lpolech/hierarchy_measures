@@ -9,8 +9,17 @@ import interfaces.DistanceMeasure;
 import java.util.LinkedList;
 
 public class FlatDunn2 implements QualityMeasure {
+    private DistanceMeasure dist;
+
+    private FlatDunn2() {}
+
+    public FlatDunn2(DistanceMeasure dist)
+    {
+        this.dist = dist;
+    }
+
     @Override
-    public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+    public double getMeasure(Hierarchy h) {
         Node[] nodes = h.getGroups();
         double minDistanceBetweenPointsInDifferentClusters = Double.MAX_VALUE;
         double maxDistanceBetweenPointsWithinCluster = (-1)*Double.MAX_VALUE;

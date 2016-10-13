@@ -19,7 +19,7 @@ public class VarianceDeviation implements QualityMeasure {
 	}
 	
 	@Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+	public double getMeasure(Hierarchy h) {
 		double sumOfVarianceRatios = 0.0;
 		int dataDim = Integer.MIN_VALUE;
 		HashMap<Node, Double[]> nodesWithVariances = new HashMap<>(h.getNumberOfGroups(), 1.0f);

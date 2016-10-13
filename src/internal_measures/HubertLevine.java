@@ -5,9 +5,8 @@ import interfaces.QualityMeasure;
 import basic_hierarchy.interfaces.Hierarchy;
 
 public class HubertLevine implements QualityMeasure {
-
 	@Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+	public double getMeasure(Hierarchy h) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

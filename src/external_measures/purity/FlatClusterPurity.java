@@ -12,7 +12,7 @@ import interfaces.QualityMeasure;
 public class FlatClusterPurity implements QualityMeasure {
 
 	@Override
-	public double getMeasure(Hierarchy h, DistanceMeasure dist) {
+	public double getMeasure(Hierarchy h) {
 		int sumOfDominantGroupClasses = 0;
 		for(Node n: h.getGroups())
 		{

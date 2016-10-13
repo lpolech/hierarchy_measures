@@ -12,8 +12,8 @@ public class ReadAndCalculate {
         GeneratedCSVReader reader = new GeneratedCSVReader();
 		Hierarchy H = reader.load("very-simple.csv", false, true, false);
 		H.getRoot().printSubtree();
-        FlatCalinskiHarabasz db = new FlatCalinskiHarabasz();
-        System.out.println(db.getMeasure(H, new Euclidean()));
+        FlatCalinskiHarabasz db = new FlatCalinskiHarabasz(new Euclidean());
+        System.out.println(db.getMeasure(H));
 //		int setNum = 7;
 //		int numberOfIterations = 30;
 //		System.out.println("file;standard;partialOrder;adapted;standard TP;partial TP;standard TN;partial TN;standard FP;partial FP;standard FN;partial FN");
