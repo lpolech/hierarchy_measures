@@ -34,4 +34,14 @@ public class FlatClusterPurity implements QualityMeasure {
 		return sumOfDominantGroupClasses/(double)h.getNumberOfInstances();
 	}
 
+	@Override
+	public double getDesiredValue() {
+		return 1;
+	}
+
+	@Override
+	public double getNotDesiredValue() {
+		return 0;
+	}
+
 }

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Node;
 import common.Utils;
-import interfaces.DistanceMeasure;
 import interfaces.QualityMeasure;
 
 public class VarianceDeviation implements QualityMeasure {
@@ -42,9 +41,19 @@ public class VarianceDeviation implements QualityMeasure {
 			}
 		}
 		
-		sumOfVarianceRatios /= (h.getNumberOfGroups() * dataDim);
+		sumOfVarianceRatios /= ((h.getNumberOfGroups() - 1) * dataDim) * this.alpha;
 		
 		return sumOfVarianceRatios;
+	}
+
+	@Override
+	public double getDesiredValue() {
+		return this.alpha;
+	}
+
+	@Override
+	public double getNotDesiredValue() {
+		return Double.MAX_VALUE;
 	}
 
 }

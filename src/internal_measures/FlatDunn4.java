@@ -31,7 +31,7 @@ public class FlatDunn4 implements QualityMeasure {
                 LinkedList<Instance> n2Instances = nodes[n2].getNodeInstances();
                 for(int i1 = 0; i1 < n1Instances.size(); i1++)
                 {
-                    for(int i2 = i1 + 1; i2 < n2Instances.size(); i2++)
+                    for(int i2 = 0; i2 < n2Instances.size(); i2++)
                     {
                         double distance = dist.getDistance(n1Instances.get(i1), n2Instances.get(i2));
                         minDistanceBetweenPointsInDifferentClusters = Math.min(distance,
@@ -52,5 +52,15 @@ public class FlatDunn4 implements QualityMeasure {
         }
 
         return minDistanceBetweenPointsInDifferentClusters/maxAvgPointsDistanceToClusterCenter;
+    }
+
+    @Override
+    public double getDesiredValue() {
+        return Double.MAX_VALUE;
+    }
+
+    @Override
+    public double getNotDesiredValue() {
+        return 0;
     }
 }

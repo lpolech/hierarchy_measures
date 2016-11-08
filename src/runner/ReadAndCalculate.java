@@ -10,7 +10,7 @@ public class ReadAndCalculate {
 
 	public static void main(String[] args) {
         GeneratedCSVReader reader = new GeneratedCSVReader();
-		Hierarchy H = reader.load("very-simple.csv", false, true, false);
+		Hierarchy H = reader.load("very-simple.csv", false, true, false, false);
 		H.getRoot().printSubtree();
         FlatCalinskiHarabasz db = new FlatCalinskiHarabasz(new Euclidean());
         System.out.println(db.getMeasure(H));

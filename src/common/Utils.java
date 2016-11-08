@@ -44,6 +44,11 @@ public class Utils {
     	
     	int dim = instances.getFirst().getData().length;
     	Double[] variance = new Double[dim];
+		for(int i = 0; i < dim; i++)
+		{
+			variance[i] = 0.0;
+		}
+
     	double[] mean = new double[dim];
     	
     	for(Instance i: instances)

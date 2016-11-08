@@ -3,8 +3,6 @@ package external_measures.information_based;
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Node;
 import common.Utils;
-import interfaces.DistanceMeasure;
-import interfaces.QualityMeasure;
 
 public class FlatEntropy2 extends FlatEntropy {
     public FlatEntropy2()
@@ -29,10 +27,21 @@ public class FlatEntropy2 extends FlatEntropy {
             {
                 int numberOfClassInstancesWithinNode = Utils.getClassInstancesWithinNode(n, c, false, false).size();
                 double nodePrecision = numberOfClassInstancesWithinNode/(double)numberOfClassObjects;
-                particularClassCumulativeRecall += (nodePrecision * Math.log(nodePrecision)/this.baseLogarithm);
+                particularClassCumulativeRecall += numberOfClassInstancesWithinNode == 0 || numberOfClassObjects == 0?
+                        0.0 : (nodePrecision * Math.log(nodePrecision)/this.baseLogarithm);
             }
             measure += (classToAllObjectsRatio*particularClassCumulativeRecall);
         }
         return (-1)*measure;
+    }
+
+    @Override
+    public double getDesiredValue() {
+        return 0;
+    }
+
+    @Override
+    public double getNotDesiredValue() {
+        return Double.MAX_VALUE;
     }
 }

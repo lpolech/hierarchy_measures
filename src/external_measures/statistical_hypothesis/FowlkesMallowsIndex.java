@@ -1,11 +1,6 @@
 package external_measures.statistical_hypothesis;
 
-import java.util.LinkedList;
-
 import basic_hierarchy.interfaces.Hierarchy;
-import basic_hierarchy.interfaces.Instance;
-import common.Utils;
-import interfaces.DistanceMeasure;
 import interfaces.Hypotheses;
 import interfaces.QualityMeasure;
 
@@ -25,6 +20,16 @@ public class FowlkesMallowsIndex implements QualityMeasure {
 		double numerator = this.hypothesesCalculator.getTP()*this.hypothesesCalculator.getTP();
 		double denominator = (this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getFP()) * (this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getFN());
 		return Math.sqrt(numerator/denominator);
+	}
+
+	@Override
+	public double getDesiredValue() {
+		return 1;
+	}
+
+	@Override
+	public double getNotDesiredValue() {
+		return 0;
 	}
 
 }

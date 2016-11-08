@@ -45,4 +45,14 @@ public class FlatWithinBetweenIndex implements QualityMeasure {
 		return maxWithinNodeDistance/minNodesCentersDistance;
 	}
 
+    @Override
+    public double getDesiredValue() {
+        return 0;
+    }
+
+    @Override
+    public double getNotDesiredValue() {
+        return Double.MAX_VALUE;
+    }
+
 }

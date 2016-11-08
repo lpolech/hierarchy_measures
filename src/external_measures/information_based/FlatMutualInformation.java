@@ -30,17 +30,29 @@ public class FlatMutualInformation extends FlatEntropy {
             {
                 int classInstancesWithinNodeCount = Utils.getClassInstancesWithinNode(n, c, false, false).size();
                 int classCount = h.getClassCount(c, false);
-                measure += (
-                            (classInstancesWithinNodeCount/(double)overallNumberOfObjects)
-                            * (
-                               Math.log(
-                                        (overallNumberOfObjects*classInstancesWithinNodeCount)
-                                        /(double)(nodeInstancesCount*classCount)
-                                       )/this.baseLogarithm
-                              )
-                            );
+                if(classInstancesWithinNodeCount != 0 && nodeInstancesCount != 0) {
+                    measure += (
+                            (classInstancesWithinNodeCount / (double) overallNumberOfObjects)
+                                    * (
+                                    Math.log(
+                                            (overallNumberOfObjects * classInstancesWithinNodeCount)
+                                                    / (double) (nodeInstancesCount * classCount)
+                                    ) / this.baseLogarithm
+                            )
+                    );
+                }
             }
         }
         return measure;
+    }
+
+    @Override
+    public double getDesiredValue() {
+        return Double.MAX_VALUE;
+    }
+
+    @Override
+    public double getNotDesiredValue() {
+        return 0;
     }
 }

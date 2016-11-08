@@ -29,10 +29,21 @@ public class FlatEntropy1 extends FlatEntropy {
             {
                 int numberOfClassInstancesWithinNode = Utils.getClassInstancesWithinNode(n, c, false, false).size();
                 double classPrecision = numberOfClassInstancesWithinNode/(double)numberOfNodeObjects;
-                particularNodeCumulativePrecision += (classPrecision * Math.log(classPrecision)/this.baseLogarithm);
+                particularNodeCumulativePrecision += numberOfClassInstancesWithinNode == 0 || numberOfNodeObjects == 0?
+                        0.0: (classPrecision * Math.log(classPrecision)/this.baseLogarithm);
             }
             measure += (nodeToAllObjectsRatio*particularNodeCumulativePrecision);
         }
         return (-1)*measure;
+    }
+
+    @Override
+    public double getDesiredValue() {
+        return 0.0;
+    }
+
+    @Override
+    public double getNotDesiredValue() {
+        return Double.MAX_VALUE;
     }
 }

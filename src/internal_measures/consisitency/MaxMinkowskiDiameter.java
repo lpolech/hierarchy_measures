@@ -12,6 +12,16 @@ public class MaxMinkowskiDiameter implements QualityMeasure {
 		return 0;
 	}
 
+	@Override
+	public double getDesiredValue() {
+		return 0;
+	}
+
+	@Override
+	public double getNotDesiredValue() {
+		return 0;
+	}
+
 //	@Override
 //	public double desiredValue() {
 //		// TODO Auto-generated method stub

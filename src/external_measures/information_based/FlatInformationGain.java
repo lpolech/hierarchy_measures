@@ -1,21 +1,19 @@
 package external_measures.information_based;
 
 import basic_hierarchy.interfaces.Hierarchy;
-import interfaces.DistanceMeasure;
-import interfaces.QualityMeasure;
 
-public class InformationGain extends FlatEntropy {
+public class FlatInformationGain extends FlatEntropy {
     private FlatEntropy entropyMeasure = null;
 
     /*This constructor is private because user needs to specify which entropy measure to use*/
-    private InformationGain()
+    private FlatInformationGain()
     {
         super(2.0);
     }
 
-    public InformationGain(FlatEntropy entropyMeasure)
+    public FlatInformationGain(double logBase, FlatEntropy entropyMeasure)
     {
-        super(entropyMeasure.baseLogarithm);
+        super(logBase);
         this.entropyMeasure = entropyMeasure;
     }
 
@@ -29,5 +27,15 @@ public class InformationGain extends FlatEntropy {
         }
         cumulativeClassRatio *= (-1);
         return cumulativeClassRatio - this.entropyMeasure.getMeasure(h);
+    }
+
+    @Override
+    public double getDesiredValue() {
+        return 1.0;
+    }
+
+    @Override
+    public double getNotDesiredValue() {
+        return 0;
     }
 }
