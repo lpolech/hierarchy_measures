@@ -2,6 +2,7 @@ package common;
 
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
+import internal_measures.statistics.AvgWithStdev;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -78,6 +79,93 @@ public class Utils {
 		}
     	
     	return variance;
+    }
+
+    public static double populationMean(double[] samples)
+	{
+		double mean = 0.0;
+		for(double s: samples)
+		{
+			mean += s;
+		}
+
+		return mean/samples.length;
+	}
+
+    public static double populationMean(int[] samples)
+    {
+        double mean = 0.0;
+        for(double s: samples)
+        {
+            mean += s;
+        }
+
+        return mean/samples.length;
+    }
+
+    public static double populationVariance(double[] samples)
+    {
+        double mean = populationMean(samples);
+        return populationVariance(samples, mean);
+    }
+
+	public static double populationVariance(double[] samples, double mean)
+    {
+        double var = 0.0;
+        for(double s: samples)
+        {
+            var += Math.pow(s - mean, 2);
+        }
+        return var/samples.length;
+    }
+
+    public static double populationVariance(int[] samples, double mean)
+    {
+        double var = 0.0;
+        for(double s: samples)
+        {
+            var += Math.pow(s - mean, 2);
+        }
+        return var/samples.length;
+    }
+
+    public static double populationStdev(double[] samples)
+    {
+        return Math.sqrt(populationVariance(samples));
+    }
+
+    public static double populationStdev(double[] samples, double mean)
+    {
+        return Math.sqrt(populationVariance(samples, mean));
+    }
+
+    public static double populationStdev(int[] samples, double mean)
+    {
+        return Math.sqrt(populationVariance(samples, mean));
+    }
+
+    public static double[] toPrimitiveDoubles(LinkedList<Integer> array) {
+        if (array == null)
+        {
+            return null;
+        }
+
+        final double[] result = new double[array.size()];
+        for (int i = 0; i < array.size(); i++)
+        {
+            result[i] = array.get(i).doubleValue();
+        }
+
+        return result;
+    }
+
+    public static AvgWithStdev populationMeanAndStdev(double[] samples)
+    {
+        AvgWithStdev result = new AvgWithStdev();
+        result.setAvg(populationMean(samples));
+        result.setStdev(populationStdev(samples, result.getAvg()));
+
+        return result;
     }
 }
 
