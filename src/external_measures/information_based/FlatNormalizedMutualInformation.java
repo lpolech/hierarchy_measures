@@ -47,7 +47,7 @@ public class FlatNormalizedMutualInformation  extends FlatEntropy {
 
     @Override
     public double getDesiredValue() {
-        return 0;
+        return 1.0;
     }
 
     @Override

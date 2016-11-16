@@ -1,5 +1,6 @@
 package external_measures;
 
+import common.CommonQualityMeasure;
 import interfaces.DistanceMeasure;
 import interfaces.QualityMeasure;
 
@@ -10,7 +11,7 @@ import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
 
-public class AdaptedFmeasure implements QualityMeasure {
+public class AdaptedFmeasure extends CommonQualityMeasure {
 
 	/*
 	 * Consider each instances from child groups as belonging also to parent group
@@ -81,7 +82,7 @@ public class AdaptedFmeasure implements QualityMeasure {
 			//calculate Fmeasure related to each class
 			for(int j = 0; j < numberOfClasses; j++)
 			{
-				if(eachGroupNumberOfInstances[i] == 0)//leaf node added to fill gaps
+				if(eachGroupNumberOfInstances[i] == 0)//empty node added to fill gaps
 				{
 					classToGroupPrecision[j][i] = 0;
 				}

@@ -2,12 +2,13 @@ package internal_measures;
 
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Node;
+import common.CommonQualityMeasure;
 import common.Utils;
 import interfaces.QualityMeasure;
 
 import java.util.HashMap;
 
-public class VarianceDeviation2 implements QualityMeasure {
+public class VarianceDeviation2 extends CommonQualityMeasure {
 
 	@Override
 	public double getMeasure(Hierarchy h) {
@@ -39,8 +40,8 @@ public class VarianceDeviation2 implements QualityMeasure {
 	}
 
 	@Override
-	public double getDesiredValue() {
-		return 1;
+	public double getDesiredValue() {//the desired value should be as small as possible, but not to small
+		return Double.NaN;
 	}
 
 	@Override

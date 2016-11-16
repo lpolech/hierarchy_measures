@@ -2,13 +2,14 @@ package internal_measures;
 
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
+import common.CommonQualityMeasure;
 import interfaces.DistanceMeasure;
 import interfaces.QualityMeasure;
 import basic_hierarchy.interfaces.Hierarchy;
 
 import java.util.LinkedList;
 
-public class FlatWithinBetweenIndex implements QualityMeasure {
+public class FlatWithinBetweenIndex extends CommonQualityMeasure {
     private DistanceMeasure dist;
 
     private FlatWithinBetweenIndex() {}
@@ -38,8 +39,12 @@ public class FlatWithinBetweenIndex implements QualityMeasure {
 
             for(int n2 = n1 + 1; n2 < groups.length; n2++)
             {
-                double distance = dist.getDistance(groups[n1].getNodeRepresentation(), groups[n2].getNodeRepresentation());
-                minNodesCentersDistance = Math.min(distance, minNodesCentersDistance);
+                if(groups[n1].getNodeRepresentation().getData().length != 0
+                        && groups[n2].getNodeRepresentation().getData().length != 0) {
+                    double distance =
+                            dist.getDistance(groups[n1].getNodeRepresentation(), groups[n2].getNodeRepresentation());
+                    minNodesCentersDistance = Math.min(distance, minNodesCentersDistance);
+                }
             }
 		}
 		return maxWithinNodeDistance/minNodesCentersDistance;

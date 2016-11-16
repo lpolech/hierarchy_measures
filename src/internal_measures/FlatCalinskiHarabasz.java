@@ -4,12 +4,13 @@ import basic_hierarchy.implementation.BasicInstance;
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
+import common.CommonQualityMeasure;
 import interfaces.DistanceMeasure;
 import interfaces.QualityMeasure;
 
 import java.util.LinkedList;
 
-public class FlatCalinskiHarabasz implements QualityMeasure { //inspired by
+public class FlatCalinskiHarabasz extends CommonQualityMeasure { //inspired by
     // https://www.mathworks.com/help/stats/clustering.evaluation.calinskiharabaszevaluation-class.html?requestedDomain=www.mathworks.com
     private DistanceMeasure dist;
 
@@ -43,19 +44,25 @@ public class FlatCalinskiHarabasz implements QualityMeasure { //inspired by
                 allObjectsMeanVect, "allObjectsMeanInstance");
 
         Node[] nodes = h.getGroups();
+        int numberOfSkippedEmptyNodes = 0;
         for(int n = 0; n < nodes.length; n++)
         {
-            betweenGroupsVariance += nodes[n].getNodeInstances().size()
-                    * Math.pow(this.dist.getDistance(allObjectsMeanInstance, nodes[n].getNodeRepresentation()), 2);
+            if(nodes[n].getNodeInstances().isEmpty()) {
+                numberOfSkippedEmptyNodes += 1;
+            }
+            else {
+                betweenGroupsVariance += nodes[n].getNodeInstances().size()
+                        * Math.pow(this.dist.getDistance(allObjectsMeanInstance, nodes[n].getNodeRepresentation()), 2);
 
-            Instance groupCenter = nodes[n].getNodeRepresentation();
-            for(Instance i: nodes[n].getNodeInstances())
-            {
-                withinGroupsVariance += Math.pow(this.dist.getDistance(i, groupCenter), 2);
+                Instance groupCenter = nodes[n].getNodeRepresentation();
+                for (Instance i : nodes[n].getNodeInstances()) {
+                    withinGroupsVariance += Math.pow(this.dist.getDistance(i, groupCenter), 2);
+                }
             }
         }
 
-        return (betweenGroupsVariance * (allObjects.size() - nodes.length)) / (withinGroupsVariance * (nodes.length - 1));
+        return (betweenGroupsVariance * (allObjects.size() - nodes.length)) / (withinGroupsVariance
+                * (nodes.length - numberOfSkippedEmptyNodes - 1));
     }
 
     @Override

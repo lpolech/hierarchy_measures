@@ -1,10 +1,11 @@
 package external_measures.statistical_hypothesis;
 
 import basic_hierarchy.interfaces.Hierarchy;
+import common.CommonQualityMeasure;
 import interfaces.Hypotheses;
 import interfaces.QualityMeasure;
 
-public class FowlkesMallowsIndex implements QualityMeasure {
+public class FowlkesMallowsIndex extends CommonQualityMeasure {
 	private Hypotheses hypothesesCalculator;
 
 	private FowlkesMallowsIndex() {}

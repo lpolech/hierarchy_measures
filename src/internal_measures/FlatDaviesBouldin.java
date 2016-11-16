@@ -3,12 +3,13 @@ package internal_measures;
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
+import common.CommonQualityMeasure;
 import interfaces.DistanceMeasure;
 import interfaces.QualityMeasure;
 
 import java.util.LinkedList;
 
-public class FlatDaviesBouldin implements QualityMeasure {
+public class FlatDaviesBouldin extends CommonQualityMeasure {
     private DistanceMeasure dist;
 
     private FlatDaviesBouldin() {}
@@ -23,29 +24,36 @@ public class FlatDaviesBouldin implements QualityMeasure {
         double maxAvgClustersDispersion = (-1)*Double.MAX_VALUE;
 
         Node[] nodes = h.getGroups();
-        double[] groupsAvgDispersion = new double[nodes.length];
+        double[] groupAvgDispersion = new double[nodes.length];
+        int numberOfSkippedEmptyNodes = 0;
         for(int n = 0; n < nodes.length; n++)
         {
-            Instance nCenter = nodes[n].getNodeRepresentation();
-            for(Instance i: nodes[n].getNodeInstances())
-            {
-                groupsAvgDispersion[n] += dist.getDistance(i, nCenter);
+            if(nodes[n].getNodeInstances().isEmpty()) {
+                numberOfSkippedEmptyNodes += 1;
             }
-            groupsAvgDispersion[n] /= nodes[n].getNodeInstances().size();//because of this division (outside of
-            // distanse's root, this measure differs with this in SYNAT report
+            else {
+                Instance nCenter = nodes[n].getNodeRepresentation();
+                for (Instance i : nodes[n].getNodeInstances()) {
+                    groupAvgDispersion[n] += dist.getDistance(i, nCenter);
+                }
+                groupAvgDispersion[n] /= nodes[n].getNodeInstances().size();//because of this division (outside of
+                // distanse's root, this measure differs with this in SYNAT report
+            }
         }
 
         for(int n1 = 0; n1 < nodes.length; n1++)
         {
             for(int n2 = n1 + 1; n2 < nodes.length; n2++)
             {
-                double groupsDistance = dist.getDistance(nodes[n1].getNodeRepresentation(),
-                        nodes[n2].getNodeRepresentation());
-                double avgGroupsDispersion = (groupsAvgDispersion[n1] + groupsAvgDispersion[n2])/groupsDistance;
-                maxAvgClustersDispersion = Math.max(maxAvgClustersDispersion, avgGroupsDispersion);
+                if(!nodes[n1].getNodeInstances().isEmpty() && !nodes[n2].getNodeInstances().isEmpty()) {
+                    double groupsDistance = dist.getDistance(nodes[n1].getNodeRepresentation(),
+                            nodes[n2].getNodeRepresentation());
+                    double avgGroupsDispersion = (groupAvgDispersion[n1] + groupAvgDispersion[n2]) / groupsDistance;
+                    maxAvgClustersDispersion = Math.max(maxAvgClustersDispersion, avgGroupsDispersion);
+                }
             }
         }
-        return maxAvgClustersDispersion/(double)nodes.length;
+        return maxAvgClustersDispersion/(double)(nodes.length-numberOfSkippedEmptyNodes);
     }
 
     @Override

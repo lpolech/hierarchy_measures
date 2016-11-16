@@ -4,10 +4,11 @@ import java.util.HashMap;
 
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Node;
+import common.CommonQualityMeasure;
 import common.Utils;
 import interfaces.QualityMeasure;
 
-public class VarianceDeviation implements QualityMeasure {
+public class VarianceDeviation extends CommonQualityMeasure {
 	private double alpha;
 	private VarianceDeviation() {
 	}

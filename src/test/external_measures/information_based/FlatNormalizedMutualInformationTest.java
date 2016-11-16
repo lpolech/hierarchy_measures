@@ -24,11 +24,11 @@ public class FlatNormalizedMutualInformationTest {
 
     @Test
     public void getDesiredValue() throws Exception {
-        assertEquals(1234, measure.getDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
+        assertEquals(1.0, measure.getDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
 
     @Test
     public void getNotDesiredValue() throws Exception {
-        assertEquals(3245, measure.getNotDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
+        assertEquals(0.0, measure.getNotDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
 }

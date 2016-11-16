@@ -1,10 +1,11 @@
 package external_measures.statistical_hypothesis;
 
 import basic_hierarchy.interfaces.Hierarchy;
+import common.CommonQualityMeasure;
 import interfaces.Hypotheses;
 import interfaces.QualityMeasure;
 
-public class RandIndex implements QualityMeasure {
+public class RandIndex extends CommonQualityMeasure {
 	private Hypotheses hypothesesCalculator;
 
 	private RandIndex() {}

@@ -8,13 +8,22 @@ import internal_measures.statistics.AvgWithStdev;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class HistogramOfNumberOfChildren {
+public class HistogramOfNumberOfChildren extends CommonPerLevelHistogram{
+
+    @Override
+    protected double[] rec(Node n, int currentHeight, double[] histogram) {
+        return new double[0];
+    }
 
     public double[] calculate(Hierarchy h)
     {
         HashMap<Integer, Integer> histogramBins = new HashMap<>(h.getNumberOfGroups(), 1.0f);
         int maxNumberOfChildren = buildHistogramBins(h, histogramBins);
 
+        return postprocessHistogram(histogramBins, maxNumberOfChildren);
+    }
+
+    private double[] postprocessHistogram(HashMap<Integer, Integer> histogramBins, int maxNumberOfChildren) {
         double[] histogram = new double[maxNumberOfChildren + 1];
         for(int i = 0; i <= maxNumberOfChildren; i++)
         {
@@ -23,7 +32,6 @@ public class HistogramOfNumberOfChildren {
                 histogram[i] = histogramBins.get(i);
             }
         }
-
         return histogram;
     }
 
@@ -37,7 +45,7 @@ public class HistogramOfNumberOfChildren {
             highestBinNumber = Math.max(highestBinNumber, histograms[i].length);
         }
 
-        return aggregateHistogramsAndCalculateMeanAndStdev(histograms, highestBinNumber);
+        return aggregateHistogramsAndCalculateMeanAndStdev(histograms, highestBinNumber - 1);
     }
 
     private int buildHistogramBins(Hierarchy h, HashMap<Integer, Integer> histogram) {
@@ -57,29 +65,5 @@ public class HistogramOfNumberOfChildren {
             }
         }
         return maxNumberOfChildren;
-    }
-
-    protected AvgWithStdev[] aggregateHistogramsAndCalculateMeanAndStdev(double[][] finalHistogram, int highestBinNumber) {
-        AvgWithStdev[] result = new AvgWithStdev[highestBinNumber];
-
-        for(int histogramNumber = 0; histogramNumber < finalHistogram.length; histogramNumber++)
-        {
-            double[] normalisedLengthHistogram = new double[result.length];
-            System.arraycopy(finalHistogram[histogramNumber], 0, normalisedLengthHistogram, 0, finalHistogram[histogramNumber].length);
-            finalHistogram[histogramNumber] = normalisedLengthHistogram;
-        }
-
-        for(int level = 0; level < result.length; level++)
-        {
-            double[] sample = new double[finalHistogram.length];
-            for(int histogramNumber = 0; histogramNumber < finalHistogram.length; histogramNumber++)
-            {
-                sample[histogramNumber] = finalHistogram[histogramNumber][level];
-            }
-            double mean = Utils.populationMean(sample);
-            double stdev = Utils.populationStdev(sample, mean);
-            result[level] = new AvgWithStdev(mean, stdev);
-        }
-        return result;
     }
 }

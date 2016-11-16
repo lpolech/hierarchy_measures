@@ -26,20 +26,21 @@ public class FlatMutualInformation extends FlatEntropy {
         for(Node n: h.getGroups())
         {
             int nodeInstancesCount = n.getNodeInstances().size();
-            for(String c: h.getClasses())
-            {
-                int classInstancesWithinNodeCount = Utils.getClassInstancesWithinNode(n, c, false, false).size();
-                int classCount = h.getClassCount(c, false);
-                if(classInstancesWithinNodeCount != 0 && nodeInstancesCount != 0) {
-                    measure += (
-                            (classInstancesWithinNodeCount / (double) overallNumberOfObjects)
-                                    * (
-                                    Math.log(
-                                            (overallNumberOfObjects * classInstancesWithinNodeCount)
-                                                    / (double) (nodeInstancesCount * classCount)
-                                    ) / this.baseLogarithm
-                            )
-                    );
+            if(nodeInstancesCount != 0) {
+                for (String c : h.getClasses()) {
+                    int classInstancesWithinNodeCount = Utils.getClassInstancesWithinNode(n, c, false, false).size();
+                    int classCount = h.getClassCount(c, false);
+                    if (classInstancesWithinNodeCount != 0) {
+                        measure += (
+                                (classInstancesWithinNodeCount / (double) overallNumberOfObjects)
+                                        * (
+                                        Math.log(
+                                                (overallNumberOfObjects * classInstancesWithinNodeCount)
+                                                        / (double) (nodeInstancesCount * classCount)
+                                        ) / this.baseLogarithm
+                                )
+                        );
+                    }
                 }
             }
         }

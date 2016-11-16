@@ -1,10 +1,11 @@
 package internal_measures;
 
 import basic_hierarchy.interfaces.Hierarchy;
+import common.CommonQualityMeasure;
 import interfaces.QualityMeasure;
 import interfaces.DistanceMeasure;
 
-public class FlatDunn1 implements QualityMeasure {
+public class FlatDunn1 extends CommonQualityMeasure {
     private FlatWithinBetweenIndex FWBI;
 
     private FlatDunn1() {}

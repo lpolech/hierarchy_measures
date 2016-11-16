@@ -4,11 +4,12 @@ import java.util.HashMap;
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
+import common.CommonQualityMeasure;
 import interfaces.DistanceMeasure;
 import interfaces.QualityMeasure;
 import common.Utils;
 
-public class HierarchicalClassPurity implements QualityMeasure {
+public class HierarchicalClassPurity extends CommonQualityMeasure {
 
 	@Override
 	public double getMeasure(Hierarchy h) {
@@ -68,7 +69,7 @@ public class HierarchicalClassPurity implements QualityMeasure {
 			
 			for(Node child: currentNode.getChildren())
 			{
-				int partialAccumulator = Integer.MIN_VALUE;//childNodeAcc
+				int partialAccumulator = 0;//childNodeAcc
 				for(String candidateChild: allClasses)//candidateChildClass
 				{
 					if(Utils.isTheSameOrSubclass(candidate, candidateChild))

@@ -36,6 +36,6 @@ public class FlatInformationGain extends FlatEntropy {
 
     @Override
     public double getNotDesiredValue() {
-        return 0;
+        return 0.0;
     }
 }

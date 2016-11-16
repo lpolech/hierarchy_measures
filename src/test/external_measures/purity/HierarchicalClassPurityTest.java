@@ -30,6 +30,6 @@ public class HierarchicalClassPurityTest {
 
     @Test
     public void getNotDesiredValue() throws Exception {
-        assertEquals(0.06, measure.getNotDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
+        assertEquals(0.0, measure.getNotDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
 }

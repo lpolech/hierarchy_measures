@@ -1,11 +1,12 @@
 package external_measures.statistical_hypothesis;
 
 import basic_hierarchy.interfaces.Hierarchy;
+import common.CommonQualityMeasure;
 import interfaces.DistanceMeasure;
 import interfaces.Hypotheses;
 import interfaces.QualityMeasure;
 
-public class JaccardIndex implements QualityMeasure {
+public class JaccardIndex extends CommonQualityMeasure {
 	private Hypotheses hypothesesCalculator;
 
 	private JaccardIndex() {}

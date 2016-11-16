@@ -3,12 +3,13 @@ package internal_measures;
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
+import common.CommonQualityMeasure;
 import interfaces.QualityMeasure;
 import interfaces.DistanceMeasure;
 
 import java.util.LinkedList;
 
-public class FlatDunn2 implements QualityMeasure {
+public class FlatDunn2 extends CommonQualityMeasure {
     private DistanceMeasure dist;
 
     private FlatDunn2() {}
