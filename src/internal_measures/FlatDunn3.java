@@ -39,21 +39,29 @@ public class FlatDunn3 extends CommonQualityMeasure {
                     }
                 }
 
-                double cumulativeDistanceWithinCluster = 0.0;
-                for (int i1 = 0; i1 < n1Instances.size(); i1++) {
-                    for (int i2 = 0; i2 < n1Instances.size(); i2++) {
-                        if (i1 != i2) {
-                            cumulativeDistanceWithinCluster += dist.getDistance(n1Instances.get(i1), n1Instances.get(i2));
+                if(n1Instances.size() > 1) {
+                    double cumulativeDistanceWithinCluster = 0.0;
+                    for (int i1 = 0; i1 < n1Instances.size(); i1++) {
+                        for (int i2 = 0; i2 < n1Instances.size(); i2++) {
+                            if (i1 != i2) {
+                                cumulativeDistanceWithinCluster += dist.getDistance(n1Instances.get(i1), n1Instances.get(i2));
+                            }
                         }
                     }
+                    cumulativeDistanceWithinCluster =
+                            cumulativeDistanceWithinCluster / (double) (n1Instances.size() * (n1Instances.size() - 1));
+                    maxCumulativeDistanceWithinCluster =
+                            Math.max(cumulativeDistanceWithinCluster, maxCumulativeDistanceWithinCluster);
                 }
-                cumulativeDistanceWithinCluster =
-                        cumulativeDistanceWithinCluster / (double) (n1Instances.size() * (n1Instances.size() - 1));
-                maxCumulativeDistanceWithinCluster =
-                        Math.max(cumulativeDistanceWithinCluster, maxCumulativeDistanceWithinCluster);
             }
         }
 
+        if(maxCumulativeDistanceWithinCluster == (-1)*Double.MAX_VALUE)
+        {
+            System.err.println("FlatDunn3::getMeasure - the maxCumulativeDistanceWithinCluster didn't change! It is " +
+                    "probably because every cluster contain only 1 instance. Returning NaN");
+            return Double.NaN;
+        }
         return minDistanceBetweenPointsInDifferentClusters/maxCumulativeDistanceWithinCluster;
     }
 

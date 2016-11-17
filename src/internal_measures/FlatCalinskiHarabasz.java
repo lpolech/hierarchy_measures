@@ -61,8 +61,8 @@ public class FlatCalinskiHarabasz extends CommonQualityMeasure { //inspired by
             }
         }
 
-        return (betweenGroupsVariance * (allObjects.size() - nodes.length)) / (withinGroupsVariance
-                * (nodes.length - numberOfSkippedEmptyNodes - 1));
+        return (betweenGroupsVariance * (allObjects.size() - (nodes.length - numberOfSkippedEmptyNodes)))
+                / (withinGroupsVariance * (nodes.length - numberOfSkippedEmptyNodes - 1));
     }
 
     @Override

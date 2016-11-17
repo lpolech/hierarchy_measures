@@ -60,8 +60,10 @@ public class FlatNormalizedMutualInformation  extends FlatEntropy {
         double entropy = 0.0;
         for(int i = 0; i < count.length; i++)
         {
-            double factor = count[i]/(double)overallNumberOfInstances;
-            entropy += factor * Math.log(factor)/this.baseLogarithm;
+            if(count[i] != 0) {
+                double factor = count[i] / (double) overallNumberOfInstances;
+                entropy += factor * Math.log(factor) / this.baseLogarithm;
+            }
         }
         return (-1)*entropy;
     }

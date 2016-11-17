@@ -39,8 +39,7 @@ public class FlatWithinBetweenIndex extends CommonQualityMeasure {
 
             for(int n2 = n1 + 1; n2 < groups.length; n2++)
             {
-                if(groups[n1].getNodeRepresentation().getData().length != 0
-                        && groups[n2].getNodeRepresentation().getData().length != 0) {
+                if(!groups[n1].getNodeInstances().isEmpty() && !groups[n2].getNodeInstances().isEmpty()) {
                     double distance =
                             dist.getDistance(groups[n1].getNodeRepresentation(), groups[n2].getNodeRepresentation());
                     minNodesCentersDistance = Math.min(distance, minNodesCentersDistance);

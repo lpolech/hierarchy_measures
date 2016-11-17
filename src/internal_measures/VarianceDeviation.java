@@ -37,7 +37,7 @@ public class VarianceDeviation extends CommonQualityMeasure {
 				dataDim = parentVar.length;
 				for(int i = 0; i < dataDim; i++)
 				{
-					sumOfVarianceRatios += Math.max(this.alpha, childVar[i]/parentVar[i]);
+					sumOfVarianceRatios += Math.max(this.alpha, parentVar[i] == 0.0? 0.0: childVar[i]/parentVar[i]);
 				}
 			}
 		}

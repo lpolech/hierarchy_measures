@@ -29,7 +29,7 @@ public class VarianceDeviation2 extends CommonQualityMeasure {
 				dataDim = parentVar.length;
 				for(int i = 0; i < dataDim; i++)
 				{
-					sumOfVarianceRatios += childVar[i]/parentVar[i];
+					sumOfVarianceRatios += parentVar[i] == 0.0? 0.0: childVar[i]/parentVar[i];
 				}
 			}
 		}
