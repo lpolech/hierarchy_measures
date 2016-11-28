@@ -61,7 +61,7 @@ public class HierarchicalClassPurity extends CommonQualityMeasure {
 			int accumulator = 0;//currentNodeAcc
 			for(Instance i: currentNode.getNodeInstances())
 			{
-				if(i.getClass().equals(candidate))
+				if(i.getTrueClass().equals(candidate))
 				{
 					accumulator++;
 				}

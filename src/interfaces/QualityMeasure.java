@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface QualityMeasure {
 	double getMeasure(Hierarchy h);
-	AvgWithStdev getMeasure(ArrayList<Hierarchy> hierarchies);
+	AvgWithStdev getMeasure(ArrayList<Hierarchy> hierarchies, boolean calculatePopulationStdev);
 	double getDesiredValue();
 	double getNotDesiredValue();
 }

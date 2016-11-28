@@ -22,7 +22,7 @@ public abstract class CommonPerLevelHistogram {
         return rec(hierarchy.getRoot(), 0, new double[height + 1]);
     }
 
-    public AvgWithStdev[] calculate(ArrayList<Hierarchy> hierarchies)
+    public AvgWithStdev[] calculate(ArrayList<Hierarchy> hierarchies, boolean calculatePopulationStdev)
     {
         double[][] histograms = new double[hierarchies.size()][];
         int maxHierarchyHeight = 0;
@@ -33,10 +33,10 @@ public abstract class CommonPerLevelHistogram {
             histograms[i] = this.calculateWithKnownHeight(hierarchies.get(i), hierarchyHeight);
         }
 
-        return aggregateHistogramsAndCalculateMeanAndStdev(histograms, maxHierarchyHeight);
+        return aggregateHistogramsAndCalculateMeanAndStdev(histograms, maxHierarchyHeight, calculatePopulationStdev);
     }
 
-    protected AvgWithStdev[] aggregateHistogramsAndCalculateMeanAndStdev(double[][] finalHistogram, int maxHierarchyHeight) {
+    protected AvgWithStdev[] aggregateHistogramsAndCalculateMeanAndStdev(double[][] finalHistogram, int maxHierarchyHeight, boolean calculatePopulationStdev) {
         AvgWithStdev[] result = new AvgWithStdev[maxHierarchyHeight + 1];
 
         for(int histogramNumber = 0; histogramNumber < finalHistogram.length; histogramNumber++)
@@ -53,8 +53,8 @@ public abstract class CommonPerLevelHistogram {
             {
                 sample[histogramNumber] = finalHistogram[histogramNumber][level];
             }
-            double mean = Utils.populationMean(sample);
-            double stdev = Utils.populationStdev(sample, mean);
+            double mean = Utils.mean(sample);
+            double stdev = Utils.stdev(sample, mean, calculatePopulationStdev);
             result[level] = new AvgWithStdev(mean, stdev);
         }
         return result;

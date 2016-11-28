@@ -4,7 +4,6 @@ import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Node;
 import common.CommonQualityMeasure;
 import common.Utils;
-import interfaces.QualityMeasure;
 
 import java.util.HashMap;
 
@@ -17,7 +16,7 @@ public class VarianceDeviation2 extends CommonQualityMeasure {
 		HashMap<Node, Double[]> nodesWithVariances = new HashMap<>(h.getNumberOfGroups(), 1.0f);
 		for(Node n: h.getGroups())
 		{
-			nodesWithVariances.put(n, Utils.nodeSubtreeVariance(n));
+			nodesWithVariances.put(n, Utils.nodeSubtreeVariance(n, true));
 		}
 		
 		for(Node n: h.getGroups())

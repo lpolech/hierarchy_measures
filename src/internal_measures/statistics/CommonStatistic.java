@@ -12,7 +12,7 @@ public abstract class CommonStatistic {
 
     protected abstract int rec(Node n, int value);
 
-    public AvgWithStdev calculate(ArrayList<Hierarchy> hierarchies)
+    public AvgWithStdev calculate(ArrayList<Hierarchy> hierarchies, boolean calculatePopulationStdev)
     {
         double[] values = new double[hierarchies.size()];
         for(int i = 0; i < hierarchies.size(); i++)
@@ -20,6 +20,6 @@ public abstract class CommonStatistic {
             values[i] = this.calculate(hierarchies.get(i));
         }
 
-        return new AvgWithStdev(Utils.populationMean(values), Utils.populationStdev(values));
+        return new AvgWithStdev(Utils.mean(values), Utils.stdev(values, calculatePopulationStdev));
     }
 }

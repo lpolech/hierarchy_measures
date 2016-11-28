@@ -1,5 +1,6 @@
 package internal_measures;
 
+import basic_hierarchy.implementation.BasicNode;
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
@@ -26,6 +27,12 @@ public class FlatDaviesBouldin extends CommonQualityMeasure {
         Node[] nodes = h.getGroups();
         double[] groupAvgDispersion = new double[nodes.length];
         int numberOfSkippedEmptyNodes = 0;
+
+        Instance[] oldRepr = new Instance[nodes.length];
+        for(int n = 0; n < nodes.length; n++) {
+            oldRepr[n] = ((BasicNode)nodes[n]).recalculateCentroid(false);
+        }
+
         for(int n = 0; n < nodes.length; n++)
         {
             if(nodes[n].getNodeInstances().isEmpty()) {
@@ -43,16 +50,22 @@ public class FlatDaviesBouldin extends CommonQualityMeasure {
 
         for(int n1 = 0; n1 < nodes.length; n1++)
         {
-            for(int n2 = n1 + 1; n2 < nodes.length; n2++)
-            {
-                if(!nodes[n1].getNodeInstances().isEmpty() && !nodes[n2].getNodeInstances().isEmpty()) {
-                    double groupsDistance = dist.getDistance(nodes[n1].getNodeRepresentation(),
-                            nodes[n2].getNodeRepresentation());
-                    double avgGroupsDispersion = (groupAvgDispersion[n1] + groupAvgDispersion[n2]) / groupsDistance;
-                    maxAvgClustersDispersion = Math.max(maxAvgClustersDispersion, avgGroupsDispersion);
+            if(!nodes[n1].getNodeInstances().isEmpty()) {
+                for (int n2 = n1 + 1; n2 < nodes.length; n2++) {
+                    if (!nodes[n2].getNodeInstances().isEmpty()) {
+                        double groupsDistance = dist.getDistance(nodes[n1].getNodeRepresentation(),
+                                nodes[n2].getNodeRepresentation());
+                        double avgGroupsDispersion = (groupAvgDispersion[n1] + groupAvgDispersion[n2]) / groupsDistance;
+                        maxAvgClustersDispersion = Math.max(maxAvgClustersDispersion, avgGroupsDispersion);
+                    }
                 }
             }
         }
+
+        for(int n = 0; n < nodes.length; n++) {
+            ((BasicNode)nodes[n]).setRepresentation(oldRepr[n]);
+        }
+
         return maxAvgClustersDispersion/(double)(nodes.length-numberOfSkippedEmptyNodes);
     }
 

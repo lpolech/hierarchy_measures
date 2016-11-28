@@ -39,7 +39,7 @@ public class HierarchicalInternalMeasure extends CommonQualityMeasure {
         for(Node n: divisionNodes)
         {
             LinkedList<Node> nodesToCalculateInternalMeasure = new LinkedList<>();
-            BasicNode artificialRoot = new BasicNode(Constants.ROOT_ID, null, new LinkedList<>(), new LinkedList<>(), false);
+            BasicNode artificialRoot = new BasicNode(Constants.ROOT_ID, null, new LinkedList<Node>(), new LinkedList<Instance>(), false);
             nodesToCalculateInternalMeasure.add(artificialRoot);
             int childCounter = 0;
             int numberOfInstances = 0;
@@ -47,7 +47,7 @@ public class HierarchicalInternalMeasure extends CommonQualityMeasure {
             for(Node ch: n.getChildren())
             {
                 Node child = new BasicNode(TestCommon.getIDOfChildCluster(Constants.ROOT_ID, (childCounter++)),
-                        artificialRoot, new LinkedList<>(), ch.getNodeInstances(), false);
+                        artificialRoot, new LinkedList<Node>(), ch.getNodeInstances(), false);
                 artificialRoot.addChild(child);
                 nodesToCalculateInternalMeasure.add(child);
                 numberOfInstances += ch.getNodeInstances().size();
@@ -58,12 +58,12 @@ public class HierarchicalInternalMeasure extends CommonQualityMeasure {
                 LinkedList<Instance> nodeContent = new LinkedList<>();
                 nodeContent.add(i);
                 Node instanceNode = new BasicNode(TestCommon.getIDOfChildCluster(Constants.ROOT_ID, (childCounter++)),
-                        artificialRoot, new LinkedList<>(), nodeContent, false);
+                        artificialRoot, new LinkedList<Node>(), nodeContent, false);
                 artificialRoot.addChild(instanceNode);
                 nodesToCalculateInternalMeasure.add(instanceNode);
                 numberOfInstances++;
             }
-            Hierarchy artificialHierarchy = new BasicHierarchy(artificialRoot, nodesToCalculateInternalMeasure, new HashMap<>(), numberOfInstances);
+            Hierarchy artificialHierarchy = new BasicHierarchy(artificialRoot, nodesToCalculateInternalMeasure, new HashMap<String, Integer>(), numberOfInstances);
 
             double weight = n.getSubtreeInstances().size();
             weightedSumOfDivisionNodeMeasures += weight*this.internalMeasure.getMeasure(artificialHierarchy);

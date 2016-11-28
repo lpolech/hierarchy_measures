@@ -23,6 +23,13 @@ public class FlatMutualInformationTest {
     }
 
     @Test
+    public void getMeasureForHierarchyWithEmptyNodes()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        assertEquals(0.3112781244591328, this.measure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
     public void getDesiredValue() throws Exception {
         assertEquals(Double.MAX_VALUE, measure.getDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
     }

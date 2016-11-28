@@ -23,6 +23,13 @@ public class FlatEntropy2Test {
     }
 
     @Test
+    public void getMeasureForHierarchyWithEmptyNodes()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        assertEquals(0.6887218755408673, this.measure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
     public void getDesiredValue() throws Exception {
         assertEquals(0.0, measure.getDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
     }

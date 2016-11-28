@@ -1,6 +1,7 @@
 package internal_measures;
 
 import basic_hierarchy.implementation.BasicInstance;
+import basic_hierarchy.implementation.BasicNode;
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
@@ -44,6 +45,12 @@ public class FlatCalinskiHarabasz extends CommonQualityMeasure { //inspired by
                 allObjectsMeanVect, "allObjectsMeanInstance");
 
         Node[] nodes = h.getGroups();
+
+        Instance[] oldRepr = new Instance[nodes.length];
+        for(int n = 0; n < nodes.length; n++) {
+            oldRepr[n] = ((BasicNode)nodes[n]).recalculateCentroid(false);
+        }
+        
         int numberOfSkippedEmptyNodes = 0;
         for(int n = 0; n < nodes.length; n++)
         {
@@ -61,8 +68,12 @@ public class FlatCalinskiHarabasz extends CommonQualityMeasure { //inspired by
             }
         }
 
+        for(int n = 0; n < nodes.length; n++) {
+            ((BasicNode)nodes[n]).setRepresentation(oldRepr[n]);
+        }
+
         return (betweenGroupsVariance * (allObjects.size() - (nodes.length - numberOfSkippedEmptyNodes)))
-                / (withinGroupsVariance * (nodes.length - numberOfSkippedEmptyNodes - 1));
+                / (withinGroupsVariance * (nodes.length - numberOfSkippedEmptyNodes - 1));// what if there are 1-object clusters and withinGroupVariance is 0?
     }
 
     @Override

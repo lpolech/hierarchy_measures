@@ -24,6 +24,13 @@ public class FlatClusterPurityTest {
     }
 
     @Test
+    public void getMeasureForHierarchyWithEmptyNodes()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        assertEquals(0.75, this.measure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
     public void getDesiredValue() throws Exception {
         assertEquals(1.0, measure.getDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
     }

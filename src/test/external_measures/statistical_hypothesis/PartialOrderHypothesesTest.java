@@ -19,4 +19,15 @@ public class PartialOrderHypothesesTest {
         assertEquals(2, hypotheses.getTN());
     }
 
+    @Test
+    public void calculateForHierarchyWithEmptyNodes() throws Exception {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        PartialOrderHypotheses hypotheses = new PartialOrderHypotheses();
+        hypotheses.calculate(h);
+        assertEquals(7, hypotheses.getTP());
+        assertEquals(2, hypotheses.getFN());
+        assertEquals(1, hypotheses.getFP());
+        assertEquals(2, hypotheses.getTN());
+    }
+
 }

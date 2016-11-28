@@ -27,9 +27,23 @@ public class JaccardIndexTest {
     }
 
     @Test
+    public void getFlatMeasureForHierarchyWithEmptyNodes()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        assertEquals(0.25, this.flatFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
     public void getPOMeasure() throws Exception {
         Hierarchy h = TestCommon.getTwoGroupsHierarchy();
         assertEquals(0.7, POFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
+    public void getPOMeasureForHierarchyWithEmptyNodes()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        assertEquals(0.7, this.POFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
 
     @Test

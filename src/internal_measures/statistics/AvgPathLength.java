@@ -12,10 +12,10 @@ public class AvgPathLength {
     public AvgWithStdev calculate(Hierarchy hierarchy)
     {
         LinkedList<Integer> result = rec(hierarchy.getRoot(), -1);
-        return Utils.populationMeanAndStdev(Utils.toPrimitiveDoubles(result));
+        return Utils.populationMeanAndStdev(Utils.toPrimitiveDoubles(result), true);
     }
 
-    public AvgWithStdev calculate(ArrayList<Hierarchy> hierarchies)
+    public AvgWithStdev calculate(ArrayList<Hierarchy> hierarchies, boolean isPopulation)
     {
         double[] values = new double[hierarchies.size()];
         for(int i = 0; i < hierarchies.size(); i++)
@@ -23,7 +23,7 @@ public class AvgPathLength {
             values[i] = this.calculate(hierarchies.get(i)).getAvg();
         }
 
-        return new AvgWithStdev(Utils.populationMean(values), Utils.populationStdev(values));
+        return new AvgWithStdev(Utils.mean(values), Utils.stdev(values, isPopulation));
     }
 
     private LinkedList<Integer> rec(Node n, int height)

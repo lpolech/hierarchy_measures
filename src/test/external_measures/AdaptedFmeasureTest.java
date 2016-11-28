@@ -32,6 +32,20 @@ public class AdaptedFmeasureTest {
     }
 
     @Test
+    public void testGetMeasureForHierarchyWithEmptyNodesWithInheritance()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        assertEquals(0.9333333333333333, this.withInheritanceMeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
+    public void testGetMeasureForHierarchyWithEmptyNodesWithOUTInheritance()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        assertEquals(0.8095238095238094, this.withOUTInheritanceMeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
     public void getDesiredValue() throws Exception {
         assertEquals(1.0, withOUTInheritanceMeasure.getDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
         assertEquals(1.0, withInheritanceMeasure.getDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);

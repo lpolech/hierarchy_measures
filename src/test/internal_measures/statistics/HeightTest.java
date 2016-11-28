@@ -26,12 +26,19 @@ public class HeightTest {
     }
 
     @Test
+    public void testGetMeasureForHierarchyWithEmptyNodes()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        assertEquals(3.0, this.measure.calculate(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
     public void multipleHierarchyCalculate() throws Exception {
         ArrayList<Hierarchy> hierarchies = new ArrayList<>();
         hierarchies.add(TestCommon.getTwoGroupsHierarchy());
         hierarchies.add(TestCommon.getFourGroupsHierarchy());
 
-        AvgWithStdev avgResult = this.measure.calculate(hierarchies);
+        AvgWithStdev avgResult = this.measure.calculate(hierarchies, true);
         assertEquals(1.5, avgResult.getAvg(), TestCommon.DOUBLE_COMPARISION_DELTA);
         assertEquals(0.5, avgResult.getStdev(), TestCommon.DOUBLE_COMPARISION_DELTA);
     }

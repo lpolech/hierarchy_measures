@@ -19,4 +19,14 @@ public class FlatHypothesesTest {
         assertEquals(4, hypotheses.getFN());
     }
 
+    @Test
+    public void calculateForHierarchyWithEmptyNodes() throws Exception {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        FlatHypotheses hypotheses = new FlatHypotheses();
+        hypotheses.calculate(h);
+        assertEquals(2, hypotheses.getTP());
+        assertEquals(2, hypotheses.getFP());
+        assertEquals(4, hypotheses.getTN());
+        assertEquals(4, hypotheses.getFN());
+    }
 }

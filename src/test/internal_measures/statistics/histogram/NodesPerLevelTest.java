@@ -27,12 +27,19 @@ public class NodesPerLevelTest {
     }
 
     @Test
+    public void testGetMeasureForHierarchyWithEmptyNodes()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        assertArrayEquals(new double[]{1.0, 1.0, 1.0, 2.0}, this.measure.calculate(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
     public void multipleHierarchyCalculate() throws Exception {
         ArrayList<Hierarchy> hierarchies = new ArrayList<>();
         hierarchies.add(TestCommon.getTwoGroupsHierarchy());
         hierarchies.add(TestCommon.getFourGroupsHierarchy());
 
-        AvgWithStdev[] perLevelAvgResult = this.measure.calculate(hierarchies);
+        AvgWithStdev[] perLevelAvgResult = this.measure.calculate(hierarchies, true);
         assertEquals(3, perLevelAvgResult.length);
         assertEquals(1.0, perLevelAvgResult[0].getAvg(), TestCommon.DOUBLE_COMPARISION_DELTA);
         assertEquals(0.0, perLevelAvgResult[0].getStdev(), TestCommon.DOUBLE_COMPARISION_DELTA);

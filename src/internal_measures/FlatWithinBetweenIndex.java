@@ -1,5 +1,6 @@
 package internal_measures;
 
+import basic_hierarchy.implementation.BasicNode;
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
 import common.CommonQualityMeasure;
@@ -7,6 +8,7 @@ import interfaces.DistanceMeasure;
 import interfaces.QualityMeasure;
 import basic_hierarchy.interfaces.Hierarchy;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class FlatWithinBetweenIndex extends CommonQualityMeasure {
@@ -24,29 +26,48 @@ public class FlatWithinBetweenIndex extends CommonQualityMeasure {
 		double maxWithinNodeDistance = (-1)*Double.MAX_VALUE;
         double minNodesCentersDistance = Double.MAX_VALUE;
 
-        Node[] groups = h.getGroups();
-        for(int n1 = 0; n1 < groups.length; n1++)
-		{
-            LinkedList<Instance> n1Instances = groups[n1].getNodeInstances();
-            for(int i1 = 0; i1 < n1Instances.size(); i1++)
-            {
-                for(int i2 = i1 + 1; i2 < n1Instances.size(); i2++)
-                {
-                    double distance = dist.getDistance(n1Instances.get(i1), n1Instances.get(i2));//TODO: random index access is slow on linked lists
-                    maxWithinNodeDistance = Math.max(distance, maxWithinNodeDistance);
-                }
-            }
+        Node[] nodes = h.getGroups();
 
-            for(int n2 = n1 + 1; n2 < groups.length; n2++)
-            {
-                if(!groups[n1].getNodeInstances().isEmpty() && !groups[n2].getNodeInstances().isEmpty()) {
-                    double distance =
-                            dist.getDistance(groups[n1].getNodeRepresentation(), groups[n2].getNodeRepresentation());
-                    minNodesCentersDistance = Math.min(distance, minNodesCentersDistance);
+        Instance[] oldRepr = new Instance[nodes.length];
+        for(int n = 0; n < nodes.length; n++) {
+            oldRepr[n] = ((BasicNode)nodes[n]).recalculateCentroid(false);
+        }
+
+        for(int n1 = 0; n1 < nodes.length; n1++)
+		{
+            ArrayList<Instance> n1Instances = new ArrayList<>(nodes[n1].getNodeInstances());
+            if(!nodes[n1].getNodeInstances().isEmpty()) {
+                for (int i1 = 0; i1 < n1Instances.size(); i1++) {
+                    for (int i2 = i1 + 1; i2 < n1Instances.size(); i2++) {
+                        double distance = dist.getDistance(n1Instances.get(i1), n1Instances.get(i2));//TODO: random index access is slow on linked lists
+                        maxWithinNodeDistance = Math.max(distance, maxWithinNodeDistance);
+                    }
+                }
+
+                for (int n2 = n1 + 1; n2 < nodes.length; n2++) {
+                    if (!nodes[n2].getNodeInstances().isEmpty()){
+                        double distance =
+                                dist.getDistance(nodes[n1].getNodeRepresentation(), nodes[n2].getNodeRepresentation());
+                        minNodesCentersDistance = Math.min(distance, minNodesCentersDistance);
+                    }
                 }
             }
 		}
-		return maxWithinNodeDistance/minNodesCentersDistance;
+
+        for(int n = 0; n < nodes.length; n++) {
+            ((BasicNode)nodes[n]).setRepresentation(oldRepr[n]);
+        }
+
+        if(maxWithinNodeDistance == (-1)*Double.MAX_VALUE) {
+            System.err.println("FlatWithinBetweenIndex.getMeasure maxWithinNodeDistance didn't change! It is probably " +
+                    "because every cluster contain at maximum 1 instance");
+        }
+        if(minNodesCentersDistance == Double.MAX_VALUE) {
+            System.err.println("FlatWithinBetweenIndex.getMeasure minNodesCentersDistance haven't changed, so there " +
+                    "should be something wrong with the input hierarchy (maybe there are empty clusters or clusters " +
+                    "with single element?): ");
+        }
+        return maxWithinNodeDistance/minNodesCentersDistance;
 	}
 
     @Override

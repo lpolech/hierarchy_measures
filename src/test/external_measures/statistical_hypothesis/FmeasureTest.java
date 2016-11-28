@@ -29,10 +29,24 @@ public class FmeasureTest {
     }
 
     @Test
+    public void calculateFlatFmeasureForHierarchyWithEmptyNodes()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        assertEquals(0.4, this.flatFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
     public void calculatePOFmeasure()
     {
         Hierarchy h = TestCommon.getTwoGroupsHierarchy();
         assertEquals(0.823529412, POFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
+    public void calculatePOFmeasureForHierarchyWithEmptyNodes()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        assertEquals(0.823529412, this.POFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
 
     @Test

@@ -27,9 +27,23 @@ public class FowlkesMallowsIndexTest {
     }
 
     @Test
+    public void getFlatMeasureForHierarchyWithEmptyNodes()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        assertEquals(0.40824829, this.flatFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
     public void getPOMeasure() throws Exception {
         Hierarchy h = TestCommon.getTwoGroupsHierarchy();
         assertEquals(0.824957911, POFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
+    public void getPOMeasureForHierarchyWithEmptyNodes()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        assertEquals(0.824957911, this.POFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
 
     @Test

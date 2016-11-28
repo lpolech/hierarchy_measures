@@ -37,10 +37,14 @@ public class Utils {
                 .startsWith(baseClass + basic_hierarchy.common.Constants.HIERARCHY_BRANCH_SEPARATOR)
                 && queryClass.length() > baseClass.length();
     }
-    
-    public static Double[] nodeSubtreeVariance(Node n)
+
+    public static Double[] nodeSubtreeVariance(Node n, boolean isPopulation) {
+        LinkedList<Instance> instances = n.getSubtreeInstances();
+        return nodeSubtreeVariance(instances, isPopulation);
+    }
+
+    public static Double[] nodeSubtreeVariance(LinkedList<Instance> instances, boolean isPopulation)
     {
-    	LinkedList<Instance> instances = n.getSubtreeInstances();
     	assert !instances.isEmpty();
     	
     	int dim = instances.getFirst().getData().length;
@@ -72,16 +76,16 @@ public class Utils {
     			variance[d] += Math.pow(i.getData()[d] - mean[d], 2);
     		}
     	}
-    	
+
     	for(int d = 0; d < dim; d++)
 		{
-    		variance[d] /= instances.size();
+    		variance[d] /= (instances.size() - (isPopulation? 0:1));
 		}
     	
     	return variance;
     }
 
-    public static double populationMean(double[] samples)
+    public static double mean(double[] samples)
 	{
 		double mean = 0.0;
 		for(double s: samples)
@@ -92,7 +96,7 @@ public class Utils {
 		return mean/samples.length;
 	}
 
-    public static double populationMean(int[] samples)
+    public static double mean(int[] samples)
     {
         double mean = 0.0;
         for(double s: samples)
@@ -103,45 +107,45 @@ public class Utils {
         return mean/samples.length;
     }
 
-    public static double populationVariance(double[] samples)
+    public static double variance(double[] samples, boolean isPopulation)
     {
-        double mean = populationMean(samples);
-        return populationVariance(samples, mean);
+        double mean = mean(samples);
+        return variance(samples, mean, isPopulation);
     }
 
-	public static double populationVariance(double[] samples, double mean)
+	public static double variance(double[] samples, double mean, boolean isPopulation)
     {
         double var = 0.0;
         for(double s: samples)
         {
             var += Math.pow(s - mean, 2);
         }
-        return var/samples.length;
+        return var/(samples.length - (isPopulation? 0:1));
     }
 
-    public static double populationVariance(int[] samples, double mean)
+    public static double variance(int[] samples, double mean, boolean isPopulation)
     {
         double var = 0.0;
         for(double s: samples)
         {
             var += Math.pow(s - mean, 2);
         }
-        return var/samples.length;
+        return var/(samples.length - (isPopulation? 0:1));
     }
 
-    public static double populationStdev(double[] samples)
+    public static double stdev(double[] samples, boolean isPopulation)
     {
-        return Math.sqrt(populationVariance(samples));
+        return Math.sqrt(variance(samples, isPopulation));
     }
 
-    public static double populationStdev(double[] samples, double mean)
+    public static double stdev(double[] samples, double mean, boolean isPopulation)
     {
-        return Math.sqrt(populationVariance(samples, mean));
+        return Math.sqrt(variance(samples, mean, isPopulation));
     }
 
-    public static double populationStdev(int[] samples, double mean)
+    public static double stdev(int[] samples, double mean, boolean isPopulation)
     {
-        return Math.sqrt(populationVariance(samples, mean));
+        return Math.sqrt(variance(samples, mean, isPopulation));
     }
 
     public static double[] toPrimitiveDoubles(LinkedList<Integer> array) {
@@ -159,11 +163,11 @@ public class Utils {
         return result;
     }
 
-    public static AvgWithStdev populationMeanAndStdev(double[] samples)
+    public static AvgWithStdev populationMeanAndStdev(double[] samples, boolean isPopulation)
     {
         AvgWithStdev result = new AvgWithStdev();
-        result.setAvg(populationMean(samples));
-        result.setStdev(populationStdev(samples, result.getAvg()));
+        result.setAvg(mean(samples));
+        result.setStdev(stdev(samples, result.getAvg(), isPopulation));
 
         return result;
     }

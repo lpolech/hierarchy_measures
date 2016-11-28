@@ -17,9 +17,16 @@ public class FlatCalinskiHarabaszTest {
     }
 
     @Test
-    public void testCalculateMeasureForTwoGroupHierarchy()
+    public void getMeasure()
     {
         Hierarchy h = TestCommon.getTwoGroupsHierarchy();
+        assertEquals(0.125, this.measure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
+    public void testGetMeasureForHierarchyWithEmptyNodes()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
         assertEquals(0.125, this.measure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
 

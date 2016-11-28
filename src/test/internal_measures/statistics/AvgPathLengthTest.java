@@ -28,12 +28,21 @@ public class AvgPathLengthTest {
     }
 
     @Test
+    public void testGetMeasureForHierarchyWithEmptyNodes()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+        AvgWithStdev result = this.measure.calculate(h);
+        assertEquals(3.0, result.getAvg(), TestCommon.DOUBLE_COMPARISION_DELTA);
+        assertEquals(0.0, result.getStdev(), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
     public void multipleHierarchyCalculate() throws Exception {
         ArrayList<Hierarchy> hierarchies = new ArrayList<>();
         hierarchies.add(TestCommon.getTwoGroupsHierarchy());
         hierarchies.add(TestCommon.getFourGroupsHierarchy());
 
-        AvgWithStdev avgResult = this.measure.calculate(hierarchies);
+        AvgWithStdev avgResult = this.measure.calculate(hierarchies, true);
         assertEquals(1.25, avgResult.getAvg(), TestCommon.DOUBLE_COMPARISION_DELTA);
         assertEquals(0.25, avgResult.getStdev(), TestCommon.DOUBLE_COMPARISION_DELTA);
     }

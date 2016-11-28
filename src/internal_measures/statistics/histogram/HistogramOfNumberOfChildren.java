@@ -45,7 +45,7 @@ public class HistogramOfNumberOfChildren extends CommonPerLevelHistogram{
             highestBinNumber = Math.max(highestBinNumber, histograms[i].length);
         }
 
-        return aggregateHistogramsAndCalculateMeanAndStdev(histograms, highestBinNumber - 1);
+        return aggregateHistogramsAndCalculateMeanAndStdev(histograms, highestBinNumber - 1, true);
     }
 
     private int buildHistogramBins(Hierarchy h, HashMap<Integer, Integer> histogram) {

@@ -11,14 +11,14 @@ public abstract class CommonQualityMeasure implements QualityMeasure {
     public abstract double getMeasure(Hierarchy h);
 
     @Override
-    public AvgWithStdev getMeasure(ArrayList<Hierarchy> hierarchies)
+    public AvgWithStdev getMeasure(ArrayList<Hierarchy> hierarchies, boolean calculatePopulationStdev)
     {
         double[] values = new double[hierarchies.size()];
         for(int i = 0; i < hierarchies.size(); i++)
         {
             values[i] = this.getMeasure(hierarchies.get(i));
         }
-        return new AvgWithStdev(Utils.populationMean(values), Utils.populationStdev(values));
+        return new AvgWithStdev(Utils.mean(values), Utils.stdev(values, calculatePopulationStdev));
     }
 
     @Override
