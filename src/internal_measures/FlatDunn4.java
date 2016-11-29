@@ -25,7 +25,7 @@ public class FlatDunn4 extends CommonQualityMeasure {
     public double getMeasure(Hierarchy h) {
         Node[] nodes = h.getGroups();
         double minDistanceBetweenPointsInDifferentClusters = Double.MAX_VALUE;
-        double maxAvgPointsDistanceToClusterCenter = (-1)*Double.MAX_VALUE;
+        double maxAvgPointsDistanceToClusterCenter = 0;
 
         Instance[] oldRepr = new Instance[nodes.length];
         for(int n = 0; n < nodes.length; n++) {
@@ -63,11 +63,6 @@ public class FlatDunn4 extends CommonQualityMeasure {
             ((BasicNode)nodes[n]).setRepresentation(oldRepr[n]);
         }
 
-        if(maxAvgPointsDistanceToClusterCenter == (-1)*Double.MAX_VALUE)
-        {
-            System.err.println("FlatDunn3.getMeasure - the maxAvgPointsDistanceToClusterCenter didn't change! It is " +
-                    "probably because every cluster contain at maximum 1 instance");
-        }
         if(minDistanceBetweenPointsInDifferentClusters == Double.MAX_VALUE) {
             System.err.println("FlatDunn3.getMeasure - the minDistanceBetweenPointsInDifferentClusters  haven't changed, " +
                     "so there should be something wrong with the input hierarchy (maybe there are empty clusters or " +
