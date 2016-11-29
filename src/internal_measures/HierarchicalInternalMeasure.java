@@ -47,10 +47,10 @@ public class HierarchicalInternalMeasure extends CommonQualityMeasure {
             for(Node ch: n.getChildren())
             {
                 Node child = new BasicNode(TestCommon.getIDOfChildCluster(Constants.ROOT_ID, (childCounter++)),
-                        artificialRoot, new LinkedList<Node>(), ch.getNodeInstances(), false);
+                        artificialRoot, new LinkedList<Node>(), ch.getSubtreeInstances(), false);
                 artificialRoot.addChild(child);
                 nodesToCalculateInternalMeasure.add(child);
-                numberOfInstances += ch.getNodeInstances().size();
+                numberOfInstances += ch.getSubtreeInstances().size();
             }
 
             for(Instance i: n.getNodeInstances())

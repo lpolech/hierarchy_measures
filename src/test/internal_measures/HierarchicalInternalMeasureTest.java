@@ -24,7 +24,7 @@ public class HierarchicalInternalMeasureTest {
     @Test
     public void getMeasureWithCHI() throws Exception {
         Hierarchy h = TestCommon.getFourGroupsHierarchy();
-        assertEquals(1.849591145062808, this.measureWithCHI.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+        assertEquals(1.9796183460586447, this.measureWithCHI.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
 
     @Test
@@ -33,10 +33,17 @@ public class HierarchicalInternalMeasureTest {
     }
 
     @Test
+    public void testGetMeasureForHierarchyWithCHI()
+    {
+        Hierarchy h = TestCommon.getTwoGroupsHierarchy();
+        assertEquals(0.5624999999999999, this.measureWithCHI.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+    }
+
+    @Test
     public void testGetMeasureForHierarchyWithEmptyNodesWithCHI()
     {
         Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
-        assertEquals(1.849591145062808, this.measureWithCHI.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+        assertEquals(0.5624999999999999, this.measureWithCHI.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
 
     @Test

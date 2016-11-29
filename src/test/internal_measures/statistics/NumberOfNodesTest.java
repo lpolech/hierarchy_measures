@@ -29,7 +29,7 @@ public class NumberOfNodesTest {
     public void testGetMeasureForHierarchyWithEmptyNodes()
     {
         Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
-        assertEquals(5.0, this.measure.calculate(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+        assertEquals(4.0, this.measure.calculate(h), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
 
     @Test

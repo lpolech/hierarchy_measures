@@ -32,7 +32,7 @@ public class FlatInformationGainTest {
 
     @Test
     public void getDesiredValue() throws Exception {
-        assertEquals(1.0, measure.getDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
+        assertEquals(Double.MAX_VALUE, measure.getDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
 
     @Test

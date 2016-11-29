@@ -29,7 +29,7 @@ public class LeavesPerLevelTest {
     public void testGetMeasureForHierarchyWithEmptyNodes()
     {
         Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
-        assertArrayEquals(new double[]{0.0, 0.0, 0.0, 2.0}, this.measure.calculate(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+        assertArrayEquals(new double[]{0.0, 0.0, 0.0, 1.0}, this.measure.calculate(h), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
 
     @Test

@@ -38,7 +38,7 @@ public class FlatWithinBetweenIndex extends CommonQualityMeasure {
             ArrayList<Instance> n1Instances = new ArrayList<>(nodes[n1].getNodeInstances());
             if(!nodes[n1].getNodeInstances().isEmpty()) {
                 for (int i1 = 0; i1 < n1Instances.size(); i1++) {
-                    for (int i2 = i1 + 1; i2 < n1Instances.size(); i2++) {
+                    for (int i2 = i1; i2 < n1Instances.size(); i2++) {
                         double distance = dist.getDistance(n1Instances.get(i1), n1Instances.get(i2));//TODO: random index access is slow on linked lists
                         maxWithinNodeDistance = Math.max(distance, maxWithinNodeDistance);
                     }

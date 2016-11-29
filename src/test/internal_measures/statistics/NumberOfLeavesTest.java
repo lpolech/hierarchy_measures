@@ -29,7 +29,7 @@ public class NumberOfLeavesTest {
     public void testGetMeasureForHierarchyWithEmptyNodes()
     {
         Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
-        assertEquals(2.0, this.measure.calculate(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+        assertEquals(1.0, this.measure.calculate(h), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
 
     @Test
