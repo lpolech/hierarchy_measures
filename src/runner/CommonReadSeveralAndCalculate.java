@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 public abstract class CommonReadSeveralAndCalculate {
 
-    protected static void writeHeader(boolean useSubtree, boolean withClassAttribute, String resultFilePath, boolean withStdev, boolean prependInstanceName) throws IOException {
+    protected static void writeHeader(boolean withClassAttribute, String resultFilePath, boolean withStdev, boolean prependInstanceName) throws IOException {
         BufferedWriter resultFile = new BufferedWriter(new FileWriter(resultFilePath, true));
 
         String header = "use subtree for internal measures?;num of nodes;stdev;num of leaves;stdev;height;stdev;" +
@@ -43,9 +43,9 @@ public abstract class CommonReadSeveralAndCalculate {
                     "Flat mutual information;stdev;Flat normalized mutual information;stdev;";
         }
 
-        header += "HIM + VarianceDeviation;stdev;HIM + VarianceDeviation2;stdev;HIM + FlatWithinBetweenIndex;stdev;" +
-                "HIM + FlatDunn1;stdev;HIM + FlatDunn2;stdev;HIM + FlatDunn3;stdev;HIM + FlatDunn4;stdev;" +
-                "HIM + FlatDaviesBouldin;stdev;HIM + FlatCalinskiHarabasz;stdev;";
+        header += /*"HIM + VarianceDeviation;stdev;HIM + VarianceDeviation2;stdev;*/"HIM + FlatWithinBetweenIndex;stdev;" +
+                /*"HIM + FlatDunn1;stdev;*/"HIM + FlatReversedDunn2;stdev;HIM + FlatReversedDunn3;stdev;HIM + FlatReversedDunn4;stdev;" +
+                "HIM + FlatDaviesBouldin;stdev;";/*HIM + FlatCalinskiHarabasz;stdev;";*/
 
         header += "\n";
 
@@ -87,15 +87,15 @@ public abstract class CommonReadSeveralAndCalculate {
         qualityMeasures.put(VarianceDeviation.class.getName(), new VarianceDeviation(varianceDeviationAlpha));
         qualityMeasures.put(VarianceDeviation2.class.getName(), new VarianceDeviation2());
 
-        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + VarianceDeviation.class.getName(), new HierarchicalInternalMeasure(new VarianceDeviation(1.0)));
-        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + VarianceDeviation2.class.getName(), new HierarchicalInternalMeasure(new VarianceDeviation2()));
+//        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + VarianceDeviation.class.getName(), new HierarchicalInternalMeasure(new VarianceDeviation(1.0)));
+//        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + VarianceDeviation2.class.getName(), new HierarchicalInternalMeasure(new VarianceDeviation2()));
         qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatWithinBetweenIndex.class.getName(), new HierarchicalInternalMeasure(new FlatWithinBetweenIndex(new Euclidean())));
-        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatDunn1.class.getName(), new HierarchicalInternalMeasure(new FlatDunn1(new Euclidean())));
-        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatDunn2.class.getName(), new HierarchicalInternalMeasure(new FlatDunn2(new Euclidean())));
-        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatDunn3.class.getName(), new HierarchicalInternalMeasure(new FlatDunn3(new Euclidean())));
-        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatDunn4.class.getName(), new HierarchicalInternalMeasure(new FlatDunn4(new Euclidean())));
+//        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatDunn1.class.getName(), new HierarchicalInternalMeasure(new FlatDunn1(new Euclidean())));
+        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatReversedDunn2.class.getName(), new HierarchicalInternalMeasure(new FlatReversedDunn2(new Euclidean())));
+        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatReversedDunn3.class.getName(), new HierarchicalInternalMeasure(new FlatReversedDunn3(new Euclidean())));
+        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatReversedDunn4.class.getName(), new HierarchicalInternalMeasure(new FlatReversedDunn4(new Euclidean())));
         qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatDaviesBouldin.class.getName(), new HierarchicalInternalMeasure(new FlatDaviesBouldin(new Euclidean())));
-        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatCalinskiHarabasz.class.getName(), new HierarchicalInternalMeasure(new FlatCalinskiHarabasz(new Euclidean())));
+//        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatCalinskiHarabasz.class.getName(), new HierarchicalInternalMeasure(new FlatCalinskiHarabasz(new Euclidean())));
 
         if(withClassAttribute) {
             qualityMeasures.put(AdaptedFmeasure.class.getName() + Boolean.toString(true), new AdaptedFmeasure(true));

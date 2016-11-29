@@ -13,7 +13,7 @@ import java.util.LinkedList;
 public class FlatDunn2 extends CommonQualityMeasure {
     private DistanceMeasure dist;
 
-    private FlatDunn2() {}
+    protected FlatDunn2() {}
 
     public FlatDunn2(DistanceMeasure dist)
     {
@@ -22,6 +22,20 @@ public class FlatDunn2 extends CommonQualityMeasure {
 
     @Override
     public double getMeasure(Hierarchy h) {
+        return calculate(h, false);
+    }
+
+    @Override
+    public double getDesiredValue() {
+        return Double.MAX_VALUE;
+    }
+
+    @Override
+    public double getNotDesiredValue() {
+        return 0;
+    }
+
+    protected double calculate(Hierarchy h, boolean returnMeasureReversion) {
         Node[] nodes = h.getGroups();
         double minDistanceBetweenPointsInDifferentClusters = Double.MAX_VALUE;
         double maxDistanceBetweenPointsWithinCluster = (-1)*Double.MAX_VALUE;
@@ -60,16 +74,8 @@ public class FlatDunn2 extends CommonQualityMeasure {
             System.err.println("FlatDunn2.getMeasure maxDistanceBetweenPointsWithinCluster didn't change! It is probably " +
                     "because every cluster contain at maximum 1 instance");
         }
-        return minDistanceBetweenPointsInDifferentClusters/maxDistanceBetweenPointsWithinCluster;
-    }
-
-    @Override
-    public double getDesiredValue() {
-        return Double.MAX_VALUE;
-    }
-
-    @Override
-    public double getNotDesiredValue() {
-        return 0;
+        return returnMeasureReversion?
+                maxDistanceBetweenPointsWithinCluster/minDistanceBetweenPointsInDifferentClusters:
+                minDistanceBetweenPointsInDifferentClusters/maxDistanceBetweenPointsWithinCluster;
     }
 }

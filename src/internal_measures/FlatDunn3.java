@@ -13,7 +13,7 @@ import java.util.LinkedList;
 public class FlatDunn3 extends CommonQualityMeasure {
     private DistanceMeasure dist;
 
-    private FlatDunn3() {}
+    protected FlatDunn3() {}
 
     public FlatDunn3(DistanceMeasure dist)
     {
@@ -22,6 +22,20 @@ public class FlatDunn3 extends CommonQualityMeasure {
 
     @Override
     public double getMeasure(Hierarchy h) {
+        return calculate(h, false);
+    }
+
+    @Override
+    public double getDesiredValue() {
+        return Double.MAX_VALUE;
+    }
+
+    @Override
+    public double getNotDesiredValue() {
+        return 0;
+    }
+
+    protected double calculate(Hierarchy h, boolean returnMeasureReversion) {
         Node[] nodes = h.getGroups();
         double minDistanceBetweenPointsInDifferentClusters = Double.MAX_VALUE;
         double maxCumulativeDistanceWithinCluster = 0;
@@ -62,16 +76,8 @@ public class FlatDunn3 extends CommonQualityMeasure {
                     "so there should be something wrong with the input hierarchy (maybe there are empty clusters or " +
                     "clusters with single element?): ");
         }
-        return minDistanceBetweenPointsInDifferentClusters/maxCumulativeDistanceWithinCluster;
-    }
-
-    @Override
-    public double getDesiredValue() {
-        return Double.MAX_VALUE;
-    }
-
-    @Override
-    public double getNotDesiredValue() {
-        return 0;
+        return returnMeasureReversion?
+                maxCumulativeDistanceWithinCluster/minDistanceBetweenPointsInDifferentClusters:
+                minDistanceBetweenPointsInDifferentClusters/maxCumulativeDistanceWithinCluster;
     }
 }

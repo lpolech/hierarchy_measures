@@ -43,7 +43,7 @@ public class ReadSeveralAndCalculateAggregateAll extends CommonReadSeveralAndCal
 
         try
         {
-            writeHeader(useSubtree, withClassAttribute, resultFilePath, true, false);
+            writeHeader(withClassAttribute, resultFilePath, true, false);
 
             BufferedWriter resultFile = new BufferedWriter(new FileWriter(resultFilePath, true));
             resultFile.append(Boolean.toString(useSubtree) + ";");

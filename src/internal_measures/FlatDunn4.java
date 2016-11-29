@@ -14,7 +14,7 @@ import java.util.LinkedList;
 public class FlatDunn4 extends CommonQualityMeasure {
     private DistanceMeasure dist;
 
-    private FlatDunn4() {}
+    protected FlatDunn4() {}
 
     public FlatDunn4(DistanceMeasure dist)
     {
@@ -23,6 +23,20 @@ public class FlatDunn4 extends CommonQualityMeasure {
 
     @Override
     public double getMeasure(Hierarchy h) {
+        return calculate(h, false);
+    }
+
+    @Override
+    public double getDesiredValue() {
+        return Double.MAX_VALUE;
+    }
+
+    @Override
+    public double getNotDesiredValue() {
+        return 0;
+    }
+
+    protected double calculate(Hierarchy h, boolean returnMeasureReversion) {
         Node[] nodes = h.getGroups();
         double minDistanceBetweenPointsInDifferentClusters = Double.MAX_VALUE;
         double maxAvgPointsDistanceToClusterCenter = 0;
@@ -69,16 +83,8 @@ public class FlatDunn4 extends CommonQualityMeasure {
                     "clusters with single element?): ");
         }
 
-        return minDistanceBetweenPointsInDifferentClusters/maxAvgPointsDistanceToClusterCenter;
-    }
-
-    @Override
-    public double getDesiredValue() {
-        return Double.MAX_VALUE;
-    }
-
-    @Override
-    public double getNotDesiredValue() {
-        return 0;
+        return returnMeasureReversion?
+                maxAvgPointsDistanceToClusterCenter/minDistanceBetweenPointsInDifferentClusters:
+                minDistanceBetweenPointsInDifferentClusters/maxAvgPointsDistanceToClusterCenter;
     }
 }

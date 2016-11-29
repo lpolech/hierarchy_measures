@@ -124,7 +124,7 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 //                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_30.gt.csv",
 //        };
         //parameters
-        boolean useSubtree = false;
+        boolean useSubtree = true;
         boolean withClassAttribute = true;
         double logBase = 2.0;
         double varianceDeviationAlpha = 1.0;
@@ -139,13 +139,12 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 
         try
         {
-            writeHeader(useSubtree, withClassAttribute, resultFilePath, false, true);
-            System.out.println(useSubtree? "USING SUBTREE": "NO SUBTREE");
+            writeHeader(withClassAttribute, resultFilePath, false, true);
             System.out.println("Number of loaded files: " + args.length);
             System.out.println("Calculating..");
 
             for(int i = 0; i < args.length; i++) {
-                System.out.println("========= " + i + "/" + args.length + " =========");
+                System.out.println("========= " + (i+1) + "/" + args.length + " =========");
                 String filePath = args[i];
                 saveBasicInfo(resultFilePath, filePath, useSubtree);
 
@@ -173,33 +172,33 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
     }
 
     private static void calculateAndSaveAllHIMVariants(String resultFilePath, Hierarchy hierarchy, HashMap<String, QualityMeasure> qualityMeasures) throws IOException {
-        System.out.println("HIM + VarianceDeviation..");
-        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + VarianceDeviation.class.getName(),
-                hierarchy, qualityMeasures, resultFilePath);
-        System.out.print("Done.\nHIM + VarianceDeviation2..");
-        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + VarianceDeviation2.class.getName(),
-                hierarchy, qualityMeasures, resultFilePath);
-        System.out.print("Done.\nHIM + FlatWithinBetweenIndex..");
+//        System.out.println("HIM + VarianceDeviation..");
+//        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + VarianceDeviation.class.getName(),
+//                hierarchy, qualityMeasures, resultFilePath);
+//        System.out.print("Done.\nHIM + VarianceDeviation2..");
+//        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + VarianceDeviation2.class.getName(),
+//                hierarchy, qualityMeasures, resultFilePath);
+        System.out.print(/*"Done.\n*/"HIM + FlatWithinBetweenIndex..");
         calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatWithinBetweenIndex.class.getName(),
                 hierarchy, qualityMeasures, resultFilePath);
-        System.out.print("Done.\nHIM + FlatDunn1..");
-        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDunn1.class.getName(),
+//        System.out.print("Done.\nHIM + FlatDunn1..");
+//        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDunn1.class.getName(),
+//                hierarchy, qualityMeasures, resultFilePath);
+        System.out.print("Done.\nHIM + FlatReversedDunn2..");
+        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatReversedDunn2.class.getName(),
                 hierarchy, qualityMeasures, resultFilePath);
-        System.out.print("Done.\nHIM + FlatDunn2..");
-        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDunn2.class.getName(),
+        System.out.print("Done.\nHIM + FlatReversedDunn3..");
+        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatReversedDunn3.class.getName(),
                 hierarchy, qualityMeasures, resultFilePath);
-        System.out.print("Done.\nHIM + FlatDunn3..");
-        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDunn3.class.getName(),
-                hierarchy, qualityMeasures, resultFilePath);
-        System.out.print("Done.\nHIM + FlatDunn4..");
-        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDunn4.class.getName(),
+        System.out.print("Done.\nHIM + FlatReversedDunn4..");
+        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatReversedDunn4.class.getName(),
                 hierarchy, qualityMeasures, resultFilePath);
         System.out.print("Done.\nHIM + FlatDaviesBouldin..");
         calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDaviesBouldin.class.getName(),
                 hierarchy, qualityMeasures, resultFilePath);
-        System.out.print("Done.\nHIM + FlatCalinskiHarabasz..");
-        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatCalinskiHarabasz.class.getName(),
-                hierarchy, qualityMeasures, resultFilePath);
+//        System.out.print("Done.\nHIM + FlatCalinskiHarabasz..");
+//        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatCalinskiHarabasz.class.getName(),
+//                hierarchy, qualityMeasures, resultFilePath);
         System.out.println("Done.");
     }
 
