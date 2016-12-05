@@ -69,7 +69,7 @@ public class FlatCalinskiHarabasz extends CommonQualityMeasure { //inspired by
         }
 
         for(int n = 0; n < nodes.length; n++) {
-            ((BasicNode)nodes[n]).setRepresentation(oldRepr[n]);
+            nodes[n].setRepresentation(oldRepr[n]);
         }
 
         return (betweenGroupsVariance * (allObjects.size() - (nodes.length - numberOfSkippedEmptyNodes)))
