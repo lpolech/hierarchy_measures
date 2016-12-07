@@ -7,10 +7,10 @@ import basic_hierarchy.interfaces.Instance;
 import interfaces.Hypotheses;
 
 public class FlatHypotheses implements Hypotheses {
-	private int TP = Integer.MIN_VALUE;
-	private int FP = Integer.MIN_VALUE;
-	private int TN = Integer.MIN_VALUE;
-	private int FN = Integer.MIN_VALUE;
+	private long TP = Integer.MIN_VALUE;
+	private long FP = Integer.MIN_VALUE;
+	private long TN = Integer.MIN_VALUE;
+	private long FN = Integer.MIN_VALUE;
 
 	public void calculate(Hierarchy h)
 	{
@@ -59,19 +59,19 @@ public class FlatHypotheses implements Hypotheses {
 		}
 	}
 
-	public int getTP() {
+	public long getTP() {
 		return TP;
 	}
 
-	public int getFP() {
+	public long getFP() {
 		return FP;
 	}
 
-	public int getTN() {
+	public long getTN() {
 		return TN;
 	}
 
-	public int getFN() {
+	public long getFN() {
 		return FN;
 	}
 }

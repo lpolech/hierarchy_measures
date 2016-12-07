@@ -8,10 +8,10 @@ import common.Utils;
 import interfaces.Hypotheses;
 
 public class PartialOrderHypotheses implements Hypotheses {//TODO: mozna z tej klasy i FlatHypotheses zrobic jedna klase przyjmujaca lambde czy tam funkcje, ktora bedzie odpalana w tych ifach
-	private int TP = Integer.MIN_VALUE;
-	private int FP = Integer.MIN_VALUE;
-	private int TN = Integer.MIN_VALUE;
-	private int FN = Integer.MIN_VALUE;
+	private long TP = Integer.MIN_VALUE;
+	private long FP = Integer.MIN_VALUE;
+	private long TN = Integer.MIN_VALUE;
+	private long FN = Integer.MIN_VALUE;
 
 	public void calculate(Hierarchy h) 
 	{
@@ -60,19 +60,19 @@ public class PartialOrderHypotheses implements Hypotheses {//TODO: mozna z tej k
 		}
 	}
 
-	public int getTP() {
+	public long getTP() {
 		return TP;
 	}
 
-	public int getFP() {
+	public long getFP() {
 		return FP;
 	}
 
-	public int getTN() {
+	public long getTN() {
 		return TN;
 	}
 
-	public int getFN() {
+	public long getFN() {
 		return FN;
 	}
 }
