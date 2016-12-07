@@ -30,7 +30,7 @@ public class FlatClusterPurity extends CommonQualityMeasure {
                 sumOfDominantGroupClasses += Collections.max(classesCount.values());
             }
 		}
-		return sumOfDominantGroupClasses/(double)h.getNumberOfInstances();
+		return sumOfDominantGroupClasses/(double)h.getOverallNumberOfInstances();
 	}
 
 	@Override

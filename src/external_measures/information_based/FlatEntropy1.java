@@ -23,7 +23,7 @@ public class FlatEntropy1 extends FlatEntropy {
         for(Node n: h.getGroups())
         {
             int numberOfNodeObjects = n.getNodeInstances().size();
-            double nodeToAllObjectsRatio = numberOfNodeObjects/(double)h.getNumberOfInstances();
+            double nodeToAllObjectsRatio = numberOfNodeObjects/(double)h.getOverallNumberOfInstances();
             double particularNodeCumulativePrecision = 0.0;
             for(String c: h.getClasses())
             {

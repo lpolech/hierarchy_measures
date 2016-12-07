@@ -30,9 +30,9 @@ public class FlatNormalizedMutualInformation  extends FlatEntropy {
         int[] classesCount = new int[h.getNumberOfClasses()];
         for(int i = 0; i < classesCount.length; i++)
         {
-            classesCount[i] = h.getClassCount(classes[i], false);
+            classesCount[i] = h.getParticularClassCount(classes[i], false);
         }
-        double classEntropy = calculateEntropy(classesCount, h.getNumberOfInstances());
+        double classEntropy = calculateEntropy(classesCount, h.getOverallNumberOfInstances());
 
         Node[] nodes = h.getGroups();
         int[] nodesCount = new int[nodes.length];
@@ -40,7 +40,7 @@ public class FlatNormalizedMutualInformation  extends FlatEntropy {
         {
             nodesCount[i] = nodes[i].getNodeInstances().size();
         }
-        double nodeEntropy = calculateEntropy(nodesCount, h.getNumberOfInstances());
+        double nodeEntropy = calculateEntropy(nodesCount, h.getOverallNumberOfInstances());
 
         return mutualInformation/((classEntropy + nodeEntropy)/2.0);
     }

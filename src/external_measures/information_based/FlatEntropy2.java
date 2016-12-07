@@ -20,8 +20,8 @@ public class FlatEntropy2 extends FlatEntropy {
         double measure = 0.0;
         for(String c: h.getClasses())
         {
-            int numberOfClassObjects = h.getClassCount(c, false);
-            double classToAllObjectsRatio = numberOfClassObjects/(double)h.getNumberOfInstances();
+            int numberOfClassObjects = h.getParticularClassCount(c, false);
+            double classToAllObjectsRatio = numberOfClassObjects/(double)h.getOverallNumberOfInstances();
             double particularClassCumulativeRecall = 0.0;
             for(Node n: h.getGroups())
             {

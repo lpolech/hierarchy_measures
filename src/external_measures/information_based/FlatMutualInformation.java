@@ -21,7 +21,7 @@ public class FlatMutualInformation extends FlatEntropy {
 
     @Override
     public double getMeasure(Hierarchy h) {
-        int overallNumberOfObjects = h.getNumberOfInstances();
+        int overallNumberOfObjects = h.getOverallNumberOfInstances();
         double measure = 0.0;
         for(Node n: h.getGroups())
         {
@@ -29,7 +29,7 @@ public class FlatMutualInformation extends FlatEntropy {
             if(nodeInstancesCount != 0) {
                 for (String c : h.getClasses()) {
                     int classInstancesWithinNodeCount = Utils.getClassInstancesWithinNode(n, c, false, false).size();
-                    int classCount = h.getClassCount(c, false);
+                    int classCount = h.getParticularClassCount(c, false);
                     if (classInstancesWithinNodeCount != 0) {
                         measure += (
                                 (classInstancesWithinNodeCount / (double) overallNumberOfObjects)

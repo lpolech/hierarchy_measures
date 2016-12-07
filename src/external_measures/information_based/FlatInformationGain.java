@@ -22,7 +22,7 @@ public class FlatInformationGain extends FlatEntropy {
         double cumulativeClassRatio = 0.0;
         for(String c: h.getClasses())
         {
-            double classRatio = h.getClassCount(c, false)/(double)h.getNumberOfInstances();
+            double classRatio = h.getParticularClassCount(c, false)/(double)h.getOverallNumberOfInstances();
             cumulativeClassRatio += (classRatio * Math.log(classRatio)/this.baseLogarithm);
         }
         cumulativeClassRatio *= (-1);

@@ -25,7 +25,7 @@ public abstract class CommonReadSeveralAndCalculate {
     protected static void writeHeader(boolean withClassAttribute, String resultFilePath, boolean withStdev, boolean prependInstanceName) throws IOException {
         BufferedWriter resultFile = new BufferedWriter(new FileWriter(resultFilePath, true));
 
-        String header = "use subtree for internal measures?;num of nodes;stdev;num of leaves;stdev;height;stdev;" +
+        String header = "use subtree for internal measures?;mimic flat clustering?;mimic one cluster?;num of nodes;stdev;num of leaves;stdev;height;stdev;" +
                 "avg path length;stdev;variance deviation;stdev;variance deviation2;stdev;flat within between;stdev;" +
                 "flat dunn1;stdev;flat dunn2;stdev;flat dunn3;stdev;flat dunn4;stdev;flat davis-bouldin;stdev;" +
                 "flat calinski-harabasz;stdev;";

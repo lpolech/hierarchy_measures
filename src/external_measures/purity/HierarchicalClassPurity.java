@@ -36,7 +36,7 @@ public class HierarchicalClassPurity extends CommonQualityMeasure {
 			sumOfClassPurity = Math.max(indexedPartials.get(h.getRoot())[i], sumOfClassPurity);			
 		}
 		
-		return sumOfClassPurity/(double)h.getNumberOfInstances();
+		return sumOfClassPurity/(double)h.getOverallNumberOfInstances();
 	}
 
 	@Override

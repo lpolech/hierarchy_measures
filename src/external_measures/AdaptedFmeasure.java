@@ -93,7 +93,7 @@ public class AdaptedFmeasure extends CommonQualityMeasure {
 				}
 				
 				classToGroupRecall[j][i] = 
-						eachClassInGroupNumberOfInstances[j][i]/(double)h.getClassCount(classes[j], withInstancesInheritance);
+						eachClassInGroupNumberOfInstances[j][i]/(double)h.getParticularClassCount(classes[j], withInstancesInheritance);
 				double precision = classToGroupPrecision[j][i];
 				double recall = classToGroupRecall[j][i];
 				
@@ -131,13 +131,13 @@ public class AdaptedFmeasure extends CommonQualityMeasure {
 		
 		for(int i = 0; i < numberOfClasses; i++)
 		{
-			FMeasure += h.getClassCount(classes[i], withInstancesInheritance)*eachClassMaxFMeasure[i];
+			FMeasure += h.getParticularClassCount(classes[i], withInstancesInheritance)*eachClassMaxFMeasure[i];
 		}
 		
 		int normalisingFactor = 0;
 		for(int i = 0; i < classes.length; i++)
 		{
-			normalisingFactor += h.getClassCount(classes[i], withInstancesInheritance);
+			normalisingFactor += h.getParticularClassCount(classes[i], withInstancesInheritance);
 		}
 		
 		FMeasure /= normalisingFactor;
