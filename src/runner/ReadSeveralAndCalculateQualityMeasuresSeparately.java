@@ -20,115 +20,22 @@ import java.util.HashMap;
 
 public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonReadSeveralAndCalculate {
     public static void main(String[] args) {
-//        args = new String[]{
-//                "GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_92.r.csv"
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_43.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_21.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_82.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_10.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_20.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_19.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_1.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_94.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_14.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_66.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_60.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_72.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_68.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_56.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_91.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_18.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_45.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_34.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_96.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_39.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_89.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_73.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_98.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_16.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_7.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_27.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_11.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_46.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_0.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_48.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_75.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_71.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_67.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_36.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_88.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_33.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_65.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_69.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_58.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_23.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_81.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_9.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_8.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_24.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_54.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_51.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_63.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_4.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_62.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_79.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_41.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_13.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_44.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_38.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_3.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_25.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_74.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_31.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_87.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_5.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_84.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_53.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_86.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_6.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_57.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_37.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_99.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_35.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_22.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_59.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_47.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_15.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_80.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_90.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_17.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_85.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_52.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_28.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_70.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_76.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_40.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_97.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_55.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_92.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_42.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_50.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_64.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_29.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_95.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_26.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_61.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_77.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_78.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_2.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_32.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_49.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_83.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_12.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_93.gt.csv",
-//                "/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_30.gt.csv",
-//        };
+        args = new String[]{
+                "GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_92.r.csv"
+        };
         //parameters
         boolean useSubtree = true;
         boolean withClassAttribute = true;
         double logBase = 2.0;
         double varianceDeviationAlpha = 1.0;
+        boolean mimicFlatClustering = false;
+        boolean mimicOneCluster = true;
         String resultFilePath = "measures.csv";
+
+        if(mimicFlatClustering && mimicOneCluster) {
+            System.err.println("You can either mimic flat clustering or one cluster but never do both!");
+            System.exit(1);
+        }
 
         DistanceMeasure measure = new Euclidean();
 
@@ -146,11 +53,25 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
             for(int i = 0; i < args.length; i++) {
                 System.out.println("========= " + (i+1) + "/" + args.length + " =========");
                 String filePath = args[i];
-                saveBasicInfo(resultFilePath, filePath, useSubtree);
+                saveBasicInfo(resultFilePath, filePath, useSubtree, mimicFlatClustering, mimicOneCluster);
 
                 GeneratedCSVReader reader = new GeneratedCSVReader();
                 Hierarchy h = reader.load(filePath, false, withClassAttribute, false, useSubtree);
+
                 System.out.println(filePath + " loaded");
+
+                if(mimicOneCluster) {
+                    System.out.print("Transforming into one-cluster solution..");
+                    h = basic_hierarchy.common.Utils.getOneClusterHierarchy(h);
+                    System.out.println("Done.");
+                }
+
+                if(mimicFlatClustering) {
+                    System.out.print("Transforming into flat clustering solution..");
+                    h = h.getFlatClusteringWithCommonEmptyRoot();
+                    System.out.println("Done.");
+                }
+
 
                 calculateAndSaveAllBasicStatistics(resultFilePath, h, basicStatistics, apt);
                 calculateAndSaveAllFlatInternalMeasures(resultFilePath, h, qualityMeasures);
@@ -165,9 +86,11 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
         }
     }
 
-    private static void saveBasicInfo(String resultFilePath, String instanceFilePath, boolean useSubtree) throws IOException {
+    private static void saveBasicInfo(String resultFilePath, String instanceFilePath, boolean useSubtree,
+                                      boolean mimicFlatClustering, boolean mimicOneCluster) throws IOException {
         BufferedWriter resultFile = new BufferedWriter(new FileWriter(resultFilePath, true));
-        resultFile.append(instanceFilePath + ";" + Boolean.toString(useSubtree) + ";");
+        resultFile.append(instanceFilePath + ";" + Boolean.toString(useSubtree) + ";"
+                + Boolean.toString(mimicFlatClustering) + ";" + Boolean.toString(mimicOneCluster) + ";");
         resultFile.close();
     }
 
