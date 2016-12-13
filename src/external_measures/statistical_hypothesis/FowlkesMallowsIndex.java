@@ -19,8 +19,9 @@ public class FowlkesMallowsIndex extends CommonQualityMeasure {
 	public double getMeasure(Hierarchy h) {
 		this.hypothesesCalculator.calculate(h);
 		double numerator = this.hypothesesCalculator.getTP()*this.hypothesesCalculator.getTP();
-		double denominator = (this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getFP()) * (this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getFN());
-		return Math.sqrt(numerator/denominator);
+		double denominator = (this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getFP())
+                * (this.hypothesesCalculator.getTP() + this.hypothesesCalculator.getFN());
+        return Math.sqrt(numerator/denominator);
 	}
 
 	@Override

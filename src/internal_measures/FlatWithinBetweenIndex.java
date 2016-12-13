@@ -60,12 +60,14 @@ public class FlatWithinBetweenIndex extends CommonQualityMeasure {
 
         if(maxWithinNodeDistance == (-1)*Double.MAX_VALUE) {
             System.err.println("FlatWithinBetweenIndex.getMeasure maxWithinNodeDistance didn't change! It is probably " +
-                    "because every cluster contain at maximum 1 instance");
+                    "because every cluster contain at maximum 1 instance. Returning NaN.");
+            return Double.NaN;
         }
         if(minNodesCentersDistance == Double.MAX_VALUE) {
             System.err.println("FlatWithinBetweenIndex.getMeasure minNodesCentersDistance haven't changed, so there " +
                     "should be something wrong with the input hierarchy (maybe there are empty clusters or clusters " +
-                    "with single element?): ");
+                    "with single element?). Returning NaN. ");
+            return Double.NaN;
         }
         return maxWithinNodeDistance/minNodesCentersDistance;
 	}

@@ -80,7 +80,9 @@ public class FlatDunn4 extends CommonQualityMeasure {
         if(minDistanceBetweenPointsInDifferentClusters == Double.MAX_VALUE) {
             System.err.println("FlatDunn3.getMeasure - the minDistanceBetweenPointsInDifferentClusters  haven't changed, " +
                     "so there should be something wrong with the input hierarchy (maybe there are empty clusters or " +
-                    "clusters with single element?): ");
+                    "clusters with single element?). Returning NaN.");
+
+            return Double.NaN;
         }
 
         return returnMeasureReversion?

@@ -66,13 +66,28 @@ public class HierarchicalInternalMeasure extends CommonQualityMeasure {
             Hierarchy artificialHierarchy = new BasicHierarchy(artificialRoot, nodesToCalculateInternalMeasure, new HashMap<String, Integer>(), numberOfInstances);
 
             double weight = n.getSubtreeInstances().size();
-            weightedSumOfDivisionNodeMeasures += weight*this.internalMeasure.getMeasure(artificialHierarchy);
+            double divisionPointMeasure = this.internalMeasure.getMeasure(artificialHierarchy);
+            if(Double.isNaN(divisionPointMeasure)) {
+                System.err.println("HierarchicalInternalMeasure.getMeasure divisionPointMeasure is NaN which means that"
+                        + " the internal measure couldn't be computed for that division point! Returning NaN.");
+                return Double.NaN;
+            }
+
+            weightedSumOfDivisionNodeMeasures += weight*divisionPointMeasure;
             sumOfWeights += weight;
 
 //            System.out.println("artificial:");
 //            artificialHierarchy.printTree();
         }
-        return (sumOfWeights == 0.0)? this.internalMeasure.getNotDesiredValue(): weightedSumOfDivisionNodeMeasures/sumOfWeights;
+
+        if(sumOfWeights == 0.0) {
+            System.err.println("HierarchicalInternalMeasure.getMeasure sumOfWeights is zero! It is probably because every"
+                    + " cluster contain 0 instances or there was no division points. Returning NaN.");
+
+            return Double.NaN;
+        }
+
+        return weightedSumOfDivisionNodeMeasures/sumOfWeights;
     }
 
     @Override

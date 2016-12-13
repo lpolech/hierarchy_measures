@@ -68,11 +68,15 @@ public class FlatDunn2 extends CommonQualityMeasure {
 
         if(minDistanceBetweenPointsInDifferentClusters == Double.MAX_VALUE) {
             System.err.println("FlatDunn2.getMeasure minDistanceBetweenPointsInDifferentClusters didn't change! It is " +
-                    "probably because every cluster contain at maximum 1 instance");
+                    "probably because every cluster contain at maximum 1 instance. Returning NaN.");
+
+            return Double.NaN;
         }
         if(maxDistanceBetweenPointsWithinCluster == (-1)*Double.MAX_VALUE) {
             System.err.println("FlatDunn2.getMeasure maxDistanceBetweenPointsWithinCluster didn't change! It is probably " +
-                    "because every cluster contain at maximum 1 instance");
+                    "because every cluster contain at maximum 1 instance. Returning NaN.");
+
+            return Double.NaN;
         }
         return returnMeasureReversion?
                 maxDistanceBetweenPointsWithinCluster/minDistanceBetweenPointsInDifferentClusters:

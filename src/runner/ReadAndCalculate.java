@@ -6,12 +6,19 @@ import distance_measures.Euclidean;
 import internal_measures.FlatCalinskiHarabasz;
 import internal_measures.FlatDaviesBouldin;
 
+import java.io.IOException;
+
 public class ReadAndCalculate {
 
 	public static void main(String[] args) {
         GeneratedCSVReader reader = new GeneratedCSVReader();
-		Hierarchy H = reader.load("very-simple.csv", false, true, false, false);
-		H.getRoot().printSubtree();
+        Hierarchy H = null;
+        try {
+            H = reader.load("very-simple.csv", false, true, false, false, false);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        H.getRoot().printSubtree();
         FlatCalinskiHarabasz db = new FlatCalinskiHarabasz(new Euclidean());
         System.out.println(db.getMeasure(H));
 //		int setNum = 7;

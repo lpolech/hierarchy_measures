@@ -66,6 +66,14 @@ public class FlatDaviesBouldin extends CommonQualityMeasure {
             ((BasicNode)nodes[n]).setRepresentation(oldRepr[n]);
         }
 
+        if(maxAvgClustersDispersion == (-1)*Double.MAX_VALUE) {
+            System.err.println("FlatDaviesBouldin.getMeasure - the maxAvgClustersDispersion  haven't changed, " +
+                    "so there should be something wrong with the input hierarchy (maybe there is only one clusters or " +
+                    "clusters with single element?). Returning NaN.");
+
+            return Double.NaN;
+        }
+
         return maxAvgClustersDispersion/(double)(nodes.length-numberOfSkippedEmptyNodes);
     }
 

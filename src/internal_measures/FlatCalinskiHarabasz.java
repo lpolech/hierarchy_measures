@@ -72,8 +72,25 @@ public class FlatCalinskiHarabasz extends CommonQualityMeasure { //inspired by
             nodes[n].setRepresentation(oldRepr[n]);
         }
 
+        int denominatorNormalizingFactor = (nodes.length - numberOfSkippedEmptyNodes - 1);
+        if(denominatorNormalizingFactor <= 0) {
+            System.err.println("FlatCalinskiHarabasz.getMeasure - the denominatorNormalizingFactor is equal or below 0, " +
+                    "so there should be something wrong with the input hierarchy probably the number of non-empty clusters" +
+                    "is equal to 1. Returning NaN.");
+
+            return Double.NaN;
+        }
+
+        if(withinGroupsVariance <= 0) {
+            System.err.println("FlatCalinskiHarabasz.getMeasure - the withinGroupsVariance is equal or below 0, " +
+                    "so there should be something wrong with the input hierarchy probably there are only one-element" +
+                    "clusters. Returning NaN.");
+
+            return Double.NaN;
+        }
+
         return (betweenGroupsVariance * (allObjects.size() - (nodes.length - numberOfSkippedEmptyNodes)))
-                / (withinGroupsVariance * (nodes.length - numberOfSkippedEmptyNodes - 1));// what if there are 1-object clusters and withinGroupVariance is 0?
+                / (withinGroupsVariance * denominatorNormalizingFactor);// what if there are 1-object clusters and withinGroupVariance is 0?
     }
 
     @Override

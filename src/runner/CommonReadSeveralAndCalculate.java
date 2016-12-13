@@ -133,7 +133,12 @@ public abstract class CommonReadSeveralAndCalculate {
         {
             GeneratedCSVReader reader = new GeneratedCSVReader();
             System.out.println(filePath);
-            hierarchies.add(reader.load(filePath, false, withClassAttribute, false, useSubtree));
+            try {
+                hierarchies.add(reader.load(filePath, false, withClassAttribute, false, false, useSubtree));
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
             System.out.println(filePath + " loaded");
         }
 
