@@ -120,11 +120,13 @@ public abstract class CommonReadSeveralAndCalculate {
         return qualityMeasures;
     }
 
-    protected static AvgPathLength getAvgPathLengthAndCreateBasicStatics(HashMap<String, CommonStatistic> basicStatistics) {
+    protected static HashMap<String, CommonStatistic> createBasicStatics() {
+        HashMap<String, CommonStatistic> basicStatistics = new HashMap<>();
         basicStatistics.put(Height.class.getName(), new Height());
         basicStatistics.put(NumberOfLeaves.class.getName(), new NumberOfLeaves());
         basicStatistics.put(NumberOfNodes.class.getName(), new NumberOfNodes());
-        return new AvgPathLength();
+
+        return basicStatistics;
     }
 
     protected static ArrayList<Hierarchy> loadHierarchies(String[] args, boolean useSubtree, boolean withClassAttribute) {

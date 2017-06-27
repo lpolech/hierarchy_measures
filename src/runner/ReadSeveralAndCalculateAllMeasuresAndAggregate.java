@@ -18,8 +18,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-public class ReadSeveralAndCalculateAggregateAll extends CommonReadSeveralAndCalculate {
+//TODO: przerobic ta klase tak, ze bedzie ona normalna klasa ze stanem i funkcja run, ktora bedzie sie odpalalo z NOWEJ klasy CL_ReadSeveralAndCalculateAllMeasuresAndAggregate
+// dokladnie tak jak zrobilem z klasa CL_ReadSeveralAndCalculateQualityMeasuresSeparately
+public class ReadSeveralAndCalculateAllMeasuresAndAggregate extends CommonReadSeveralAndCalculate {
 
     public static void main(String[] args) {
 //        args = new String[]{"/home/tosterr/Desktop/FINAL_100_repeats/set00/GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_0.gt.csv"};
@@ -34,8 +35,8 @@ public class ReadSeveralAndCalculateAggregateAll extends CommonReadSeveralAndCal
 
         DistanceMeasure measure = new Euclidean();
 
-        HashMap<String, CommonStatistic> basicStatistics = new HashMap<>();
-        AvgPathLength apt = getAvgPathLengthAndCreateBasicStatics(basicStatistics);
+        HashMap<String, CommonStatistic> basicStatistics = createBasicStatics();
+        AvgPathLength apt = new AvgPathLength();
 
         HashMap<String, QualityMeasure> qualityMeasures = getQualityMeasureHashMap(withClassAttribute, logBase, varianceDeviationAlpha, measure);
 

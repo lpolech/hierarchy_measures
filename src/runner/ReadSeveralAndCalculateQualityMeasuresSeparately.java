@@ -19,41 +19,60 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonReadSeveralAndCalculate {
-    public static void main(String[] args) {
-//        args = new String[]{
-////                "GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_92.r.csv",
-//                "set00_a-1_l-05_g-02_N-1000_d-3_P-1_Q-5_minSD-005_maxSd-10.e0_000.csv"
-//        };
-        //parameters
-        boolean useSubtree = true;
-        boolean withClassAttribute = true;
-        double logBase = 2.0;
-        double varianceDeviationAlpha = 1.0;
-        boolean mimicFlatClustering = false;
-        boolean mimicOneCluster = false;
-        String resultFilePath = "measures.csv";
+    //parameters
+    private boolean useSubtree = true;
+    private boolean withClassAttribute = true;
+    private double informationBasedMeasureslogBase = 2.0;
+    private double varianceDeviationAlpha = 1.0;
+    private boolean mimicFlatClustering = false;
+    private boolean mimicOneCluster = false;
+    private DistanceMeasure distanceUsedWithinMeasures;
+    //measures
+    private static HashMap<String, CommonStatistic> basicStatistics;
+    private static AvgPathLength apt;
+    private HashMap<String, QualityMeasure> qualityMeasures;
+
+    public ReadSeveralAndCalculateQualityMeasuresSeparately(boolean useSubtree, boolean withClassAttribute,
+                                                            boolean mimicFlatClustering, boolean mimicOneCluster,
+                                                            double informationBasedMeasuresLogBase,
+                                                            double varianceDeviationAlpha,
+                                                            DistanceMeasure distanceUsedWithinMeasures) {
+        this.useSubtree = useSubtree;
+        this.withClassAttribute = withClassAttribute;
+        this.mimicFlatClustering = mimicFlatClustering;
+        this.mimicOneCluster = mimicOneCluster;
+        this.informationBasedMeasureslogBase = informationBasedMeasuresLogBase;
+        this.varianceDeviationAlpha = varianceDeviationAlpha;
+        this.distanceUsedWithinMeasures = distanceUsedWithinMeasures;
+
+        createQualityMeasures(withClassAttribute, varianceDeviationAlpha, distanceUsedWithinMeasures);
 
         if(mimicFlatClustering && mimicOneCluster) {
             System.err.println("You can either mimic flat clustering or one cluster but never do both!");
             System.exit(1);
         }
+    }
 
-        DistanceMeasure measure = new Euclidean();
+    private void createQualityMeasures(boolean withClassAttribute, double varianceDeviationAlpha, DistanceMeasure distanceUsedWithinMeasures) {
+        ReadSeveralAndCalculateQualityMeasuresSeparately.basicStatistics = createBasicStatics();
+        ReadSeveralAndCalculateQualityMeasuresSeparately.apt = new AvgPathLength();
+        qualityMeasures = getQualityMeasureHashMap(withClassAttribute, informationBasedMeasureslogBase, varianceDeviationAlpha, distanceUsedWithinMeasures);
+    }
 
-        HashMap<String, CommonStatistic> basicStatistics = new HashMap<>();
-        AvgPathLength apt = getAvgPathLengthAndCreateBasicStatics(basicStatistics);
+    public ReadSeveralAndCalculateQualityMeasuresSeparately() {
+        this(true, true, false, false, 2.0, 1.0, new Euclidean());
+    }
 
-        HashMap<String, QualityMeasure> qualityMeasures = getQualityMeasureHashMap(withClassAttribute, logBase, varianceDeviationAlpha, measure);
-
+    public void run(String[] pathsToHierarchies, String resultFilePath) {
         try
         {
             writeHeader(withClassAttribute, resultFilePath, false, true);
-            System.out.println("Number of loaded files: " + args.length);
+            System.out.println("Number of loaded files: " + pathsToHierarchies.length);
             System.out.println("Calculating..");
 
-            for(int i = 0; i < args.length; i++) {
-                System.out.println("========= " + (i+1) + "/" + args.length + " =========");
-                String filePath = args[i];
+            for(int i = 0; i < pathsToHierarchies.length; i++) {
+                System.out.println("========= " + (i+1) + "/" + pathsToHierarchies.length + " =========");
+                String filePath = pathsToHierarchies[i];
                 saveBasicInfo(resultFilePath, filePath, useSubtree, mimicFlatClustering, mimicOneCluster);
 
                 GeneratedCSVReader reader = new GeneratedCSVReader();
@@ -72,7 +91,6 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
                     h = h.getFlatClusteringWithCommonEmptyRoot();
                     System.out.println("Done.");
                 }
-
 
                 calculateAndSaveAllBasicStatistics(resultFilePath, h, basicStatistics, apt);
                 calculateAndSaveAllFlatInternalMeasures(resultFilePath, h, qualityMeasures);
