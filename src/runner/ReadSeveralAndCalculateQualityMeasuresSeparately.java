@@ -21,7 +21,6 @@ import java.util.HashMap;
 public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonReadSeveralAndCalculate {
     //parameters
     private boolean useSubtree = true;
-    private boolean withClassAttribute = true;
     private double informationBasedMeasureslogBase = 2.0;
     private double varianceDeviationAlpha = 1.0;
     private boolean mimicFlatClustering = false;
@@ -32,20 +31,19 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
     private static AvgPathLength apt;
     private HashMap<String, QualityMeasure> qualityMeasures;
 
-    public ReadSeveralAndCalculateQualityMeasuresSeparately(boolean useSubtree, boolean withClassAttribute,
-                                                            boolean mimicFlatClustering, boolean mimicOneCluster,
+    public ReadSeveralAndCalculateQualityMeasuresSeparately(boolean useSubtree, boolean mimicFlatClustering,
+                                                            boolean mimicOneCluster,
                                                             double informationBasedMeasuresLogBase,
                                                             double varianceDeviationAlpha,
                                                             DistanceMeasure distanceUsedWithinMeasures) {
         this.useSubtree = useSubtree;
-        this.withClassAttribute = withClassAttribute;
         this.mimicFlatClustering = mimicFlatClustering;
         this.mimicOneCluster = mimicOneCluster;
         this.informationBasedMeasureslogBase = informationBasedMeasuresLogBase;
         this.varianceDeviationAlpha = varianceDeviationAlpha;
         this.distanceUsedWithinMeasures = distanceUsedWithinMeasures;
 
-        createQualityMeasures(withClassAttribute, varianceDeviationAlpha, distanceUsedWithinMeasures);
+        createQualityMeasures(varianceDeviationAlpha, distanceUsedWithinMeasures);
 
         if(mimicFlatClustering && mimicOneCluster) {
             System.err.println("You can either mimic flat clustering or one cluster but never do both!");
@@ -53,20 +51,21 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
         }
     }
 
-    private void createQualityMeasures(boolean withClassAttribute, double varianceDeviationAlpha, DistanceMeasure distanceUsedWithinMeasures) {
+    private void createQualityMeasures(double varianceDeviationAlpha, DistanceMeasure distanceUsedWithinMeasures) {
         ReadSeveralAndCalculateQualityMeasuresSeparately.basicStatistics = createBasicStatics();
         ReadSeveralAndCalculateQualityMeasuresSeparately.apt = new AvgPathLength();
-        qualityMeasures = getQualityMeasureHashMap(withClassAttribute, informationBasedMeasureslogBase, varianceDeviationAlpha, distanceUsedWithinMeasures);
+        qualityMeasures = getQualityMeasureHashMap(informationBasedMeasureslogBase, varianceDeviationAlpha, distanceUsedWithinMeasures);
     }
 
     public ReadSeveralAndCalculateQualityMeasuresSeparately() {
-        this(true, true, false, false, 2.0, 1.0, new Euclidean());
+        this(true, false, false, 2.0, 1.0, new Euclidean());
     }
 
-    public void run(String[] pathsToHierarchies, String resultFilePath) {
+    public void run(String[] pathsToHierarchies, String resultFilePath, boolean withClassAttribute,
+                    boolean withInstanceAttribute, boolean withColumnHeader, boolean fixBreadthGaps) {
         try
         {
-            writeHeader(withClassAttribute, resultFilePath, false, true);
+            writeHeaderIfEmptyFile(withClassAttribute, resultFilePath, false, true);
             System.out.println("Number of loaded files: " + pathsToHierarchies.length);
             System.out.println("Calculating..");
 
@@ -76,7 +75,7 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
                 saveBasicInfo(resultFilePath, filePath, useSubtree, mimicFlatClustering, mimicOneCluster);
 
                 GeneratedCSVReader reader = new GeneratedCSVReader();
-                Hierarchy h = reader.load(filePath, false, withClassAttribute, false, false, useSubtree);
+                Hierarchy h = reader.load(filePath, withInstanceAttribute, withClassAttribute, withColumnHeader, fixBreadthGaps, useSubtree);
 
                 System.out.println(filePath + " loaded");
 

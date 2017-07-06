@@ -15,6 +15,7 @@ import internal_measures.statistics.*;
 import internal_measures.statistics.histogram.*;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,43 +23,45 @@ import java.util.HashMap;
 
 public abstract class CommonReadSeveralAndCalculate {
 
-    protected static void writeHeader(boolean withClassAttribute, String resultFilePath, boolean withStdev, boolean prependInstanceName) throws IOException {
-        BufferedWriter resultFile = new BufferedWriter(new FileWriter(resultFilePath, true));
+    protected static void writeHeaderIfEmptyFile(boolean withClassAttribute, String resultFilePath, boolean withStdev, boolean prependInstanceName) throws IOException {
+        if(!new File(resultFilePath).exists()) {
+            BufferedWriter resultFile = new BufferedWriter(new FileWriter(resultFilePath, true));
 
-        String header = "use subtree for internal measures?;mimic flat clustering?;mimic one cluster?;num of nodes;stdev;num of leaves;stdev;height;stdev;" +
-                "avg path length;stdev;variance deviation;stdev;variance deviation2;stdev;flat within between;stdev;" +
-                "flat dunn1;stdev;flat dunn2;stdev;flat dunn3;stdev;flat dunn4;stdev;flat davis-bouldin;stdev;" +
-                "flat calinski-harabasz;stdev;";
+            String header = "use subtree for internal measures?;mimic flat clustering?;mimic one cluster?;num of nodes;stdev;num of leaves;stdev;height;stdev;" +
+                    "avg path length;stdev;variance deviation;stdev;variance deviation2;stdev;flat within between;stdev;" +
+                    "flat dunn1;stdev;flat dunn2;stdev;flat dunn3;stdev;flat dunn4;stdev;flat davis-bouldin;stdev;" +
+                    "flat calinski-harabasz;stdev;";
 
 
-        if(withClassAttribute)
-        {
-            header += "Flat cluster purity;stdev;Hierarchcal purity;stdev;Fmasure flat hypotheses;stdev;" +
-                    "Fmeasure partial order hypotheses;stdev;Adapted Fmeasure instances inheritance;stdev;" +
-                    "Adapted Fmeasure NO instances inheritance;stdev;Fowlkes Mallows flat hypotheses;stdev;" +
-                    "Fowlkes Mallows partial order hypotheses;stdev;Rand flat hypotheses;stdev;" +
-                    "Rand partial order hypotheses;stdev;Jaccard flat hypotheses;stdev;" +
-                    "Jaccard partial order hypotheses;stdev;Flat entropy1;stdev;Flat entropy2;stdev;" +
-                    "Flat information gain flat entropy1;stdev;Flat information gain flat entropy2;stdev;" +
-                    "Flat mutual information;stdev;Flat normalized mutual information;stdev;";
-        }
+            if(withClassAttribute)
+            {
+                header += "Flat cluster purity;stdev;Hierarchcal purity;stdev;Fmasure flat hypotheses;stdev;" +
+                        "Fmeasure partial order hypotheses;stdev;Adapted Fmeasure instances inheritance;stdev;" +
+                        "Adapted Fmeasure NO instances inheritance;stdev;Fowlkes Mallows flat hypotheses;stdev;" +
+                        "Fowlkes Mallows partial order hypotheses;stdev;Rand flat hypotheses;stdev;" +
+                        "Rand partial order hypotheses;stdev;Jaccard flat hypotheses;stdev;" +
+                        "Jaccard partial order hypotheses;stdev;Flat entropy1;stdev;Flat entropy2;stdev;" +
+                        "Flat information gain flat entropy1;stdev;Flat information gain flat entropy2;stdev;" +
+                        "Flat mutual information;stdev;Flat normalized mutual information;stdev;";
+            }
 
-        header += /*"HIM + VarianceDeviation;stdev;HIM + VarianceDeviation2;stdev;*/"HIM + FlatWithinBetweenIndex;stdev;" +
+            header += /*"HIM + VarianceDeviation;stdev;HIM + VarianceDeviation2;stdev;*/"HIM + FlatWithinBetweenIndex;stdev;" +
                 /*"HIM + FlatDunn1;stdev;*/"HIM + FlatReversedDunn2;stdev;HIM + FlatReversedDunn3;stdev;HIM + FlatReversedDunn4;stdev;" +
-                "HIM + FlatDaviesBouldin;stdev;";/*HIM + FlatCalinskiHarabasz;stdev;";*/
+                    "HIM + FlatDaviesBouldin;stdev;";/*HIM + FlatCalinskiHarabasz;stdev;";*/
 
-        header += "\n";
+            header += "\n";
 
-        if(!withStdev) {
-            header = header.replaceAll(";stdev", "");
-            header = header.replace("avg path length;", "avg path length;stdev;");
+            if(!withStdev) {
+                header = header.replaceAll(";stdev", "");
+                header = header.replace("avg path length;", "avg path length;stdev;");
+            }
+
+            if(prependInstanceName)
+                header = "instance name;" + header;
+
+            resultFile.append(header);
+            resultFile.close();
         }
-
-        if(prependInstanceName)
-            header = "instance name;" + header;
-
-        resultFile.append(header);
-        resultFile.close();
     }
 
     protected static HashMap<String, CommonPerLevelHistogram> getHistogramsHashMap() {
@@ -72,7 +75,7 @@ public abstract class CommonReadSeveralAndCalculate {
         return histograms;
     }
 
-    protected static HashMap<String, QualityMeasure> getQualityMeasureHashMap(boolean withClassAttribute, double logBase, double varianceDeviationAlpha, DistanceMeasure measure) {
+    protected static HashMap<String, QualityMeasure> getQualityMeasureHashMap(double logBase, double varianceDeviationAlpha, DistanceMeasure measure) {
         HashMap<String, QualityMeasure> qualityMeasures = new HashMap<>();
         //below measures are sensitive to useSubtree toggle
         qualityMeasures.put(FlatCalinskiHarabasz.class.getName(), new FlatCalinskiHarabasz(measure));
@@ -97,26 +100,26 @@ public abstract class CommonReadSeveralAndCalculate {
         qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatDaviesBouldin.class.getName(), new HierarchicalInternalMeasure(new FlatDaviesBouldin(new Euclidean())));
 //        qualityMeasures.put(HierarchicalInternalMeasure.class.getName() + FlatCalinskiHarabasz.class.getName(), new HierarchicalInternalMeasure(new FlatCalinskiHarabasz(new Euclidean())));
 
-        if(withClassAttribute) {
-            qualityMeasures.put(AdaptedFmeasure.class.getName() + Boolean.toString(true), new AdaptedFmeasure(true));
-            qualityMeasures.put(AdaptedFmeasure.class.getName() + Boolean.toString(false), new AdaptedFmeasure(false));
-            qualityMeasures.put(Fmeasure.class.getName() + FlatHypotheses.class.getName(), new Fmeasure(1.0f, new FlatHypotheses()));
-            qualityMeasures.put(Fmeasure.class.getName() + PartialOrderHypotheses.class.getName(), new Fmeasure(1.0f, new PartialOrderHypotheses()));
-            qualityMeasures.put(FowlkesMallowsIndex.class.getName() + FlatHypotheses.class.getName(), new FowlkesMallowsIndex(new FlatHypotheses()));
-            qualityMeasures.put(FowlkesMallowsIndex.class.getName() + PartialOrderHypotheses.class.getName(), new FowlkesMallowsIndex(new PartialOrderHypotheses()));
-            qualityMeasures.put(JaccardIndex.class.getName() + FlatHypotheses.class.getName(), new JaccardIndex(new FlatHypotheses()));
-            qualityMeasures.put(JaccardIndex.class.getName() + PartialOrderHypotheses.class.getName(), new JaccardIndex(new PartialOrderHypotheses()));
-            qualityMeasures.put(RandIndex.class.getName() + FlatHypotheses.class.getName(), new RandIndex(new FlatHypotheses()));
-            qualityMeasures.put(RandIndex.class.getName() + PartialOrderHypotheses.class.getName(), new RandIndex(new PartialOrderHypotheses()));
-            qualityMeasures.put(FlatClusterPurity.class.getName(), new FlatClusterPurity());
-            qualityMeasures.put(HierarchicalClassPurity.class.getName(), new HierarchicalClassPurity());
-            qualityMeasures.put(FlatEntropy1.class.getName(), new FlatEntropy1(logBase));
-            qualityMeasures.put(FlatEntropy2.class.getName(), new FlatEntropy2(logBase));
-            qualityMeasures.put(FlatInformationGain.class.getName() + FlatEntropy1.class.getName(), new FlatInformationGain(logBase, new FlatEntropy1(logBase)));
-            qualityMeasures.put(FlatInformationGain.class.getName() + FlatEntropy2.class.getName(), new FlatInformationGain(logBase, new FlatEntropy2(logBase)));
-            qualityMeasures.put(FlatMutualInformation.class.getName(), new FlatMutualInformation(logBase));
-            qualityMeasures.put(FlatNormalizedMutualInformation.class.getName(), new FlatNormalizedMutualInformation(logBase));
-        }
+        //external
+        qualityMeasures.put(AdaptedFmeasure.class.getName() + Boolean.toString(true), new AdaptedFmeasure(true));
+        qualityMeasures.put(AdaptedFmeasure.class.getName() + Boolean.toString(false), new AdaptedFmeasure(false));
+        qualityMeasures.put(Fmeasure.class.getName() + FlatHypotheses.class.getName(), new Fmeasure(1.0f, new FlatHypotheses()));
+        qualityMeasures.put(Fmeasure.class.getName() + PartialOrderHypotheses.class.getName(), new Fmeasure(1.0f, new PartialOrderHypotheses()));
+        qualityMeasures.put(FowlkesMallowsIndex.class.getName() + FlatHypotheses.class.getName(), new FowlkesMallowsIndex(new FlatHypotheses()));
+        qualityMeasures.put(FowlkesMallowsIndex.class.getName() + PartialOrderHypotheses.class.getName(), new FowlkesMallowsIndex(new PartialOrderHypotheses()));
+        qualityMeasures.put(JaccardIndex.class.getName() + FlatHypotheses.class.getName(), new JaccardIndex(new FlatHypotheses()));
+        qualityMeasures.put(JaccardIndex.class.getName() + PartialOrderHypotheses.class.getName(), new JaccardIndex(new PartialOrderHypotheses()));
+        qualityMeasures.put(RandIndex.class.getName() + FlatHypotheses.class.getName(), new RandIndex(new FlatHypotheses()));
+        qualityMeasures.put(RandIndex.class.getName() + PartialOrderHypotheses.class.getName(), new RandIndex(new PartialOrderHypotheses()));
+        qualityMeasures.put(FlatClusterPurity.class.getName(), new FlatClusterPurity());
+        qualityMeasures.put(HierarchicalClassPurity.class.getName(), new HierarchicalClassPurity());
+        qualityMeasures.put(FlatEntropy1.class.getName(), new FlatEntropy1(logBase));
+        qualityMeasures.put(FlatEntropy2.class.getName(), new FlatEntropy2(logBase));
+        qualityMeasures.put(FlatInformationGain.class.getName() + FlatEntropy1.class.getName(), new FlatInformationGain(logBase, new FlatEntropy1(logBase)));
+        qualityMeasures.put(FlatInformationGain.class.getName() + FlatEntropy2.class.getName(), new FlatInformationGain(logBase, new FlatEntropy2(logBase)));
+        qualityMeasures.put(FlatMutualInformation.class.getName(), new FlatMutualInformation(logBase));
+        qualityMeasures.put(FlatNormalizedMutualInformation.class.getName(), new FlatNormalizedMutualInformation(logBase));
+
         return qualityMeasures;
     }
 

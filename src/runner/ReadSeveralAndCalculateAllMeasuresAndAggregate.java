@@ -38,13 +38,13 @@ public class ReadSeveralAndCalculateAllMeasuresAndAggregate extends CommonReadSe
         HashMap<String, CommonStatistic> basicStatistics = createBasicStatics();
         AvgPathLength apt = new AvgPathLength();
 
-        HashMap<String, QualityMeasure> qualityMeasures = getQualityMeasureHashMap(withClassAttribute, logBase, varianceDeviationAlpha, measure);
+        HashMap<String, QualityMeasure> qualityMeasures = getQualityMeasureHashMap(logBase, varianceDeviationAlpha, measure);
 
         HashMap<String, CommonPerLevelHistogram> histograms = getHistogramsHashMap();
 
         try
         {
-            writeHeader(withClassAttribute, resultFilePath, true, false);
+            writeHeaderIfEmptyFile(withClassAttribute, resultFilePath, true, false);
 
             BufferedWriter resultFile = new BufferedWriter(new FileWriter(resultFilePath, true));
             resultFile.append(Boolean.toString(useSubtree) + ";");
