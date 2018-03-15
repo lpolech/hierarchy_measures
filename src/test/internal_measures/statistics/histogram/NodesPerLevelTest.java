@@ -29,10 +29,10 @@ public class NodesPerLevelTest {
     @Test
     public void testGetMeasureForHierarchyWithEmptyNodes()
     {
-        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
-        assertArrayEquals(new double[]{1.0, 1.0, 1.0, 1.0}, this.measure.calculate(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+       Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+       assertArrayEquals(new double[]{1.0, 1.0, 1.0, 1.0}, this.measure.calculate(h), TestCommon.DOUBLE_COMPARISION_DELTA);
     }
-
+    
     @Test
     public void multipleHierarchyCalculate() throws Exception {
         ArrayList<Hierarchy> hierarchies = new ArrayList<>();
