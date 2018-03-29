@@ -19,7 +19,6 @@ import basic_hierarchy.interfaces.Instance;
 
 public class UtilsTest {
 
-	//wrocimy do tego potem moze jak bedziemy wiedzieli skad wyciagnac kolekcje nodow sensowna
 	@Test
 	public void testGetClassInstancesWithinNode() {
 		BasicNode node = new BasicNode ("0", null, null );
@@ -60,8 +59,7 @@ public class UtilsTest {
 		assertEquals(1.0, Utils.nodeSubtreeVariance(list, true));
 	}
 	
-	//tez wrocimy do tego jak bede mial skad wyciagnac kolekcje nodow
-	//dlaczego te funkcje zwracaja Double[] zamiast double []????
+
 	@Test 
 	public void testNodeSubtreeVarianceNodeBoolean() {
 		BasicNode node2 = new BasicNode ("0", null, new BasicInstance("instanceName", "0", new double [] {1,2}));
@@ -80,10 +78,8 @@ public class UtilsTest {
 	@Test
 	public void testNodeSubtreeVarianceLinkedListOfInstanceBoolean() {
 
-
 		LinkedList<Instance> linklist= new LinkedList<>();
 		linklist.add(new BasicInstance("instanceName", "0", new double [] {1,2}));
-		
 		
 		assertEquals(2,  Utils.nodeSubtreeVariance(linklist, true).length, 0.1);
 	}

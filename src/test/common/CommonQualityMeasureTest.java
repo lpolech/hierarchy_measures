@@ -18,25 +18,4 @@ public class CommonQualityMeasureTest {
 		measure=(CommonQualityMeasure) new VarianceDeviation2();
 	}
 	
-	//nie da sie tego przetestowaæ 
-	@Test
-	public void testGetMeasureHierarchy() {
-		
-	}
-
-	@Test
-	public void testGetMeasureArrayListOfHierarchyBoolean() {
-		
-	}
-
-	@Test
-	public void testGetDesiredValue() {
-		
-	}
-
-	@Test
-	public void testGetNotDesiredValue() {
-		
-	}
-
 }
