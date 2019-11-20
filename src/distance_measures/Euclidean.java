@@ -18,12 +18,4 @@ public class Euclidean implements DistanceMeasure {
 
         return Math.sqrt(measure);
     }
-
-//    @Override
-//    public int compareDistances(double m1, double m2)
-//    {
-//        if(m1 < m2) return -1;
-//        if(m1 > m2) return 1;
-//        return 0;
-//    }
 }
