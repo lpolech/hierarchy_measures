@@ -3,7 +3,6 @@ package external_measures.information_based;
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Node;
 import common.Utils;
-import interfaces.DistanceMeasure;
 
 /**
  * Implemented based on http://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-clustering-1.html

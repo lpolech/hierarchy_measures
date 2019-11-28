@@ -2,7 +2,6 @@ package test.internal_measures.statistics.histogram;
 
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.test.TestCommon;
-import internal_measures.statistics.AvgPathLength;
 import internal_measures.statistics.AvgWithStdev;
 import internal_measures.statistics.histogram.NodesPerLevel;
 import org.junit.Before;

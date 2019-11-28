@@ -2,9 +2,7 @@ package external_measures.statistical_hypothesis;
 
 import basic_hierarchy.interfaces.Hierarchy;
 import common.CommonQualityMeasure;
-import interfaces.DistanceMeasure;
 import interfaces.Hypotheses;
-import interfaces.QualityMeasure;
 
 public class Fmeasure extends CommonQualityMeasure {
 	private float beta = 1.0f;

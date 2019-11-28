@@ -2,7 +2,6 @@ package internal_measures;
 
 import basic_hierarchy.interfaces.Hierarchy;
 import common.CommonQualityMeasure;
-import interfaces.QualityMeasure;
 import interfaces.DistanceMeasure;
 
 public class FlatDunn1 extends CommonQualityMeasure {

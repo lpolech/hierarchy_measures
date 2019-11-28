@@ -13,7 +13,6 @@ import common.Utils;
 import internal_measures.statistics.AvgWithStdev;
 import basic_hierarchy.implementation.BasicInstance;
 import basic_hierarchy.implementation.BasicNode;
-import basic_hierarchy.interfaces.Instance;
 
 
 

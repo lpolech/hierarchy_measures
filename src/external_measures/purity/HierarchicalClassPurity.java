@@ -5,8 +5,6 @@ import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
 import common.CommonQualityMeasure;
-import interfaces.DistanceMeasure;
-import interfaces.QualityMeasure;
 import common.Utils;
 
 public class HierarchicalClassPurity extends CommonQualityMeasure {

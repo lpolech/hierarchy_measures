@@ -4,8 +4,6 @@ import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.reader.GeneratedCSVReader;
 import distance_measures.Euclidean;
 import internal_measures.FlatCalinskiHarabasz;
-import internal_measures.FlatDaviesBouldin;
-
 import java.io.IOException;
 
 public class ReadAndCalculate {

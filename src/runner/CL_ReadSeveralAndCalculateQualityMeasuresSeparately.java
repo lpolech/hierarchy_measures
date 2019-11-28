@@ -1,7 +1,5 @@
 package runner;
 
-import distance_measures.Euclidean;
-
 public class CL_ReadSeveralAndCalculateQualityMeasuresSeparately {
     public static void main(String[] args) {
         args = new String[]{

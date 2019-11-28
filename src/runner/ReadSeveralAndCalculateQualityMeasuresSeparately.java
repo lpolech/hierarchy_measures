@@ -121,7 +121,9 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 				if (withClassAttribute)
 					calculateAndSaveAllExternalMeasures(resultFilePath, h, qualityMeasures);
 				calculateAndSaveAllHIMVariants(resultFilePath, h, qualityMeasures);
-				new BufferedWriter(new FileWriter(resultFilePath, true)).append("\n").close();
+				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resultFilePath, true));
+				bufferedWriter.append("\n");
+				bufferedWriter.close();
 			}
 
 		} catch (IOException e) {

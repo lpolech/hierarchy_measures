@@ -2,7 +2,6 @@ package external_measures.information_based;
 
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Node;
-import interfaces.DistanceMeasure;
 
 /**
  * Normalized version of Mutual Information is more robust to reach better values when number of nodes increases

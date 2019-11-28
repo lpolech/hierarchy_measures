@@ -2,7 +2,6 @@ package internal_measures.statistics.histogram;
 
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Node;
-import common.Utils;
 import internal_measures.statistics.AvgWithStdev;
 
 import java.util.ArrayList;

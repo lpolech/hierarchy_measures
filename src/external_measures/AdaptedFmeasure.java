@@ -1,9 +1,6 @@
 package external_measures;
 
 import common.CommonQualityMeasure;
-import interfaces.DistanceMeasure;
-import interfaces.QualityMeasure;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 

@@ -5,10 +5,7 @@ import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
 import common.CommonQualityMeasure;
 import interfaces.DistanceMeasure;
-import interfaces.QualityMeasure;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class FlatDunn3 extends CommonQualityMeasure {
     private DistanceMeasure dist;

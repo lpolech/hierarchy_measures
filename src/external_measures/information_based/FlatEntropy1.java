@@ -3,8 +3,6 @@ package external_measures.information_based;
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Node;
 import common.Utils;
-import interfaces.DistanceMeasure;
-import interfaces.QualityMeasure;
 
 public class FlatEntropy1 extends FlatEntropy {
     public FlatEntropy1()

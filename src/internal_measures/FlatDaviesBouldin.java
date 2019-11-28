@@ -6,9 +6,6 @@ import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
 import common.CommonQualityMeasure;
 import interfaces.DistanceMeasure;
-import interfaces.QualityMeasure;
-
-import java.util.LinkedList;
 
 public class FlatDaviesBouldin extends CommonQualityMeasure {
     private DistanceMeasure dist;

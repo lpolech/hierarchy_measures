@@ -3,8 +3,6 @@ package test.internal_measures;
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.test.TestCommon;
 import distance_measures.Euclidean;
-import interfaces.QualityMeasure;
-import internal_measures.FlatDaviesBouldin;
 import internal_measures.FlatWithinBetweenIndex;
 import org.junit.Before;
 import org.junit.Test;

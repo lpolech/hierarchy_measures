@@ -1,7 +1,6 @@
 package internal_measures;
 
 import basic_hierarchy.common.Constants;
-import basic_hierarchy.common.Utils;
 import basic_hierarchy.implementation.BasicHierarchy;
 import basic_hierarchy.implementation.BasicNode;
 import basic_hierarchy.interfaces.Hierarchy;
