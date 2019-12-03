@@ -10,7 +10,8 @@ import interfaces.DistanceMeasure;
 import java.util.LinkedList;
 
 public class FlatCalinskiHarabasz extends CommonQualityMeasure { //inspired by
-    // https://www.mathworks.com/help/stats/clustering.evaluation.calinskiharabaszevaluation-class.html?requestedDomain=www.mathworks.com
+    private static final String ALL_OBJECTS_MEAN_INSTANCE = "allObjectsMeanInstance";
+	// https://www.mathworks.com/help/stats/clustering.evaluation.calinskiharabaszevaluation-class.html?requestedDomain=www.mathworks.com
     private DistanceMeasure dist;
 
     private FlatCalinskiHarabasz() {}
@@ -39,8 +40,8 @@ public class FlatCalinskiHarabasz extends CommonQualityMeasure { //inspired by
         {
             allObjectsMeanVect[d] /= allObjects.size();
         }
-        Instance allObjectsMeanInstance = new BasicInstance("allObjectsMeanInstance", "allObjectsMeanInstance",
-                allObjectsMeanVect, "allObjectsMeanInstance");
+        Instance allObjectsMeanInstance = new BasicInstance(ALL_OBJECTS_MEAN_INSTANCE, ALL_OBJECTS_MEAN_INSTANCE,
+                allObjectsMeanVect, ALL_OBJECTS_MEAN_INSTANCE);
 
         Node[] nodes = h.getGroups();
 

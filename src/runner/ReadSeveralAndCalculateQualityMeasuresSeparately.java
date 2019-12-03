@@ -5,6 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.reader.GeneratedCSVReader;
 import distance_measures.Euclidean;
@@ -45,6 +48,8 @@ import internal_measures.statistics.NumberOfLeaves;
 import internal_measures.statistics.NumberOfNodes;
 
 public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonReadSeveralAndCalculate {
+	private static final Logger log = LogManager.getLogger(ReadSeveralAndCalculateQualityMeasuresSeparately.class);
+	private static final String DONE = "Done.";
 	// parameters
 	private boolean useSubtree = true;
 	private double informationBasedMeasureslogBase = 2.0;
@@ -107,13 +112,13 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 				if (mimicOneCluster) {
 					System.out.print("Transforming into one-cluster solution..");
 					h = basic_hierarchy.common.HierarchyUtils.getOneClusterHierarchy(h);
-					System.out.println("Done.");
+					System.out.println(DONE);
 				}
 
 				if (mimicFlatClustering) {
 					System.out.print("Transforming into flat clustering solution..");
 					h = h.getFlatClusteringWithCommonEmptyRoot();
-					System.out.println("Done.");
+					System.out.println(DONE);
 				}
 
 				calculateAndSaveAllBasicStatistics(resultFilePath, h, basicStatistics, apt);
@@ -121,39 +126,30 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 				if (withClassAttribute)
 					calculateAndSaveAllExternalMeasures(resultFilePath, h, qualityMeasures);
 				calculateAndSaveAllHIMVariants(resultFilePath, h, qualityMeasures);
-				BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resultFilePath, true));
-				bufferedWriter.append("\n");
-				bufferedWriter.close();
+				try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resultFilePath, true))) {
+					bufferedWriter.append("\n");
+				}
 			}
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error(e);
 		}
 	}
 
 	private static void saveBasicInfo(String resultFilePath, String instanceFilePath, boolean useSubtree,
 			boolean mimicFlatClustering, boolean mimicOneCluster) throws IOException {
-		BufferedWriter resultFile = new BufferedWriter(new FileWriter(resultFilePath, true));
-		resultFile.append(instanceFilePath + ";" + Boolean.toString(useSubtree) + ";"
-				+ Boolean.toString(mimicFlatClustering) + ";" + Boolean.toString(mimicOneCluster) + ";");
-		resultFile.close();
+		try (BufferedWriter resultFile = new BufferedWriter(new FileWriter(resultFilePath, true))) {
+			resultFile.append(instanceFilePath + ";" + Boolean.toString(useSubtree) + ";"
+					+ Boolean.toString(mimicFlatClustering) + ";" + Boolean.toString(mimicOneCluster) + ";");
+		}
 	}
 
 	private static void calculateAndSaveAllHIMVariants(String resultFilePath, Hierarchy hierarchy,
 			HashMap<String, QualityMeasure> qualityMeasures) throws IOException {
-//        System.out.println("HIM + VarianceDeviation..");
-//        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + VarianceDeviation.class.getName(),
-//                hierarchy, qualityMeasures, resultFilePath);
-//        System.out.print("Done.\nHIM + VarianceDeviation2..");
-//        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + VarianceDeviation2.class.getName(),
-//                hierarchy, qualityMeasures, resultFilePath);
 		System.out.print(/* "Done.\n */"HIM + FlatWithinBetweenIndex..");
 		calculateAndSaveQualityMeasure(
 				HierarchicalInternalMeasure.class.getName() + FlatWithinBetweenIndex.class.getName(), hierarchy,
 				qualityMeasures, resultFilePath);
-//        System.out.print("Done.\nHIM + FlatDunn1..");
-//        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDunn1.class.getName(),
-//                hierarchy, qualityMeasures, resultFilePath);
 		System.out.print("Done.\nHIM + FlatReversedDunn2..");
 		calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatReversedDunn2.class.getName(),
 				hierarchy, qualityMeasures, resultFilePath);
@@ -166,10 +162,7 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 		System.out.print("Done.\nHIM + FlatDaviesBouldin..");
 		calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDaviesBouldin.class.getName(),
 				hierarchy, qualityMeasures, resultFilePath);
-//        System.out.print("Done.\nHIM + FlatCalinskiHarabasz..");
-//        calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatCalinskiHarabasz.class.getName(),
-//                hierarchy, qualityMeasures, resultFilePath);
-		System.out.println("Done.");
+		System.out.println(DONE);
 	}
 
 	private static void calculateAndSaveAllExternalMeasures(String resultFilePath, Hierarchy hierarchy,
@@ -225,7 +218,7 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 		System.out.print("Done.\nFlat normalized mutual information..");
 		calculateAndSaveQualityMeasure(FlatNormalizedMutualInformation.class.getName(), hierarchy, qualityMeasures,
 				resultFilePath);
-		System.out.println("Done.");
+		System.out.println(DONE);
 	}
 
 	private static void calculateAndSaveAllFlatInternalMeasures(String resultFilePath, Hierarchy hierarchy,
@@ -250,7 +243,7 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 		System.out.print("Done.\nFlat Calinski-Charabasz..");
 		calculateAndSaveQualityMeasure(FlatCalinskiHarabasz.class.getName(), hierarchy, qualityMeasures,
 				resultFilePath);
-		System.out.println("Done.");
+		System.out.println(DONE);
 	}
 
 	private static void calculateAndSaveAllBasicStatistics(String resultFilePath, Hierarchy hierarchy,
@@ -265,7 +258,7 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 		try (BufferedWriter resultFileAvgPathLength = new BufferedWriter(new FileWriter(resultFilePath, true))) {
 			AvgWithStdev aptResult = apt.calculate(hierarchy);
 			resultFileAvgPathLength.append(aptResult.getAvg() + ";" + aptResult.getStdev() + ";");
-			System.out.println("Done.");
+			System.out.println(DONE);
 		}
 	}
 

@@ -6,10 +6,9 @@ import internal_measures.VarianceDeviation2;
 public class CommonQualityMeasureTest {
 
 	CommonQualityMeasure measure;
-	
-	public CommonQualityMeasureTest()
-	{
-		measure=(CommonQualityMeasure) new VarianceDeviation2();
+
+	public CommonQualityMeasureTest() {
+		measure = new VarianceDeviation2();
 	}
-	
+
 }

@@ -8,17 +8,17 @@ import common.Utils;
 import interfaces.Hypotheses;
 
 public class PartialOrderHypotheses implements Hypotheses {//TODO: mozna z tej klasy i FlatHypotheses zrobic jedna klase przyjmujaca lambde czy tam funkcje, ktora bedzie odpalana w tych ifach
-	private long TP = Integer.MIN_VALUE;
-	private long FP = Integer.MIN_VALUE;
-	private long TN = Integer.MIN_VALUE;
-	private long FN = Integer.MIN_VALUE;
+	private long tP = Integer.MIN_VALUE;
+	private long fP = Integer.MIN_VALUE;
+	private long tN = Integer.MIN_VALUE;
+	private long fN = Integer.MIN_VALUE;
 
 	public void calculate(Hierarchy h) 
 	{
-		TP = 0;
-		FP = 0;
-		TN = 0;
-		FN = 0;
+		tP = 0;
+		fP = 0;
+		tN = 0;
+		fN = 0;
 		LinkedList<Instance> allInstances = h.getRoot().getSubtreeInstances();
 		Instance[] allInstancesArr = allInstances.toArray(new Instance[allInstances.size()]);
 		
@@ -37,22 +37,22 @@ public class PartialOrderHypotheses implements Hypotheses {//TODO: mozna z tej k
 					{
 						if(Utils.isTheSameOrSubclass(firstAssignClass, secondAssignClass))
 						{
-							TP++;
+							tP++;
 						}
 						else
 						{
-							FN++;
+							fN++;
 						}
 					}
 					else
 					{
 						if(Utils.isTheSameOrSubclass(firstAssignClass, secondAssignClass))
 						{
-							FP++;
+							fP++;
 						}
 						else
 						{
-							TN++;
+							tN++;
 						}
 					}
 				}
@@ -61,18 +61,18 @@ public class PartialOrderHypotheses implements Hypotheses {//TODO: mozna z tej k
 	}
 
 	public long getTP() {
-		return TP;
+		return tP;
 	}
 
 	public long getFP() {
-		return FP;
+		return fP;
 	}
 
 	public long getTN() {
-		return TN;
+		return tN;
 	}
 
 	public long getFN() {
-		return FN;
+		return fN;
 	}
 }

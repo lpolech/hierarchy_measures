@@ -5,18 +5,18 @@ import common.CommonQualityMeasure;
 import interfaces.DistanceMeasure;
 
 public class FlatDunn1 extends CommonQualityMeasure {
-    private FlatWithinBetweenIndex FWBI;
+    private FlatWithinBetweenIndex fWBI;
 
     private FlatDunn1() {}
 
     public FlatDunn1(DistanceMeasure dist)
     {
-        FWBI = new FlatWithinBetweenIndex(dist);
+        fWBI = new FlatWithinBetweenIndex(dist);
     }
 
     @Override
     public double getMeasure(Hierarchy h) {
-        return 1/this.FWBI.getMeasure(h);
+        return 1/this.fWBI.getMeasure(h);
     }
 
     @Override

@@ -18,6 +18,10 @@ import basic_hierarchy.implementation.BasicNode;
 
 public class UtilsTest {
 
+	private static final String INSTANCE_NAME = "instanceName";
+	private static final String QUALITY_MEASURE = "QualityMeasure";
+	private static final String COMMON_QUALITY_MEASURE = "CommonQualityMeasure";
+
 	@Test
 	public void testGetClassInstancesWithinNode() {
 		BasicNode node = new BasicNode ("0", null, null );
@@ -26,29 +30,29 @@ public class UtilsTest {
 		assertEquals(new ArrayList<>(), Utils.getClassInstancesWithinNode(node, "test",true, true));
 		
 		
-		BasicNode node2 = new BasicNode ("0", null, new BasicInstance("instanceName", "0", new double [] {1,2}));
+		BasicNode node2 = new BasicNode ("0", null, new BasicInstance(INSTANCE_NAME, "0", new double [] {1,2}));
 		LinkedList<Node> list= new LinkedList<>();
 		list.add(node2);
 		
 		LinkedList<Instance> linklist= new LinkedList<>();
-		linklist.add(new BasicInstance("instanceName", "0", new double [] {1,2}));
-		BasicNode node3 = new BasicNode ("0", null,list,linklist ,new BasicInstance("instanceName", "0", new double [] {1,2}));
+		linklist.add(new BasicInstance(INSTANCE_NAME, "0", new double [] {1,2}));
+		BasicNode node3 = new BasicNode ("0", null,list,linklist ,new BasicInstance(INSTANCE_NAME, "0", new double [] {1,2}));
 		
 		assertEquals(new ArrayList<>(), Utils.getClassInstancesWithinNode(node3, "test",true, true));
 	}
 
 	@Test
 	public void testIsTheSameOrSubclass() {
-		assertEquals(false, Utils.isTheSameOrSubclass("CommonQualityMeasure", "QualityMeasure"));
-		assertEquals(false, Utils.isTheSameOrSubclass("QualityMeasure", "CommonQualityMeasure"));
+		assertEquals(false, Utils.isTheSameOrSubclass(COMMON_QUALITY_MEASURE, QUALITY_MEASURE));
+		assertEquals(false, Utils.isTheSameOrSubclass(QUALITY_MEASURE, COMMON_QUALITY_MEASURE));
 		assertEquals(true, Utils.isTheSameOrSubclass("test", "test.nic"));
 		assertEquals(true, Utils.isTheSameOrSubclass("test", "test"));
 	}
 
 	@Test
 	public void testIsSubclass() {
-		assertEquals(false, Utils.isSubclass("CommonQualityMeasure", "QualityMeasure"));
-		assertEquals(false, Utils.isSubclass("QualityMeasure", "CommonQualityMeasure"));
+		assertEquals(false, Utils.isSubclass(COMMON_QUALITY_MEASURE, QUALITY_MEASURE));
+		assertEquals(false, Utils.isSubclass(QUALITY_MEASURE, COMMON_QUALITY_MEASURE));
 		assertEquals(true, Utils.isSubclass("test", "test.nic"));
 	}
 
@@ -61,13 +65,13 @@ public class UtilsTest {
 
 	@Test 
 	public void testNodeSubtreeVarianceNodeBoolean() {
-		BasicNode node2 = new BasicNode ("0", null, new BasicInstance("instanceName", "0", new double [] {1,2}));
+		BasicNode node2 = new BasicNode ("0", null, new BasicInstance(INSTANCE_NAME, "0", new double [] {1,2}));
 		LinkedList<Node> list= new LinkedList<>();
 		list.add(node2);
 		
 		LinkedList<Instance> linklist= new LinkedList<>();
-		linklist.add(new BasicInstance("instanceName", "0", new double [] {1,2}));
-		BasicNode node = new BasicNode ("0", null,list,linklist ,new BasicInstance("instanceName", "0", new double [] {1,2}));
+		linklist.add(new BasicInstance(INSTANCE_NAME, "0", new double [] {1,2}));
+		BasicNode node = new BasicNode ("0", null,list,linklist ,new BasicInstance(INSTANCE_NAME, "0", new double [] {1,2}));
 		
 		assertEquals(2,  Utils.nodeSubtreeVariance(node, true).length, 0.1);
 		assertEquals(2,  Utils.nodeSubtreeVariance(node, false).length, 0.1);
@@ -78,7 +82,7 @@ public class UtilsTest {
 	public void testNodeSubtreeVarianceLinkedListOfInstanceBoolean() {
 
 		LinkedList<Instance> linklist= new LinkedList<>();
-		linklist.add(new BasicInstance("instanceName", "0", new double [] {1,2}));
+		linklist.add(new BasicInstance(INSTANCE_NAME, "0", new double [] {1,2}));
 		
 		assertEquals(2,  Utils.nodeSubtreeVariance(linklist, true).length, 0.1);
 	}

@@ -1,60 +1,59 @@
 package test.external_measures.statistical_hypothesis;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.test.TestCommon;
 import external_measures.statistical_hypothesis.FlatHypotheses;
 import external_measures.statistical_hypothesis.PartialOrderHypotheses;
 import external_measures.statistical_hypothesis.RandIndex;
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class RandIndexTest {
-    private RandIndex flatFmeasure;
-    private RandIndex POFmeasure;
+	private RandIndex flatFmeasure;
+	private RandIndex pOFmeasure;
 
-    @Before
-    public void setUp() throws Exception {
-        flatFmeasure = new RandIndex(new FlatHypotheses());
-        POFmeasure = new RandIndex(new PartialOrderHypotheses());
-    }
+	@Before
+	public void setUp() {
+		flatFmeasure = new RandIndex(new FlatHypotheses());
+		pOFmeasure = new RandIndex(new PartialOrderHypotheses());
+	}
 
-    @Test
-    public void getFlatMeasure() throws Exception {
-        Hierarchy h = TestCommon.getTwoGroupsHierarchy();
-        assertEquals(0.5, flatFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
-    }
+	@Test
+	public void getFlatMeasure() {
+		Hierarchy h = TestCommon.getTwoGroupsHierarchy();
+		assertEquals(0.5, flatFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+	}
 
-    @Test
-    public void getFlatMeasureForHierarchyWithEmptyNodes()
-    {
-        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
-        assertEquals(0.5, this.flatFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
-    }
+	@Test
+	public void getFlatMeasureForHierarchyWithEmptyNodes() {
+		Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+		assertEquals(0.5, this.flatFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+	}
 
-    @Test
-    public void getPOMeasure() throws Exception {
-        Hierarchy h = TestCommon.getTwoGroupsHierarchy();
-        assertEquals(0.75, POFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
-    }
+	@Test
+	public void getPOMeasure() {
+		Hierarchy h = TestCommon.getTwoGroupsHierarchy();
+		assertEquals(0.75, pOFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+	}
 
-    @Test
-    public void getPOMeasureForHierarchyWithEmptyNodes()
-    {
-        Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
-        assertEquals(0.75, this.POFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
-    }
+	@Test
+	public void getPOMeasureForHierarchyWithEmptyNodes() {
+		Hierarchy h = TestCommon.getTwoGroupsHierarchyWithEmptyNodes();
+		assertEquals(0.75, this.pOFmeasure.getMeasure(h), TestCommon.DOUBLE_COMPARISION_DELTA);
+	}
 
-    @Test
-    public void getDesiredValue() throws Exception {
-        assertEquals(1.0, flatFmeasure.getDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
-        assertEquals(1.0, POFmeasure.getDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
-    }
+	@Test
+	public void getDesiredValue() {
+		assertEquals(1.0, flatFmeasure.getDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
+		assertEquals(1.0, pOFmeasure.getDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
+	}
 
-    @Test
-    public void getNotDesiredValue() throws Exception {
-        assertEquals(0.0, flatFmeasure.getNotDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
-        assertEquals(0.0, POFmeasure.getNotDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
-    }
+	@Test
+	public void getNotDesiredValue() {
+		assertEquals(0.0, flatFmeasure.getNotDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
+		assertEquals(0.0, pOFmeasure.getNotDesiredValue(), TestCommon.DOUBLE_COMPARISION_DELTA);
+	}
 }
