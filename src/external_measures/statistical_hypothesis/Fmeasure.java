@@ -34,4 +34,9 @@ public class Fmeasure extends CommonQualityMeasure {
 	public double getNotDesiredValue() {
 		return 0;
 	}
+
+	public Hypotheses getHypotheses() {
+		return hypothesesCalculator;
+	}
+
 }

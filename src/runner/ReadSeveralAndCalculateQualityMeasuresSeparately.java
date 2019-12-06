@@ -49,7 +49,7 @@ import internal_measures.statistics.NumberOfNodes;
 
 public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonReadSeveralAndCalculate {
 	private static final Logger log = LogManager.getLogger(ReadSeveralAndCalculateQualityMeasuresSeparately.class);
-	private static final String DONE = "Done.";
+	private static final String MSG_DONE = "Done.";
 	// parameters
 	private boolean useSubtree = true;
 	private double informationBasedMeasureslogBase = 2.0;
@@ -112,13 +112,13 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 				if (mimicOneCluster) {
 					System.out.print("Transforming into one-cluster solution..");
 					h = basic_hierarchy.common.HierarchyUtils.getOneClusterHierarchy(h);
-					System.out.println(DONE);
+					System.out.println(MSG_DONE);
 				}
 
 				if (mimicFlatClustering) {
 					System.out.print("Transforming into flat clustering solution..");
 					h = h.getFlatClusteringWithCommonEmptyRoot();
-					System.out.println(DONE);
+					System.out.println(MSG_DONE);
 				}
 
 				calculateAndSaveAllBasicStatistics(resultFilePath, h, basicStatistics, apt);
@@ -162,7 +162,7 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 		System.out.print("Done.\nHIM + FlatDaviesBouldin..");
 		calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDaviesBouldin.class.getName(),
 				hierarchy, qualityMeasures, resultFilePath);
-		System.out.println(DONE);
+		System.out.println(MSG_DONE);
 	}
 
 	private static void calculateAndSaveAllExternalMeasures(String resultFilePath, Hierarchy hierarchy,
@@ -218,7 +218,7 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 		System.out.print("Done.\nFlat normalized mutual information..");
 		calculateAndSaveQualityMeasure(FlatNormalizedMutualInformation.class.getName(), hierarchy, qualityMeasures,
 				resultFilePath);
-		System.out.println(DONE);
+		System.out.println(MSG_DONE);
 	}
 
 	private static void calculateAndSaveAllFlatInternalMeasures(String resultFilePath, Hierarchy hierarchy,
@@ -243,7 +243,7 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 		System.out.print("Done.\nFlat Calinski-Charabasz..");
 		calculateAndSaveQualityMeasure(FlatCalinskiHarabasz.class.getName(), hierarchy, qualityMeasures,
 				resultFilePath);
-		System.out.println(DONE);
+		System.out.println(MSG_DONE);
 	}
 
 	private static void calculateAndSaveAllBasicStatistics(String resultFilePath, Hierarchy hierarchy,
@@ -258,7 +258,7 @@ public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonRead
 		try (BufferedWriter resultFileAvgPathLength = new BufferedWriter(new FileWriter(resultFilePath, true))) {
 			AvgWithStdev aptResult = apt.calculate(hierarchy);
 			resultFileAvgPathLength.append(aptResult.getAvg() + ";" + aptResult.getStdev() + ";");
-			System.out.println(DONE);
+			System.out.println(MSG_DONE);
 		}
 	}
 

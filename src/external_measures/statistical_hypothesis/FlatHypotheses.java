@@ -7,17 +7,17 @@ import basic_hierarchy.interfaces.Instance;
 import interfaces.Hypotheses;
 
 public class FlatHypotheses implements Hypotheses {
-	private long tP = Integer.MIN_VALUE;
-	private long fP = Integer.MIN_VALUE;
-	private long tN = Integer.MIN_VALUE;
-	private long fN = Integer.MIN_VALUE;
+	private long tp = Integer.MIN_VALUE;
+	private long fp = Integer.MIN_VALUE;
+	private long tn = Integer.MIN_VALUE;
+	private long fn = Integer.MIN_VALUE;
 
 	public void calculate(Hierarchy h)
 	{
-		tP = 0;
-		fP = 0;
-		tN = 0;
-		fN = 0;
+		tp = 0;
+		fp = 0;
+		tn = 0;
+		fn = 0;
 		LinkedList<Instance> allInstances = h.getRoot().getSubtreeInstances();
 		Instance[] allInstancesArr = allInstances.toArray(new Instance[allInstances.size()]);
 		
@@ -36,22 +36,22 @@ public class FlatHypotheses implements Hypotheses {
 					{
 						if(firstAssignClass.equals(secondAssignClass))
 						{
-							tP++;
+							tp++;
 						}
 						else
 						{
-							fN++;
+							fn++;
 						}
 					}
 					else
 					{
 						if(firstAssignClass.equals(secondAssignClass))
 						{
-							fP++;
+							fp++;
 						}
 						else
 						{
-							tN++;
+							tn++;
 						}
 					}
 				}
@@ -60,18 +60,18 @@ public class FlatHypotheses implements Hypotheses {
 	}
 
 	public long getTP() {
-		return tP;
+		return tp;
 	}
 
 	public long getFP() {
-		return fP;
+		return fp;
 	}
 
 	public long getTN() {
-		return tN;
+		return tn;
 	}
 
 	public long getFN() {
-		return fN;
+		return fn;
 	}
 }
