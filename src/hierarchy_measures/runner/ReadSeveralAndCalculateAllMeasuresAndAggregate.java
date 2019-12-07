@@ -83,8 +83,7 @@ public class ReadSeveralAndCalculateAllMeasuresAndAggregate extends CommonReadSe
 			try (BufferedWriter resultFile = new BufferedWriter(new FileWriter(resultFilePath, true))) {
 				resultFile.append(Boolean.toString(useSubtree) + ";");
 			}
-
-			System.out.println("Calculating..");
+			log.info("Calculating..");
 
 			calculateAndSaveAllBasicStatistics(resultFilePath, hierarchies, basicStatistics, apt);
 			calculateAndSaveAllFlatInternalMeasures(resultFilePath, hierarchies, qualityMeasures);
@@ -100,149 +99,149 @@ public class ReadSeveralAndCalculateAllMeasuresAndAggregate extends CommonReadSe
 
 	private static void calculateAndSaveAllHistogramicMeasures(String resultFilePath, ArrayList<Hierarchy> hierarchies,
 			HashMap<String, CommonPerLevelHistogram> histograms) throws IOException {
-		System.out.println("Nodes per level histogram..");
+		log.info("Nodes per level histogram..");
 		try (BufferedWriter resultFileSpacing = new BufferedWriter(new FileWriter(resultFilePath, true))) {
-			resultFileSpacing.append("\n\n");
+			resultFileSpacing.append("%n%n");
 		}
 		calculateAndWriteHistogramicValues("Nodes per level histogram", hierarchies, histograms,
 				NodesPerLevel.class.getName(), resultFilePath);
-		System.out.print("Done.\nLeaves per level histogram..");
+		log.info("Done.%nLeaves per level histogram..");
 		calculateAndWriteHistogramicValues("Leaves per level histogram", hierarchies, histograms,
 				LeavesPerLevel.class.getName(), resultFilePath);
-		System.out.print("Done.\nInstances per level histogram..");
+		log.info("Done.%nInstances per level histogram..");
 		calculateAndWriteHistogramicValues("Instances per level histogram", hierarchies, histograms,
 				InstancesPerLevel.class.getName(), resultFilePath);
-		System.out.print("Done.\nChild per node per level histogram..");
+		log.info("Done.%nChild per node per level histogram..");
 		calculateAndWriteHistogramicValues("Child per node per level histogram", hierarchies, histograms,
 				ChildPerNodePerLevel.class.getName(), resultFilePath);
-		System.out.print("Done.\nHistogram of number of children..");
+		log.info("Done.%nHistogram of number of children..");
 		calculateAndWriteHistogramicValues("Histogram of number of children", hierarchies, histograms,
 				HistogramOfNumberOfChildren.class.getName(), resultFilePath);
-		System.out.print(DONE);
+		log.info(DONE);
 	}
 
 	private static void calculateAndSaveAllHIMVariants(String resultFilePath, ArrayList<Hierarchy> hierarchies,
 			HashMap<String, QualityMeasure> qualityMeasures) throws IOException {
-		System.out.print("Done.\nHIM + FlatWithinBetweenIndex..");
+		log.info("Done.%nHIM + FlatWithinBetweenIndex..");
 		calculateAndSaveQualityMeasure(
 				HierarchicalInternalMeasure.class.getName() + FlatWithinBetweenIndex.class.getName(), hierarchies,
 				qualityMeasures, resultFilePath);
-		System.out.print("Done.\nHIM + FlatDunn1..");
+		log.info("Done.%nHIM + FlatDunn1..");
 		calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDunn1.class.getName(),
 				hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nHIM + FlatDunn2..");
+		log.info("Done.%nHIM + FlatDunn2..");
 		calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDunn2.class.getName(),
 				hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nHIM + FlatDunn3..");
+		log.info("Done.%nHIM + FlatDunn3..");
 		calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDunn3.class.getName(),
 				hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nHIM + FlatDunn4..");
+		log.info("Done.%nHIM + FlatDunn4..");
 		calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDunn4.class.getName(),
 				hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nHIM + FlatDaviesBouldin..");
+		log.info("Done.%nHIM + FlatDaviesBouldin..");
 		calculateAndSaveQualityMeasure(HierarchicalInternalMeasure.class.getName() + FlatDaviesBouldin.class.getName(),
 				hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nHIM + FlatCalinskiHarabasz..");
+		log.info("Done.%nHIM + FlatCalinskiHarabasz..");
 		calculateAndSaveQualityMeasure(
 				HierarchicalInternalMeasure.class.getName() + FlatCalinskiHarabasz.class.getName(), hierarchies,
 				qualityMeasures, resultFilePath);
-		System.out.print(DONE);
+		log.info(DONE);
 	}
 
 	private static void calculateAndSaveAllExternalMeasures(String resultFilePath, ArrayList<Hierarchy> hierarchies,
 			HashMap<String, QualityMeasure> qualityMeasures) throws IOException {
-		System.out.println("Flat cluster purity..");
+		log.info("Flat cluster purity..");
 		calculateAndSaveQualityMeasure(FlatClusterPurity.class.getName(), hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nHierarchcal purity..");
+		log.info("Done.%nHierarchcal purity..");
 		calculateAndSaveQualityMeasure(HierarchicalClassPurity.class.getName(), hierarchies, qualityMeasures,
 				resultFilePath);
-		System.out.print("Done.\nFmasure with flat hypotheses..");
+		log.info("Done.%nFmasure with flat hypotheses..");
 		calculateAndSaveQualityMeasure(Fmeasure.class.getName() + FlatHypotheses.class.getName(), hierarchies,
 				qualityMeasures, resultFilePath);
-		System.out.print("Done.\nFmeasure with partial order hypotheses..");
+		log.info("Done.%nFmeasure with partial order hypotheses..");
 		calculateAndSaveQualityMeasure(Fmeasure.class.getName() + PartialOrderHypotheses.class.getName(), hierarchies,
 				qualityMeasures, resultFilePath);
-		System.out.print("Done.\nAdapted Fmeasure with instances inheritance..");
+		log.info("Done.%nAdapted Fmeasure with instances inheritance..");
 		calculateAndSaveQualityMeasure(AdaptedFmeasure.class.getName() + Boolean.toString(true), hierarchies,
 				qualityMeasures, resultFilePath);
-		System.out.print("Done.\nAdapted Fmeasure with NO instances inheritance..");
+		log.info("Done.%nAdapted Fmeasure with NO instances inheritance..");
 		calculateAndSaveQualityMeasure(AdaptedFmeasure.class.getName() + Boolean.toString(false), hierarchies,
 				qualityMeasures, resultFilePath);
-		System.out.print("Done.\nFowlkes Mallows with flat hypotheses..");
+		log.info("Done.%nFowlkes Mallows with flat hypotheses..");
 		calculateAndSaveQualityMeasure(FowlkesMallowsIndex.class.getName() + FlatHypotheses.class.getName(),
 				hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nFowlkes Mallows with partial order hypotheses..");
+		log.info("Done.%nFowlkes Mallows with partial order hypotheses..");
 		calculateAndSaveQualityMeasure(FowlkesMallowsIndex.class.getName() + PartialOrderHypotheses.class.getName(),
 				hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nRand with flat hypotheses..");
+		log.info("Done.%nRand with flat hypotheses..");
 		calculateAndSaveQualityMeasure(RandIndex.class.getName() + FlatHypotheses.class.getName(), hierarchies,
 				qualityMeasures, resultFilePath);
-		System.out.print("Done.\nRand with partial order hypotheses..");
+		log.info("Done.%nRand with partial order hypotheses..");
 		calculateAndSaveQualityMeasure(RandIndex.class.getName() + PartialOrderHypotheses.class.getName(), hierarchies,
 				qualityMeasures, resultFilePath);
-		System.out.print("Done.\nJaccard with flat hypotheses..");
+		log.info("Done.%nJaccard with flat hypotheses..");
 		calculateAndSaveQualityMeasure(JaccardIndex.class.getName() + FlatHypotheses.class.getName(), hierarchies,
 				qualityMeasures, resultFilePath);
-		System.out.print("Done.\nJaccard with partial order hypotheses..");
+		log.info("Done.%nJaccard with partial order hypotheses..");
 		calculateAndSaveQualityMeasure(JaccardIndex.class.getName() + PartialOrderHypotheses.class.getName(),
 				hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nFlat entropy 1..");
+		log.info("Done.%nFlat entropy 1..");
 		calculateAndSaveQualityMeasure(FlatEntropy1.class.getName(), hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nFlat entropy 2..");
+		log.info("Done.%nFlat entropy 2..");
 		calculateAndSaveQualityMeasure(FlatEntropy2.class.getName(), hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nFlat information gain with flat entropy 1..");
+		log.info("Done.%nFlat information gain with flat entropy 1..");
 		calculateAndSaveQualityMeasure(FlatInformationGain.class.getName() + FlatEntropy1.class.getName(), hierarchies,
 				qualityMeasures, resultFilePath);
-		System.out.print("Done.\nFlat information gain with flat entropy 2..");
+		log.info("Done.%nFlat information gain with flat entropy 2..");
 		calculateAndSaveQualityMeasure(FlatInformationGain.class.getName() + FlatEntropy2.class.getName(), hierarchies,
 				qualityMeasures, resultFilePath);
-		System.out.print("Done.\nFlat mutual information..");
+		log.info("Done.%nFlat mutual information..");
 		calculateAndSaveQualityMeasure(FlatMutualInformation.class.getName(), hierarchies, qualityMeasures,
 				resultFilePath);
-		System.out.print("Done.\nFlat normalized mutual information..");
+		log.info("Done.%nFlat normalized mutual information..");
 		calculateAndSaveQualityMeasure(FlatNormalizedMutualInformation.class.getName(), hierarchies, qualityMeasures,
 				resultFilePath);
-		System.out.print(DONE);
+		log.info(DONE);
 	}
 
 	private static void calculateAndSaveAllFlatInternalMeasures(String resultFilePath, ArrayList<Hierarchy> hierarchies,
 			HashMap<String, QualityMeasure> qualityMeasures) throws IOException {
-		System.out.println("Variance deviation..");
+		log.info("Variance deviation..");
 		calculateAndSaveQualityMeasure(VarianceDeviation.class.getName(), hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nVariance deviation 2..");
+		log.info("Done.%nVariance deviation 2..");
 		calculateAndSaveQualityMeasure(VarianceDeviation2.class.getName(), hierarchies, qualityMeasures,
 				resultFilePath);
-		System.out.print("Done.\nFlat within between..");
+		log.info("Done.%nFlat within between..");
 		calculateAndSaveQualityMeasure(FlatWithinBetweenIndex.class.getName(), hierarchies, qualityMeasures,
 				resultFilePath);
-		System.out.print("Done.\nFlat Dunn 1..");
+		log.info("Done.%nFlat Dunn 1..");
 		calculateAndSaveQualityMeasure(FlatDunn1.class.getName(), hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nFlat Dunn 2..");
+		log.info("Done.%nFlat Dunn 2..");
 		calculateAndSaveQualityMeasure(FlatDunn2.class.getName(), hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nFlat Dunn 3..");
+		log.info("Done.%nFlat Dunn 3..");
 		calculateAndSaveQualityMeasure(FlatDunn3.class.getName(), hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nFlat Dunn 4..");
+		log.info("Done.%nFlat Dunn 4..");
 		calculateAndSaveQualityMeasure(FlatDunn4.class.getName(), hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nFlat Davies-Bouldin..");
+		log.info("Done.%nFlat Davies-Bouldin..");
 		calculateAndSaveQualityMeasure(FlatDaviesBouldin.class.getName(), hierarchies, qualityMeasures, resultFilePath);
-		System.out.print("Done.\nFlat Calinski-Charabasz..");
+		log.info("Done.%nFlat Calinski-Charabasz..");
 		calculateAndSaveQualityMeasure(FlatCalinskiHarabasz.class.getName(), hierarchies, qualityMeasures,
 				resultFilePath);
-		System.out.print(DONE);
+		log.info(DONE);
 	}
 
 	private static void calculateAndSaveAllBasicStatistics(String resultFilePath, ArrayList<Hierarchy> hierarchies,
 			HashMap<String, CommonStatistic> basicStatistics, AvgPathLength apt) throws IOException {
-		System.out.println("Number of nodes..");
+		log.info("Number of nodes..");
 		calculateAndSaveBasicStatistics(NumberOfNodes.class.getName(), hierarchies, basicStatistics, resultFilePath);
-		System.out.print("Done.\nNumber of leaves..");
+		log.info("Done.%nNumber of leaves..");
 		calculateAndSaveBasicStatistics(NumberOfLeaves.class.getName(), hierarchies, basicStatistics, resultFilePath);
-		System.out.print("Done.\nHeight..");
+		log.info("Done.%nHeight..");
 		calculateAndSaveBasicStatistics(Height.class.getName(), hierarchies, basicStatistics, resultFilePath);
-		System.out.print("Done.\nAvg path length..");
+		log.info("Done.%nAvg path length..");
 		try (BufferedWriter resultFileAvgPathLength = new BufferedWriter(new FileWriter(resultFilePath, true))) {
 			resultFileAvgPathLength.append(getAvgAndStdevInOutputFormat(apt.calculate(hierarchies, false)));
-			System.out.print(DONE);
+			log.info(DONE);
 		}
 	}
 
@@ -276,14 +275,14 @@ public class ReadSeveralAndCalculateAllMeasuresAndAggregate extends CommonReadSe
 				histAvg.append(histogram[i].getAvg() + ";");
 				histStdev.append(histogram[i].getStdev() + ";");
 			}
-			histBin.append("\n");
-			histAvg.append("\n");
-			histStdev.append("\n");
-			resultFile.append(histogramName + "\n");
+			histBin.append("%n");
+			histAvg.append("%n");
+			histStdev.append("%n");
+			resultFile.append(histogramName + "%n");
 			resultFile.append(histBin.toString());
 			resultFile.append(histAvg.toString());
 			resultFile.append(histStdev.toString());
-			resultFile.append("\n");
+			resultFile.append("%n");
 		}
 	}
 

@@ -1,6 +1,6 @@
 package hierarchy_measures.runner;
 
-public class CL_ReadSeveralAndCalculateQualityMeasuresSeparately {
+public class CLReadSeveralAndCalculateQualityMeasuresSeparately {
 	public static void main(String[] args) {
 		String[] newArgs = new String[] {
 //                "GENERATOR_set00_a-1,0_l-0,5_g-0,2_N-10000_d-2_P-1,0_Q-5,0_minSD-0,05_maxSd-10,0_92.r.csv",

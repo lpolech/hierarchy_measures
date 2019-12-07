@@ -3,6 +3,9 @@ package hierarchy_measures.internal_measures;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import basic_hierarchy.common.Constants;
 import basic_hierarchy.common.HierarchyUtils;
 import basic_hierarchy.implementation.BasicHierarchy;
@@ -14,6 +17,7 @@ import hierarchy_measures.common.CommonQualityMeasure;
 
 public class HierarchicalInternalMeasure extends CommonQualityMeasure {
 	private CommonQualityMeasure internalMeasure;
+	private static final Logger log = LogManager.getLogger(HierarchicalInternalMeasure.class);
 
 	private HierarchicalInternalMeasure() {
 	}
@@ -66,7 +70,7 @@ public class HierarchicalInternalMeasure extends CommonQualityMeasure {
 			double weight = n.getSubtreeInstances().size();
 			double divisionPointMeasure = this.internalMeasure.getMeasure(artificialHierarchy);
 			if (Double.isNaN(divisionPointMeasure)) {
-				System.err.println("HierarchicalInternalMeasure.getMeasure divisionPointMeasure is NaN which means that"
+				log.error("HierarchicalInternalMeasure.getMeasure divisionPointMeasure is NaN which means that"
 						+ " the internal measure couldn't be computed for that division point! Returning NaN.");
 				return Double.NaN;
 			}
@@ -76,9 +80,8 @@ public class HierarchicalInternalMeasure extends CommonQualityMeasure {
 		}
 
 		if (sumOfWeights == 0.0) {
-			System.err
-					.println("HierarchicalInternalMeasure.getMeasure sumOfWeights is zero! It is probably because every"
-							+ " cluster contain 0 instances or there was no division points. Returning NaN.");
+			log.error("HierarchicalInternalMeasure.getMeasure sumOfWeights is zero! It is probably because every"
+					+ " cluster contain 0 instances or there was no division points. Returning NaN.");
 
 			return Double.NaN;
 		}

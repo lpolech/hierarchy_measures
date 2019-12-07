@@ -2,6 +2,9 @@ package hierarchy_measures.internal_measures;
 
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import basic_hierarchy.implementation.BasicNode;
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
@@ -11,6 +14,7 @@ import hierarchy_measures.interfaces.DistanceMeasure;
 
 public class FlatDunn4 extends CommonQualityMeasure {
 	private DistanceMeasure dist;
+	private static final Logger log = LogManager.getLogger(FlatDunn4.class);
 
 	protected FlatDunn4() {
 	}
@@ -77,10 +81,9 @@ public class FlatDunn4 extends CommonQualityMeasure {
 		}
 
 		if (minDistanceBetweenPointsInDifferentClusters == Double.MAX_VALUE) {
-			System.err
-					.println("FlatDunn3.getMeasure - the minDistanceBetweenPointsInDifferentClusters  haven't changed, "
-							+ "so there should be something wrong with the input hierarchy (maybe there are empty clusters or "
-							+ "clusters with single element?). Returning NaN.");
+			log.error("FlatDunn3.getMeasure - the minDistanceBetweenPointsInDifferentClusters  haven't changed, "
+					+ "so there should be something wrong with the input hierarchy (maybe there are empty clusters or "
+					+ "clusters with single element?). Returning NaN.");
 
 			return Double.NaN;
 		}

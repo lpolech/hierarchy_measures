@@ -3,13 +3,16 @@ package hierarchy_measures.external_measures;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
 import hierarchy_measures.common.CommonQualityMeasure;
 
 public class AdaptedFmeasure extends CommonQualityMeasure {
-
+	private static final Logger log = LogManager.getLogger(AdaptedFmeasure.class);
 	/*
 	 * Consider each instances from child groups as belonging also to parent group
 	 */
@@ -87,7 +90,7 @@ public class AdaptedFmeasure extends CommonQualityMeasure {
 				if (fMeasureDenominator != 0) {
 					classToGroupFMeasure[j][i] = (2.0 * precision * recall) / (precision + recall);
 					if (classToGroupFMeasure[j][i] > 1) {
-						System.out.println("Fmeasure is bigger than 1!");
+						log.warn("Fmeasure is bigger than 1!");
 					}
 				} else {
 					classToGroupFMeasure[j][i] = 0;
