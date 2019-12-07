@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import basic_hierarchy.TestCommon;
 import basic_hierarchy.interfaces.Hierarchy;
-import basic_hierarchy.test.TestCommon;
 import hierarchy_measures.external_measures.statistical_hypothesis.PartialOrderHypotheses;
 
 public class PartialOrderHypothesesTest {

@@ -6,3 +6,5 @@ src/META-INF/
 .project
 /coverage.xml
 /junit.xml
+/sonar-project.properties
+.scannerwork/

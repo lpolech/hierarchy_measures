@@ -23,7 +23,7 @@ public class AutomatedRunAndCalculate {
 	public static void main(String[] args) {
 
 		try {
-			if (args != null && args.length > 0 && args[0].equals("1"))
+			if (args != null && args.length > 0 && "1".equals(args[0]))
 				analizeFirst();
 			else
 				analizeSecond();

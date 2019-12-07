@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import basic_hierarchy.common.Constants;
+import basic_hierarchy.common.HierarchyUtils;
 import basic_hierarchy.implementation.BasicHierarchy;
 import basic_hierarchy.implementation.BasicNode;
 import basic_hierarchy.interfaces.Hierarchy;
 import basic_hierarchy.interfaces.Instance;
 import basic_hierarchy.interfaces.Node;
-import basic_hierarchy.test.TestCommon;
 import hierarchy_measures.common.CommonQualityMeasure;
 
 public class HierarchicalInternalMeasure extends CommonQualityMeasure {
@@ -43,7 +43,7 @@ public class HierarchicalInternalMeasure extends CommonQualityMeasure {
 			int numberOfInstances = 0;
 
 			for (Node ch : n.getChildren()) {
-				Node child = new BasicNode(TestCommon.getIDOfChildCluster(Constants.ROOT_ID, (childCounter++)),
+				Node child = new BasicNode(HierarchyUtils.getIDOfChildCluster(Constants.ROOT_ID, (childCounter++)),
 						artificialRoot, new LinkedList<Node>(), ch.getSubtreeInstances(), false);
 				artificialRoot.addChild(child);
 				nodesToCalculateInternalMeasure.add(child);
@@ -53,8 +53,9 @@ public class HierarchicalInternalMeasure extends CommonQualityMeasure {
 			for (Instance i : n.getNodeInstances()) {
 				LinkedList<Instance> nodeContent = new LinkedList<>();
 				nodeContent.add(i);
-				Node instanceNode = new BasicNode(TestCommon.getIDOfChildCluster(Constants.ROOT_ID, (childCounter++)),
-						artificialRoot, new LinkedList<Node>(), nodeContent, false);
+				Node instanceNode = new BasicNode(
+						HierarchyUtils.getIDOfChildCluster(Constants.ROOT_ID, (childCounter++)), artificialRoot,
+						new LinkedList<Node>(), nodeContent, false);
 				artificialRoot.addChild(instanceNode);
 				nodesToCalculateInternalMeasure.add(instanceNode);
 				numberOfInstances++;

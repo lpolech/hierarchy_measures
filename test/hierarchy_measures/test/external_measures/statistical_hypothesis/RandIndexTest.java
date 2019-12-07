@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import basic_hierarchy.TestCommon;
 import basic_hierarchy.interfaces.Hierarchy;
-import basic_hierarchy.test.TestCommon;
 import hierarchy_measures.external_measures.statistical_hypothesis.FlatHypotheses;
 import hierarchy_measures.external_measures.statistical_hypothesis.PartialOrderHypotheses;
 import hierarchy_measures.external_measures.statistical_hypothesis.RandIndex;

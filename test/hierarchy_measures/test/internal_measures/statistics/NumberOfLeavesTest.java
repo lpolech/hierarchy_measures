@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import basic_hierarchy.TestCommon;
 import basic_hierarchy.interfaces.Hierarchy;
-import basic_hierarchy.test.TestCommon;
 import hierarchy_measures.internal_measures.statistics.AvgWithStdev;
 import hierarchy_measures.internal_measures.statistics.NumberOfLeaves;
 
