@@ -1,5 +1,7 @@
 package hierarchy_measures.runner;
 
+import static hierarchy_measures.common.Consts.MSG_DONE;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -49,7 +51,7 @@ import hierarchy_measures.internal_measures.statistics.NumberOfNodes;
 
 public class ReadSeveralAndCalculateQualityMeasuresSeparately extends CommonReadSeveralAndCalculate {
 	private static final Logger log = LogManager.getLogger(ReadSeveralAndCalculateQualityMeasuresSeparately.class);
-	private static final String MSG_DONE = "Done.";
+
 	// parameters
 	private boolean useSubtree = true;
 	private double informationBasedMeasureslogBase = 2.0;

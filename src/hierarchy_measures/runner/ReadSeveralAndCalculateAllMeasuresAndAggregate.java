@@ -1,5 +1,7 @@
 package hierarchy_measures.runner;
 
+import static hierarchy_measures.common.Consts.MSG_DONE;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -54,7 +56,6 @@ import hierarchy_measures.internal_measures.statistics.histogram.NodesPerLevel;
 // dokladnie tak jak zrobilem z klasa CL_ReadSeveralAndCalculateQualityMeasuresSeparately
 public class ReadSeveralAndCalculateAllMeasuresAndAggregate extends CommonReadSeveralAndCalculate {
 
-	private static final String DONE = "Done.";
 	private static final Logger log = LogManager.getLogger(ReadSeveralAndCalculateAllMeasuresAndAggregate.class);
 
 	public static void main(String[] args) {
@@ -117,7 +118,7 @@ public class ReadSeveralAndCalculateAllMeasuresAndAggregate extends CommonReadSe
 		log.info("Done.%nHistogram of number of children..");
 		calculateAndWriteHistogramicValues("Histogram of number of children", hierarchies, histograms,
 				HistogramOfNumberOfChildren.class.getName(), resultFilePath);
-		log.info(DONE);
+		log.info(MSG_DONE);
 	}
 
 	private static void calculateAndSaveAllHIMVariants(String resultFilePath, ArrayList<Hierarchy> hierarchies,
@@ -145,7 +146,7 @@ public class ReadSeveralAndCalculateAllMeasuresAndAggregate extends CommonReadSe
 		calculateAndSaveQualityMeasure(
 				HierarchicalInternalMeasure.class.getName() + FlatCalinskiHarabasz.class.getName(), hierarchies,
 				qualityMeasures, resultFilePath);
-		log.info(DONE);
+		log.info(MSG_DONE);
 	}
 
 	private static void calculateAndSaveAllExternalMeasures(String resultFilePath, ArrayList<Hierarchy> hierarchies,
@@ -201,7 +202,7 @@ public class ReadSeveralAndCalculateAllMeasuresAndAggregate extends CommonReadSe
 		log.info("Done.%nFlat normalized mutual information..");
 		calculateAndSaveQualityMeasure(FlatNormalizedMutualInformation.class.getName(), hierarchies, qualityMeasures,
 				resultFilePath);
-		log.info(DONE);
+		log.info(MSG_DONE);
 	}
 
 	private static void calculateAndSaveAllFlatInternalMeasures(String resultFilePath, ArrayList<Hierarchy> hierarchies,
@@ -227,7 +228,7 @@ public class ReadSeveralAndCalculateAllMeasuresAndAggregate extends CommonReadSe
 		log.info("Done.%nFlat Calinski-Charabasz..");
 		calculateAndSaveQualityMeasure(FlatCalinskiHarabasz.class.getName(), hierarchies, qualityMeasures,
 				resultFilePath);
-		log.info(DONE);
+		log.info(MSG_DONE);
 	}
 
 	private static void calculateAndSaveAllBasicStatistics(String resultFilePath, ArrayList<Hierarchy> hierarchies,
@@ -241,7 +242,7 @@ public class ReadSeveralAndCalculateAllMeasuresAndAggregate extends CommonReadSe
 		log.info("Done.%nAvg path length..");
 		try (BufferedWriter resultFileAvgPathLength = new BufferedWriter(new FileWriter(resultFilePath, true))) {
 			resultFileAvgPathLength.append(getAvgAndStdevInOutputFormat(apt.calculate(hierarchies, false)));
-			log.info(DONE);
+			log.info(MSG_DONE);
 		}
 	}
 
