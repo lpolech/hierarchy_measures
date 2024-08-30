@@ -154,4 +154,19 @@ public class AdaptedFmeasure extends CommonQualityMeasure {
 		return 0.0;
 	}
 
+	@Override
+	public boolean isFirstMeasureBetterThanSecond(double firstMeasure, double secondMeasure) {
+		return firstMeasure > secondMeasure;
+	}
+
+	@Override
+	public boolean shouldMeasureBeMaximised() {
+		return true;
+	}
+
+	@Override
+	public String getName() {
+		return "AFM";
+	}
+
 }

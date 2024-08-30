@@ -49,6 +49,21 @@ public class HierarchicalClassPurity extends CommonQualityMeasure {
 		return 0;
 	}
 
+	@Override
+	public boolean isFirstMeasureBetterThanSecond(double firstMeasure, double secondMeasure) {
+		return firstMeasure > secondMeasure;
+	}
+
+	@Override
+	public boolean shouldMeasureBeMaximised() {
+		return true;
+	}
+
+	@Override
+	public String getName() {
+		return "HCP";
+	}
+
 	private void bottomUpCalculation(Node currentNode/*node*/, String[] allClasses, HashMap<String, Integer> indexedClasses, HashMap<Node, Integer[]> indexedPartials)
 	{
 		for(Node child: currentNode.getChildren())

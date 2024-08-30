@@ -55,6 +55,21 @@ public class FlatNormalizedMutualInformation  extends FlatEntropy {
         return 0;
     }
 
+    @Override
+    public boolean isFirstMeasureBetterThanSecond(double firstMeasure, double secondMeasure) {
+        return firstMeasure > secondMeasure;
+    }
+
+    @Override
+    public boolean shouldMeasureBeMaximised() {
+        return true;
+    }
+
+    @Override
+    public String getName() {
+        return "FNMI";
+    }
+
     private double calculateEntropy(int[] count, int overallNumberOfInstances)
     {
         double entropy = 0.0;

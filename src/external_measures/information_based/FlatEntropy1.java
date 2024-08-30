@@ -46,4 +46,19 @@ public class FlatEntropy1 extends FlatEntropy {
     public double getNotDesiredValue() {
         return Double.MAX_VALUE;
     }
+
+    @Override
+    public boolean isFirstMeasureBetterThanSecond(double firstMeasure, double secondMeasure) {
+        return firstMeasure < secondMeasure;
+    }
+
+    @Override
+    public boolean shouldMeasureBeMaximised() {
+        return false;
+    }
+
+    @Override
+    public String getName() {
+        return "FE1";
+    }
 }

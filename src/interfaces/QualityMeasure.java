@@ -10,5 +10,10 @@ public interface QualityMeasure {
 	AvgWithStdev getMeasure(ArrayList<Hierarchy> hierarchies, boolean calculatePopulationStdev);
 	double getDesiredValue();
 	double getNotDesiredValue();
+	public boolean isFirstMeasureBetterThanSecond(double firstMeasure, double secondMeasure);
+	boolean shouldMeasureBeMaximised();
+
+    String getName();
+
 }
 

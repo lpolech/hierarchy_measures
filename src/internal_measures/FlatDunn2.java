@@ -35,6 +35,21 @@ public class FlatDunn2 extends CommonQualityMeasure {
         return 0;
     }
 
+    @Override
+    public boolean isFirstMeasureBetterThanSecond(double firstMeasure, double secondMeasure) {
+        return firstMeasure > secondMeasure;
+    }
+
+    @Override
+    public boolean shouldMeasureBeMaximised() {
+        return true;
+    }
+
+    @Override
+    public String getName() {
+        return "FD2";
+    }
+
     protected double calculate(Hierarchy h, boolean returnMeasureReversion) {
         Node[] nodes = h.getGroups();
         double minDistanceBetweenPointsInDifferentClusters = Double.MAX_VALUE;

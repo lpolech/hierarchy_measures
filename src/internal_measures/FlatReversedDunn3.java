@@ -28,4 +28,8 @@ public class FlatReversedDunn3 extends FlatDunn3 {
         return Double.MAX_VALUE;
     }
 
+    @Override
+    public boolean isFirstMeasureBetterThanSecond(double firstMeasure, double secondMeasure) {
+        return firstMeasure < secondMeasure;
+    }
 }

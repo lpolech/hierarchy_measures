@@ -100,6 +100,21 @@ public class HierarchicalInternalMeasure extends CommonQualityMeasure {
         return predictHIMValue(this.internalMeasure.getNotDesiredValue());
     }
 
+    @Override
+    public boolean isFirstMeasureBetterThanSecond(double firstMeasure, double secondMeasure) {
+        return this.internalMeasure.isFirstMeasureBetterThanSecond(firstMeasure, secondMeasure);
+    }
+
+    @Override
+    public boolean shouldMeasureBeMaximised() {
+        return this.internalMeasure.shouldMeasureBeMaximised();
+    }
+
+    @Override
+    public String getName() {
+        return "HIM";
+    }
+
     private double predictHIMValue(double value) {
         if(value > 0) {
             return Double.MAX_VALUE;

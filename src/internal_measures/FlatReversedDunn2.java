@@ -27,4 +27,9 @@ public class FlatReversedDunn2 extends FlatDunn2 {
     public double getNotDesiredValue() {
         return Double.MAX_VALUE;
     }
+
+    @Override
+    public boolean isFirstMeasureBetterThanSecond(double firstMeasure, double secondMeasure) {
+        return firstMeasure < secondMeasure;
+    }
 }
