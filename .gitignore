@@ -1,3 +1,10 @@
 .idea/
 out/
 src/META-INF/
+/bin/
+.classpath
+.project
+/coverage.xml
+/junit.xml
+/sonar-project.properties
+.scannerwork/
